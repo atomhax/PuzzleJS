@@ -1,6 +1,9 @@
 ﻿var materials;
 var blocks;
 var display;
+var fps = 60;
+var renderStats;
+var updateStats;
 
 function Load()
 {
@@ -15,8 +18,35 @@ function Setup()
     blocks = [];
     display = new Display(document.getElementById('myCanvas'))
    
+    renderStats = new Stats();
+    document.body.appendChild(renderStats.domElement);
+
+    updateStats = new Stats();
+    document.body.appendChild(updateStats.domElement);
+
     Start();
 }
+
+//Game Loop
+this.GameLoop = (function () {
+    var loops = 0, skipTicks = 1000 / fps,
+        maxFrameSkip = 10,
+        nextGameTick = (new Date).getTime();
+
+    return function () {
+        loops = 0;
+
+        while ((new Date).getTime() > nextGameTick) {
+            updateStats.update();
+            GameTick();
+            nextGameTick += skipTicks;
+            loops++;
+        }
+        renderStats.update();
+        Draw();
+    };
+})();
+
 function Start()
 {
     for (var i = 0; i < 14; i++)
@@ -26,17 +56,15 @@ function Start()
         }
     }
 
-    display.render(blocks);
-
-    //This is a temp, start. will use proper game loop later
-    setInterval(function () { GameLoop() }, 100);
+    window.setInterval(this.GameLoop, 0);
 }
-
-function GameLoop()
+function Draw()
+{
+    display.render(blocks);
+}
+function GameTick()
 {
     for (var i = 0; i < blocks.length; i++) {
-        blocks[i].y--;
+        blocks[i].y = blocks[i].y - 1;
     }
-    display.render(blocks);
-
 }
