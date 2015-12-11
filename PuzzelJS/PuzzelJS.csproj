@@ -166,10 +166,16 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Files\block.png" />
+    <Content Include="Content\Files\block.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\Hello World.js" />
+    <Content Include="Scripts\Materials.js" />
+    <Content Include="Scripts\Display.js" />
+    <Content Include="Scripts\Block.js" />
+    <Content Include="Scripts\Other\Experiment\GameLoop.js" />
+    <Content Include="Scripts\Other\Working Samples\Hello World.js" />
     <Content Include="Scripts\Game.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -188,7 +194,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\CSS\" />
-    <Folder Include="Content\Files\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,38 +1,30 @@
-﻿
-var x = 0;
-var blockOne;
-var blockTwo;
+﻿var materials;
+var blocks;
+var display;
+
+function Load()
+{
+    materials = new Materials();
+    materials.Load(this.FinshLoad);
+} 
+function FinshLoad() {
+    Setup();
+}
+function Setup()
+{
+    blocks = [];
+    display = new Display(document.getElementById('myCanvas'))
+   
+    Start();
+}
 function Start()
 {
-    var canvas = document.getElementById('myCanvas');
-    blockOne = canvas.getContext('2d');
-
-    //Block1 
-    blockOne.beginPath();
-    blockOne.rect(0, 50, 200, 100);
-    blockOne.fillStyle = 'yellow';
-    blockOne.fill();
-    blockOne.lineWidth = 7;
-    blockOne.strokeStyle = 'black';
-    blockOne.stroke();
-
-
-    //Block2
-    blockTwo = canvas.getContext('2d');
-
-    blockTwo.beginPath();
-    blockTwo.rect(250, 50, 200, 100);
-    blockTwo.fillStyle = 'yellow';
-    blockTwo.fill();
-    blockTwo.lineWidth = 7;
-    blockTwo.strokeStyle = 'black';
-    blockTwo.stroke();
-
-    //Every 3 SEc Run this
-    setInterval(function ()
+    for (var i = 0; i < 14; i++)
     {
-        x = x + 50;
-        blockTwo.translate(300, 300);
+        for (var j = 0; j < 6; j++) {
+            blocks.push(new Block(materials.blockSVG, j * 50, i * 50, true));
+        }
+    }
 
-    }, 3000);
+    display.render(blocks);
 }
