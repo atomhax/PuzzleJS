@@ -27,4 +27,16 @@ function Start()
     }
 
     display.render(blocks);
+
+    //This is a temp, start. will use proper game loop later
+    setInterval(function () { GameLoop() }, 100);
+}
+
+function GameLoop()
+{
+    for (var i = 0; i < blocks.length; i++) {
+        blocks[i].y--;
+    }
+    display.render(blocks);
+
 }
