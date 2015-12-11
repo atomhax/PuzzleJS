@@ -7,6 +7,7 @@ function Start()
     var canvas = document.getElementById('myCanvas');
     blockOne = canvas.getContext('2d');
 
+    //Block1 
     blockOne.beginPath();
     blockOne.rect(0, 50, 200, 100);
     blockOne.fillStyle = 'yellow';
