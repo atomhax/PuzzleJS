@@ -16,6 +16,8 @@ function Start()
     blockOne.strokeStyle = 'black';
     blockOne.stroke();
 
+
+    //Block2
     blockTwo = canvas.getContext('2d');
 
     blockTwo.beginPath();
