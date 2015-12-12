@@ -8,4 +8,4 @@
     //Image Data
     this.x = x;
     this.y = y;
-};
+}; 
