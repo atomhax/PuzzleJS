@@ -168,11 +168,18 @@
   <ItemGroup>
     <Content Include="Content\Files\block.png" />
     <Content Include="Content\Files\block.svg" />
+    <Content Include="Content\Files\BlockBlue.png" />
+    <Content Include="Content\Files\BlockGreen.png" />
+    <Content Include="Content\Files\BlockPurple.png" />
+    <Content Include="Content\Files\BlockRed.png" />
+    <Content Include="Content\Files\BlockYellow.png" />
     <Content Include="Content\Files\orange.svg" />
     <Content Include="Content\Files\Svg_example_square.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Puzzle.js" />
+    <Content Include="Scripts\Controller.js" />
     <Content Include="Scripts\Materials.js" />
     <Content Include="Scripts\Display.js" />
     <Content Include="Scripts\Block.js" />
@@ -205,6 +212,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

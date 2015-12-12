@@ -1,5 +1,5 @@
 ﻿var materials;
-var blocks;
+var puzzle;
 var display;
 var fps = 60;
 var renderStats;
@@ -15,14 +15,16 @@ function FinshLoad() {
 }
 function Setup()
 {
-    blocks = [];
+
+
+    puzzle = new Puzzle(materials);
     display = new Display(document.getElementById('myCanvas'))
    
     renderStats = new Stats();
-    document.body.appendChild(renderStats.domElement);
+    //document.body.appendChild(renderStats.domElement);
 
     updateStats = new Stats();
-    document.body.appendChild(updateStats.domElement);
+    //document.body.appendChild(updateStats.domElement);
 
     Start();
 }
@@ -49,22 +51,15 @@ this.GameLoop = (function () {
 
 function Start()
 {
-    for (var i = 0; i < 500; i++)
-    {
-        for (var j = 0; j < 6; j++) {
-            blocks.push(new Block(materials.block, j * 50, i * 50, true));
-        }
-    }
-
+    puzzle.CreateStartingBlocks();
     window.setInterval(this.GameLoop, 0);
 }
 function Draw()
 {
-    display.render(blocks);
+    display.render(puzzle.blocks);
 }
 function GameTick()
 {
-    for (var i = 0; i < blocks.length; i++) {
-        blocks[i].y = blocks[i].y - 1;
-    }
+    if (puzzle.inPlay === true)
+        puzzle.MoveBlocksUp();
 }
