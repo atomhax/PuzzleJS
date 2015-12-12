@@ -4,6 +4,7 @@ var display;
 var fps = 60;
 var renderStats;
 var updateStats;
+var controller;
 
 var BLOCK_COLORS = {
     Green: 1,
@@ -24,8 +25,8 @@ function FinshLoad() {
 function Setup()
 {
 
-
-    puzzle = new Puzzle( BLOCK_COLORS );
+    puzzle = new Puzzle(BLOCK_COLORS);
+    controller = new Controller(puzzle);
     display = new Display(document.getElementById('myCanvas'), materials, BLOCK_COLORS)
    
     renderStats = new Stats();
@@ -52,6 +53,7 @@ this.GameLoop = (function () {
             nextGameTick += skipTicks;
             loops++;
         }
+        controller.Run();       
         renderStats.update();
         Draw();
     };

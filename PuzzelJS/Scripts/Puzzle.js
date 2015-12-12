@@ -69,6 +69,12 @@
     this.SwapBlocks = function () {
 
     }
+    this.Reset = function () {
+        this.blockInc = 0;
+        this.blocks = [];
+        this.inPlay = true;
+        this.CreateStartingBlocks();
+    }
     this.CreateStartingBlocks = function () {
         for (var i = 0; i < 1; i++) {
             for (var j = 0; j < 6; j++) {
@@ -89,7 +95,6 @@
             }
         }
     }
-
     this.VaildRandomColor = function(row, col, randomColor) {
 
         var foundValue = false;
@@ -169,8 +174,7 @@
         }
 
         return true;
-    }
-    
+    }    
     this.FindBlock = function(row, col) {
         var block = null;
         for (var i = 0; i < this.blocks.length; i++) {
