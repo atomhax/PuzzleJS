@@ -49,7 +49,7 @@ this.GameLoop = (function () {
 
 function Start()
 {
-    for (var i = 0; i < 14; i++)
+    for (var i = 0; i < 500; i++)
     {
         for (var j = 0; j < 6; j++) {
             blocks.push(new Block(materials.blockSVG, j * 50, i * 50, true));

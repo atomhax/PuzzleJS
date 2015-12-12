@@ -6,11 +6,11 @@
     //Functions
     this.render = function ( blocks ) {
         this.clearScreen();
-        this._drawBlockArea();
+      //  this._drawBlockArea();
 
         this._drawBlocks(250, 50, blocks);
-        this._drawBlockHiddenEnter();
-        this._drawBlockHiddenExit();   
+     //   this._drawBlockHiddenEnter();
+     //   this._drawBlockHiddenExit();   
     };
     this.clearScreen = function () {
         this._context.clearRect(0, 0, this._canvas.width, this._canvas.height);
