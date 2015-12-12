@@ -179,8 +179,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Keyboard.js" />
     <Content Include="Scripts\Selector.js" />
-    <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\Puzzle.js" />
     <Content Include="Scripts\Controller.js" />
     <Content Include="Scripts\Materials.js" />
@@ -189,7 +189,6 @@
     <Content Include="Scripts\Other\Experiment\GameLoop.js" />
     <Content Include="Scripts\Other\Working Samples\Hello World.js" />
     <Content Include="Scripts\Game.js" />
-    <Content Include="Scripts\PxGamepad.js" />
     <Content Include="Scripts\Stats.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
