@@ -5,6 +5,14 @@ var fps = 60;
 var renderStats;
 var updateStats;
 
+var BLOCK_COLORS = {
+    Green: 1,
+    Blue: 2,
+    Red: 3,
+    Purple: 4,
+    Yellow: 5
+};
+
 function Load()
 {
     materials = new Materials();
@@ -17,8 +25,8 @@ function Setup()
 {
 
 
-    puzzle = new Puzzle(materials);
-    display = new Display(document.getElementById('myCanvas'))
+    puzzle = new Puzzle( BLOCK_COLORS );
+    display = new Display(document.getElementById('myCanvas'), materials, BLOCK_COLORS)
    
     renderStats = new Stats();
     //document.body.appendChild(renderStats.domElement);

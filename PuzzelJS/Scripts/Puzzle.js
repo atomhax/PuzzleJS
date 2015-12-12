@@ -1,16 +1,8 @@
-﻿function Puzzle(materials) {
+﻿function Puzzle( BLOCK_COLORS ) {
    
     //Constants
     this.BLOCK_ROW_CHANGE = 50;
-    this.BLOCK_COLORS = {
-        Green: 1,
-        Blue: 2,
-        Red: 3,
-        Purple: 4,
-        Yellow: 5
-    };
-    this.materials = materials;
-
+    this.BLOCK_COLORS = BLOCK_COLORS;
     //Variables
     this.blockInc = 0;
     this.blocks = [];
@@ -49,7 +41,14 @@
         for (var i = 0; i < 6; i++) {
             var row = 0;
             var col = i + 1;
-            this.blocks.push(new Block(row, col, this.BLOCK_COLORS.Green, this.RandomColor(), i * 50, 0, true));
+
+            //Get Vaild random Color
+            var randomColor;
+            do {
+                randomColor = this.RandomColor();
+            } while (!this.VaildRandomColor(row, col, randomColor))
+
+            this.blocks.push(new Block(row, col, randomColor, i * 50, 0));
         }
     }
     this.CheckPuzzel = function () {
@@ -75,30 +74,131 @@
             for (var j = 0; j < 6; j++) {
                 var row = i;
                 var col = j + 1;
-                this.blocks.push(new Block(row, col, this.BLOCK_COLORS.Green, this.RandomColor(), j * 50, i * 50, true));
+
+                //Get Vaild random Color
+                var randomColor;
+                do
+                {
+                    randomColor = this.RandomColor();
+                } while (!this.VaildRandomColor(row, col, randomColor))
+
+
+
+                //
+                this.blocks.push(new Block(row, col, randomColor, j * 50, i * 50));
             }
         }
     }
 
+    this.VaildRandomColor = function(row, col, randomColor) {
+
+        var foundValue = false;
+        var i;
+        //Check Row
+        var rowSameColor = 1;
+        //Left
+        
+        i = 1;
+        do{
+            foundValue = false;
+
+            var block = this.FindBlock( row - i , col );
+            if(block !== null && block.color == randomColor)
+            {
+                row++;
+                foundValue = true;
+            }
+            i++
+        }while(foundValue)
+
+        //Right
+        i = 1;
+        do{
+            foundValue = false;
+
+            var block = this.FindBlock( row + i , col  );
+            if(block !== null && block.color == randomColor)
+            {
+                rowSameColor++;
+                foundValue = true;
+            }
+            i++
+        }while(foundValue)
+
+
+        if(rowSameColor >= 3)
+        {
+            return false;
+        }
+
+        //Check Col
+        var colSameColor = 1;
+        //Left
+        
+        i = 1;
+        do{
+            foundValue = false;
+
+            var block = this.FindBlock( row , col - i);
+            if(block !== null && block.color == randomColor)
+            {
+                colSameColor++;
+                foundValue = true;
+            }
+            i++
+        }while(foundValue)
+
+        //Right
+        i = 1;
+        do{
+            foundValue = false;
+
+            var block = this.FindBlock( row , col + i );
+            if(block !== null && block.color == randomColor)
+            {
+                colSameColor++;
+                foundValue = true;
+            }
+            i++
+        }while(foundValue)
+
+
+        if (colSameColor >= 3)
+        {
+            return false;
+        }
+
+        return true;
+    }
+    
+    this.FindBlock = function(row, col) {
+        var block = null;
+        for (var i = 0; i < this.blocks.length; i++) {
+            if(this.blocks[i].row === row && this.blocks[i].col === col)  {
+                block = this.blocks[i];
+                break;
+            }
+        }
+        return block;
+    }
     this.RandomColor = function () {
         var min = 1;
         var max = 5;
         var random = Math.floor(Math.random() * (max - min)) + min;
-        if(random == 1)
-        {
-            return this.materials.blockGreen;
+        if(random == 1){
+            return this.BLOCK_COLORS.Green;
         }
         if (random == 2) {
-            return this.materials.blockBlue;
+            return this.BLOCK_COLORS.Blue;
         }
         if (random == 3) {
-            return this.materials.blockRed;
+            return this.BLOCK_COLORS.Red;
         }
         if (random == 4) {
-            return this.materials.blockPurple;
+            return this.BLOCK_COLORS.Purple;
         }
         if (random == 5) {
-            return this.materials.blockYellow;
+            return this.BLOCK_COLORS.Yellow;
         }
     }
 };

@@ -1,4 +1,4 @@
-﻿function Block(row, col, color, img, x, y, visible)
+﻿function Block(row, col, color, x, y)
 {
     //Game Data
     this.row = row;
@@ -6,11 +6,6 @@
     this.color = color;
 
     //Image Data
-    this.img = img;
     this.x = x;
     this.y = y;
-    this.width = 50;
-    this.height = 50;
-    this.visible = true;
-
 };
