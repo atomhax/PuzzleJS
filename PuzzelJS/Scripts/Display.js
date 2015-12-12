@@ -6,11 +6,11 @@
     this.BLOCK_COLORS = BLOCK_COLORS;
     
     //Functions
-    this.render = function ( blocks ) {
+    this.render = function ( blocks, selector ) {
         this.clearScreen();
-       this._drawBlockArea();
-
+        this._drawBlockArea();
         this._drawBlocks(250, 700, blocks);
+        this._drawSelector(250, 700, selector);
         this._drawBlockHiddenEnter();
         this._drawBlockHiddenExit();   
     };
@@ -21,6 +21,9 @@
         this._context.rect(248, 45, 304, 710);
 
         this._context.stroke();
+    }
+    this._drawSelector = function (xOffset, yOffSet, selector) {
+        this._context.drawImage(materials.selecter, xOffset + selector.x, yOffSet + selector.y, 100, 50);
     }
     this._drawBlockHiddenEnter = function (blocks) {
         this._context.fillStyle = "#707070";

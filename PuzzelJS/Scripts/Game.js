@@ -66,7 +66,7 @@ function Start()
 }
 function Draw()
 {
-    display.render(puzzle.blocks);
+    display.render(puzzle.blocks, puzzle.selector);
 }
 function GameTick()
 {

@@ -166,18 +166,20 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Files\block.png" />
-    <Content Include="Content\Files\block.svg" />
-    <Content Include="Content\Files\BlockBlue.png" />
-    <Content Include="Content\Files\BlockGreen.png" />
-    <Content Include="Content\Files\BlockPurple.png" />
-    <Content Include="Content\Files\BlockRed.png" />
-    <Content Include="Content\Files\BlockYellow.png" />
-    <Content Include="Content\Files\orange.svg" />
+    <Content Include="Content\Files\50x50\block.png" />
+    <Content Include="Content\Files\svg\block.svg" />
+    <Content Include="Content\Files\50x50\BlockBlue.png" />
+    <Content Include="Content\Files\50x50\BlockGreen.png" />
+    <Content Include="Content\Files\50x50\BlockPurple.png" />
+    <Content Include="Content\Files\50x50\BlockRed.png" />
+    <Content Include="Content\Files\50x50\BlockYellow.png" />
+    <Content Include="Content\Files\svg\orange.svg" />
+    <Content Include="Content\Files\Selecter.png" />
     <Content Include="Content\Files\Svg_example_square.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Selector.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\Puzzle.js" />
     <Content Include="Scripts\Controller.js" />

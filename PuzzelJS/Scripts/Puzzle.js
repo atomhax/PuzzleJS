@@ -3,6 +3,10 @@
     //Constants
     this.BLOCK_ROW_CHANGE = 50;
     this.BLOCK_COLORS = BLOCK_COLORS;
+
+    //Selector
+    this.selector = new Selector( 0, 1, this );
+
     //Variables
     this.blockInc = 0;
     this.blocks = [];
@@ -13,8 +17,9 @@
 
         for (var i = 0; i < this.blocks.length; i++) {
             this.blocks[i].y = this.blocks[i].y - 1;
+          
         }
-
+        this.selector.y--;
         this.blockInc++;
 
         if (this.blockInc == 50) {
@@ -35,6 +40,8 @@
         for (var i = 0; i < this.blocks.length; i++) {
             this.blocks[i].row++;
         }
+
+        this.selector.row++;
     }
 
     this.AddBlockRow = function () {   
@@ -203,6 +210,30 @@
         }
         if (random == 5) {
             return this.BLOCK_COLORS.Yellow;
+        }
+    }
+
+
+
+    //Selector
+    this.SelectorSwap = function (row, leftCol)
+    {
+        var leftBlock = this.FindBlock(row, leftCol);
+        var rightBlock = this.FindBlock(row, leftCol + 1);
+
+        if(leftBlock !== null && rightBlock !== null)
+        {
+            leftBlock.col++;
+            rightBlock.col--;
+
+            var leftX = leftBlock.x;
+            var leftY = leftBlock.y;
+
+            leftBlock.x = rightBlock.x;
+            leftBlock.y = rightBlock.y;
+
+            rightBlock.x = leftX;
+            rightBlock.y = leftY;
         }
     }
 };
