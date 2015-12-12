@@ -168,6 +168,8 @@
   <ItemGroup>
     <Content Include="Content\Files\block.png" />
     <Content Include="Content\Files\block.svg" />
+    <Content Include="Content\Files\orange.svg" />
+    <Content Include="Content\Files\Svg_example_square.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

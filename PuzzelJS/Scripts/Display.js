@@ -34,7 +34,7 @@
     this._drawBlocks = function (xOffset, yOffSet, blocks) {
         for (var i = 0; i < blocks.length; i++) {
             if (blocks[i].visible === true) {
-                this._context.drawImage(blocks[i].svg, xOffset + blocks[i].x, yOffSet + blocks[i].y, blocks[i].width, blocks[i].height);
+                this._context.drawImage(blocks[i].img, xOffset + blocks[i].x, yOffSet + blocks[i].y, blocks[i].width, blocks[i].height);
             }
         }
     }

@@ -1,7 +1,7 @@
-﻿function Block( SVG, x, y, visible )
+﻿function Block( img, x, y, visible )
 {
     //Data
-    this.svg = SVG;
+    this.img = img;
     this.x = x;
     this.y = y;
     this.width = 50;

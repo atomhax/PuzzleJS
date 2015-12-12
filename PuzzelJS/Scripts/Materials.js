@@ -1,13 +1,13 @@
 ﻿function Materials() {
     //Block
-    this.blockSVG = new Image();
-    this.blockSVG.Loaded = false;
+    this.block = new Image();
+    this.block.Loaded = false;
 
     //Load
     this._onLoad = function (callBackFunction, material) {
         material.Loaded = true;
 
-        if (this.blockSVG.Loaded === true)
+        if (this.block.Loaded === true)
             callBackFunction();
 
     }
@@ -16,10 +16,10 @@
         var Materials = this;
 
 
-        this.blockSVG.src = "/Content/Files/block.png";
-        this.blockSVG.onload = function (e) {
+        this.block.src = "/Content/Files/block.png";
+        this.block.onload = function (e) {
             var callBackFunction = callBackFunction;
-            Materials._onLoad(Materials.callBackFunction, Materials.blockSVG);
+            Materials._onLoad(Materials.callBackFunction, Materials.block);
         }
         var x = 0;
         x++;
