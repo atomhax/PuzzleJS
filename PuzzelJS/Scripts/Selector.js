@@ -42,7 +42,7 @@
             this.swapTicks = 0;
             this.left = this.puzzel._FindBlock(this.row, this.col);
             this.right = this.puzzel._FindBlock(this.row, this.col + 1);
-            this.sounds.swap.play();
+            Sounds("swap");
             this.continueSwap();
         } 
     }
