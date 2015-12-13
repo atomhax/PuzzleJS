@@ -8,13 +8,15 @@
     this.selector = new Selector(2, 3, this, audio);
     this.blockInc = 0;
     this.blocks = [];
+    this.score = 0;
+    this.level = 1;
     this.inPlay = true;
 
     //Public
     this.Tick = function()
     {
         if (puzzle.inPlay === true){
-           // puzzle._MoveBlocksUp();
+            puzzle._MoveBlocksUp();
         }
           
 
@@ -35,10 +37,13 @@
         this._CheckForSets();
     }
     this.Reset = function () {
+      
         this.blockInc = 0;
         this.blocks = [];
         this.inPlay = true;
-        this._CreateStartingBlocks();
+        this._CreateStartingBlocks(3);
+        this.selector.row = 2;
+        this.selector.col = 3;
     }
 
     //Private
@@ -87,8 +92,8 @@
     }
 
     //SECTION
-    this._CreateStartingBlocks = function () {
-        for (var i = 0; i < 7; i++) {
+    this._CreateStartingBlocks = function (startingRows) {
+        for (var i = 0; i < startingRows; i++) {
             for (var j = 0; j < 6; j++) {
                 var row = i;
                 var col = j + 1;
@@ -179,37 +184,7 @@
         return true;
     }
 
-    //SECTION
-    this._FindBlock = function(row, col) {
-        var block = null;
-        for (var i = 0; i < this.blocks.length; i++) {
-            if(this.blocks[i].row === row && this.blocks[i].col === col)  {
-                block = this.blocks[i];
-                break;
-            }
-        }
-        return block;
-    }
-    this._RandomColor = function () {
-        var min = 1;
-        var max = 5;
-        var random = Math.floor(Math.random() * (max - min)) + min;
-        if(random == 1){
-            return this.BLOCK_COLORS.Green;
-        }
-        if (random == 2) {
-            return this.BLOCK_COLORS.Blue;
-        }
-        if (random == 3) {
-            return this.BLOCK_COLORS.Red;
-        }
-        if (random == 4) {
-            return this.BLOCK_COLORS.Purple;
-        }
-        if (random == 5) {
-            return this.BLOCK_COLORS.Yellow;
-        }
-    }
+  
 
 
     //SECTION
@@ -223,9 +198,9 @@
     }
     this._CheckForSets = function () {
         var sets = [];
-        sets = this._GetSetsCols(sets);
-        sets = this._GetSetsRows(sets);
-        sets = this._CombineSets(sets);
+        //sets = this._GetSetsCols(sets);
+        //sets = this._GetSetsRows(sets);
+        //sets = this._CombineSets(sets);
     }
     this._GetSetsCols = function (sets) {
         var set;
@@ -345,6 +320,38 @@
         return newSet;
     }
 
+
+    //Support
+    this._FindBlock = function (row, col) {
+        var block = null;
+        for (var i = 0; i < this.blocks.length; i++) {
+            if (this.blocks[i].row === row && this.blocks[i].col === col) {
+                block = this.blocks[i];
+                break;
+            }
+        }
+        return block;
+    }
+    this._RandomColor = function () {
+        var min = 1;
+        var max = 5;
+        var random = Math.floor(Math.random() * (max - min)) + min;
+        if (random == 1) {
+            return this.BLOCK_COLORS.Green;
+        }
+        if (random == 2) {
+            return this.BLOCK_COLORS.Blue;
+        }
+        if (random == 3) {
+            return this.BLOCK_COLORS.Red;
+        }
+        if (random == 4) {
+            return this.BLOCK_COLORS.Purple;
+        }
+        if (random == 5) {
+            return this.BLOCK_COLORS.Yellow;
+        }
+    }
 
     //Not Started
     this._ClearSet = function () {

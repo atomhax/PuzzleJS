@@ -4,6 +4,7 @@
     this.puzzle = puzzle;
     this.gamePad = navigator.getGamepads()[0];
 
+    this.RKeyUp = true;
     this.AKeyUp = true;
     this.UpKeyUp = true;
     this.DownKeyUp = true;
@@ -17,6 +18,14 @@
 
         window.addEventListener('keydown', function (event) {
             switch (event.keyCode) {
+                case 82: // R
+                    if (this.RKeyUp) {
+                        this.RKeyUp = false;
+                        this.puzzle.Reset();
+                    }
+
+                    break;
+
                 case 37: // Left
                     if (this.LeftKeyUp)
                     {
@@ -88,6 +97,11 @@
 
         window.addEventListener('keyup', function (event) {
             switch (event.keyCode) {
+                case 82: // R
+                    this.RKeyUp = true;
+                    break;
+
+
                 case 37: // Left
                     this.LeftKeyUp = true;
                     break;

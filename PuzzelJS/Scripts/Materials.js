@@ -1,6 +1,11 @@
 ﻿function Materials() {
 
     //Blocks
+    this.layout = new Image();
+    this.layout.Loaded = false;
+
+  
+
     this.block = new Image();
     this.block.Loaded = false;
 
@@ -27,7 +32,8 @@
     this._onLoad = function (callBackFunction, material) {
         material.Loaded = true;
 
-        if (this.block.Loaded === true &&
+        if (this.layout.Loaded === true &&
+            this.block.Loaded === true &&
             this.blockBlue.Loaded === true &&
             this.blockGreen.Loaded === true &&
             this.blockPurple.Loaded === true &&
@@ -44,6 +50,11 @@
         this.callBackFunction = callBackFunction;
         var Materials = this;
 
+        this.layout.src = "/Content/Files/layout.png";
+        this.layout.onload = function (e) {
+            var callBackFunction = callBackFunction;
+            Materials._onLoad(Materials.callBackFunction, Materials.layout);
+        }
 
         this.block.src = "/Content/Files/50x50/block.png";
         this.block.onload = function (e) {

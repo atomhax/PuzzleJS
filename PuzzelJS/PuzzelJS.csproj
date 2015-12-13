@@ -167,6 +167,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Files\160.png" />
+    <Content Include="Content\Files\180.png" />
+    <Content Include="Content\Files\layout.png" />
     <Content Include="Content\Files\50x50\block.png" />
     <Content Include="Content\Files\Swap.mp3" />
     <Content Include="Content\Files\svg\block.svg" />

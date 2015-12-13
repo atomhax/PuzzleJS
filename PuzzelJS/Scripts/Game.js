@@ -17,6 +17,8 @@ var BLOCK_COLORS = {
     Yellow: 5
 };
 
+
+//Setup
 function Load()
 {
     materials = new Materials();
@@ -32,37 +34,30 @@ function Setup()
     controller = new Controller(puzzle);
     keyboard = new Keyboard(puzzle);
     keyboard.Run();
-    display = new Display(document.getElementById('myCanvas'), materials, BLOCK_COLORS, sounds)
-  
+    display = new Display(document.getElementById('myCanvas'), materials, BLOCK_COLORS)
+ //   SetupStats();
+
+    Start();
+}
+function SetupStats() {
     stats = new Stats();
     document.body.appendChild(stats.domElement);
     stats.domElement.style.position = 'absolute';
     stats.domElement.style.left = '10px';
     stats.domElement.style.top = '10px';
-
-    Start();
 }
 
 //Game Loop
 function GameLoop() {
     setTimeout(function () {
-
-        var a = performance.now();
-
-
         requestAnimationFrame(GameLoop);
         controller.Run();
         GameTick();
-       
-        Draw()
-        var b = performance.now();
-        if ((b - a) > 1)
-            console.log((b - a) + ' ms.');
-        stats.update();
+        Draw();
+    
+        //stats.update();
     }, interval);
 }
-
-
 function Start()
 {
     puzzle.Reset();
@@ -70,7 +65,7 @@ function Start()
 }
 function Draw()
 {
-    display.render(puzzle.blocks, puzzle.selector, puzzle.blockInc);  
+    display.render(puzzle.blocks, puzzle.selector, puzzle.blockInc, puzzle.score, puzzle.level);  
 }
 function GameTick()
 {
