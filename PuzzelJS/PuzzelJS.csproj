@@ -191,6 +191,7 @@
     <Content Include="Scripts\Other\Experiment\GameLoop.js" />
     <Content Include="Scripts\Other\Working Samples\Hello World.js" />
     <Content Include="Scripts\Game.js" />
+    <Content Include="Scripts\Sounds.js" />
     <Content Include="Scripts\Stats.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
