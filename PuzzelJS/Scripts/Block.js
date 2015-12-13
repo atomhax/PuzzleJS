@@ -5,7 +5,7 @@
     this.col = col;
     this.color = color;
 
-    //Image Data
+    //Unquie Offset
     this.x = x;
     this.y = y;
 }; 

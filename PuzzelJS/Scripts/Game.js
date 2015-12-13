@@ -55,7 +55,7 @@ this.GameLoop = (function () {
             nextGameTick += skipTicks;
             loops++;
         }
-        keyboard.Run();
+        //keyboard.Run();
         controller.Run();       
         renderStats.update();
         Draw();
@@ -64,15 +64,14 @@ this.GameLoop = (function () {
 
 function Start()
 {
-    puzzle.CreateStartingBlocks();
+    puzzle.Reset();
     window.setInterval(this.GameLoop, 0);
 }
 function Draw()
 {
-    display.render(puzzle.blocks, puzzle.selector);
+    display.render(puzzle.blocks, puzzle.selector, puzzle.blockInc);
 }
 function GameTick()
 {
-    if (puzzle.inPlay === true)
-        puzzle.MoveBlocksUp();
+    puzzle.Tick();
 }

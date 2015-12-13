@@ -9,66 +9,78 @@
     this.lastDownDown = false;
     this.lastDownLeft = false;
     this.lastDownRight = false;
+    this.buttons = {
+        a: 0,
+        b: 1,
+        x: 2,
+        y: 3,
+        dpadUp: 12,
+        dpadLeft: 14,
+        dpadDown: 13,
+        dpadRight: 15
+    };
+    this.inProcess = false;
+  
 
     //Functions
     this.Run = function () 
     {
-        
-        if (!this.GetGamePad()){
+        if (this.inProcess)
+            return;
+
+        this.inProcess = true;
+
+        //Get Current Game Pad (Player 1)
+        this.gamePad = navigator.getGamepads()[0];
+
+        //If Game Pad Not Found return
+        if (this.gamePad === undefined) {
+            inProcess = false;
             return;
         }
 
-//        if (this.gamePad.buttons[0].pressed === true)
-//            this.puzzle.Reset();
-
 
         //A
-        if (this.gamePad.buttons[0].pressed === true && this.lastDownA == false)
+        if (this.gamePad.buttons[this.buttons.a].pressed === true && this.lastDownA == false)
         {
-            this.lastDownA = true;
-            this.puzzle.selector.Swap();
-        }
-        if (this.gamePad.buttons[0].pressed === false) {
-            this.lastDownA = false;
-        }
-    
-            
+            this.puzzle.selector.StartSwap();
+        }      
 
         //Up
-        if (this.gamePad.buttons[12].pressed === true && this.lastDownUp == false) {
-            this.lastDownUp = true;
+        if (this.gamePad.buttons[this.buttons.dpadUp].pressed === true && this.lastDownUp == false) {
             this.puzzle.selector.MoveUp();
+        }  
+
+        //Down
+        if (this.gamePad.buttons[this.buttons.dpadDown].pressed === true && this.lastDownDown == false) {
+            this.puzzle.selector.MoveDown();
         }
-        if (this.gamePad.buttons[12].pressed === false) {
-            this.lastDownUp = false;
+
+        //Left
+        if (this.gamePad.buttons[this.buttons.dpadLeft].pressed === true && this.lastDownLeft == false) {
+            this.puzzle.selector.MoveLeft();
         }
 
         //Right
-        if (this.gamePad.buttons[13].pressed === true)
+        if (this.gamePad.buttons[this.buttons.dpadRight].pressed === true && this.lastDownRight == false) {
             this.puzzle.selector.MoveRight();
-      
-
-        //Left
-        if (this.gamePad.buttons[14].pressed === true)
-            this.puzzle.selector.MoveLeft();
-
-        //Down
-        if (this.gamePad.buttons[15].pressed === true && this.lastDownDown == false)
-        {
-            this.lastDownDown = true;
-            this.puzzle.selector.MoveDown();
         }
+        
+        //Last Pressed
+        this.lastDownA = this.gamePad.buttons[this.buttons.a].pressed;
+        this.lastDownUp = this.gamePad.buttons[this.buttons.dpadUp].pressed;
+        this.lastDownDown = this.gamePad.buttons[this.buttons.dpadDown].pressed;
+        this.lastDownLeft = this.gamePad.buttons[this.buttons.dpadLeft].pressed;
+        this.lastDownRight = this.gamePad.buttons[this.buttons.dpadRight].pressed;
+        this.inProcess = false;
           
-        if (this.gamePad.buttons[15].pressed === false) {
-            this.lastDownDown = false;
-        }
     };
    
-    this.GetGamePad = function () {
+    this.GetGamePad = function ()
+    {
+        //Get Current Game Pad
         this.gamePad = navigator.getGamepads()[0];
-        if (this.gamePad === undefined) {
-            this.gamePad = navigator.getGamepads()[0];
-        }
+      
         if (this.gamePad !== undefined) {
             return true;
         }

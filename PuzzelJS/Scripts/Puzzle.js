@@ -5,46 +5,71 @@
     this.BLOCK_COLORS = BLOCK_COLORS;
 
     //Selector
-    this.selector = new Selector( 0, 1, this );
-
-    //Variables
+    this.selector = new Selector( 2, 3, this );
     this.blockInc = 0;
     this.blocks = [];
     this.inPlay = true;
 
-    //Functions
-    this.MoveBlocksUp = function (blocks) {
-
-        for (var i = 0; i < this.blocks.length; i++) {
-            this.blocks[i].y = this.blocks[i].y - 1;
-          
+    //Public
+    this.Tick = function()
+    {
+        if (puzzle.inPlay === true){
+            //puzzle._MoveBlocksUp();
         }
-        this.selector.y--;
+          
+
+        if (this.selector.swapInProcess === true) {
+            this.selector.continueSwap();
+        }
+    }
+    this.SelectorSwap = function (leftBlock, rightBlock) {
+      
+        if (leftBlock !== null) {
+            leftBlock.col++;
+            leftBlock.x = 0;
+        }
+        if (rightBlock !== null) {
+            rightBlock.col--;
+            rightBlock.x = 0;
+        }
+        
+    }
+    this.Reset = function () {
+        this.blockInc = 0;
+        this.blocks = [];
+        this.inPlay = true;
+        this._CreateStartingBlocks();
+    }
+
+    //Private
+    this._MoveBlocksUp = function (blocks)
+    {
         this.blockInc++;
 
         if (this.blockInc == 50) {
-            this.blockInc = 0;
-            this.RowChange();
+         
+            this._RowChange();
         }
      
     };
-
-    this.RowChange = function ()
+    this._RowChange = function ()
     {
-        this.MoveBlocksUpOneRow();
-        this.AddBlockRow();
-        this.CheckPuzzel();
-    }
+        this._CheckPuzzel();
+        if (this.inPlay) {
+            this.blockInc = 0;
+            this._MoveBlocksUpOneRow();
+            this.selector.MoveUp();
+            this._AddBlockRow();
+        }
+           
 
-    this.MoveBlocksUpOneRow = function () {
+    }
+    this._MoveBlocksUpOneRow = function () {
         for (var i = 0; i < this.blocks.length; i++) {
             this.blocks[i].row++;
         }
-
-        this.selector.row++;
     }
-
-    this.AddBlockRow = function () {   
+    this._AddBlockRow = function () {   
         for (var i = 0; i < 6; i++) {
             var row = 0;
             var col = i + 1;
@@ -52,38 +77,23 @@
             //Get Vaild random Color
             var randomColor;
             do {
-                randomColor = this.RandomColor();
-            } while (!this.VaildRandomColor(row, col, randomColor))
+                randomColor = this._RandomColor();
+            } while (!this._VaildRandomColor(row, col, randomColor))
 
-            this.blocks.push(new Block(row, col, randomColor, i * 50, 0));
+            this.blocks.push(new Block(row, col, randomColor, 0, 0));
         }
     }
-    this.CheckPuzzel = function () {
+    this._CheckPuzzel = function () {
         for (var i = 0; i < this.blocks.length; i++) {
-            if(this.blocks[i].row === 12)
+            if(this.blocks[i].row === 11)
             {
                 this.inPlay = false;
                 break;
             }   
         }
     }
-    this.ClearSet = function () {
-
-    }
-    this.Gravity = function () {
-
-    }
-    this.SwapBlocks = function () {
-
-    }
-    this.Reset = function () {
-        this.blockInc = 0;
-        this.blocks = [];
-        this.inPlay = true;
-        this.CreateStartingBlocks();
-    }
-    this.CreateStartingBlocks = function () {
-        for (var i = 0; i < 1; i++) {
+    this._CreateStartingBlocks = function () {
+        for (var i = 0; i < 3; i++) {
             for (var j = 0; j < 6; j++) {
                 var row = i;
                 var col = j + 1;
@@ -92,97 +102,88 @@
                 var randomColor;
                 do
                 {
-                    randomColor = this.RandomColor();
-                } while (!this.VaildRandomColor(row, col, randomColor))
+                    randomColor = this._RandomColor();
+                } while (!this._VaildRandomColor(row, col, randomColor))
 
-
-
-                //
-                this.blocks.push(new Block(row, col, randomColor, j * 50, i * 50));
+                this.blocks.push(new Block(row, col, randomColor, 0, 0));
             }
         }
     }
-    this.VaildRandomColor = function(row, col, randomColor) {
+    this._VaildRandomColor = function (row, col, randomColor) {
 
         var foundValue = false;
         var i;
         //Check Row
         var rowSameColor = 1;
-        //Left
-        
+        //Down
+
         i = 1;
-        do{
+        do {
             foundValue = false;
 
-            var block = this.FindBlock( row - i , col );
-            if(block !== null && block.color == randomColor)
-            {
-                row++;
-                foundValue = true;
-            }
-            i++
-        }while(foundValue)
-
-        //Right
-        i = 1;
-        do{
-            foundValue = false;
-
-            var block = this.FindBlock( row + i , col  );
-            if(block !== null && block.color == randomColor)
-            {
+            var block = this._FindBlock(row - i, col);
+            if (block !== null && block.color == randomColor) {
                 rowSameColor++;
                 foundValue = true;
             }
             i++
-        }while(foundValue)
+        } while (foundValue)
+
+        //Up
+        i = 1;
+        do {
+            foundValue = false;
+
+            var block = this._FindBlock(row + i, col);
+            if (block !== null && block.color == randomColor) {
+                rowSameColor++;
+                foundValue = true;
+            }
+            i++
+        } while (foundValue)
 
 
-        if(rowSameColor >= 3)
-        {
+        if (rowSameColor >= 3) {
             return false;
         }
 
         //Check Col
         var colSameColor = 1;
         //Left
-        
+
         i = 1;
-        do{
+        do {
             foundValue = false;
 
-            var block = this.FindBlock( row , col - i);
-            if(block !== null && block.color == randomColor)
-            {
+            var block = this._FindBlock(row, col - i);
+            if (block !== null && block.color == randomColor) {
                 colSameColor++;
                 foundValue = true;
             }
             i++
-        }while(foundValue)
+        } while (foundValue)
 
         //Right
         i = 1;
-        do{
+        do {
             foundValue = false;
 
-            var block = this.FindBlock( row , col + i );
-            if(block !== null && block.color == randomColor)
-            {
+            var block = this._FindBlock(row, col + i);
+            if (block !== null && block.color == randomColor) {
                 colSameColor++;
                 foundValue = true;
             }
             i++
-        }while(foundValue)
+        } while (foundValue)
 
 
-        if (colSameColor >= 3)
-        {
+        if (colSameColor >= 3) {
             return false;
         }
 
         return true;
-    }    
-    this.FindBlock = function(row, col) {
+    }
+    this._FindBlock = function(row, col) {
         var block = null;
         for (var i = 0; i < this.blocks.length; i++) {
             if(this.blocks[i].row === row && this.blocks[i].col === col)  {
@@ -192,7 +193,7 @@
         }
         return block;
     }
-    this.RandomColor = function () {
+    this._RandomColor = function () {
         var min = 1;
         var max = 5;
         var random = Math.floor(Math.random() * (max - min)) + min;
@@ -213,27 +214,11 @@
         }
     }
 
+    //Not Started
+    this._ClearSet = function () {
 
+    }
+    this._Gravity = function () {
 
-    //Selector
-    this.SelectorSwap = function (row, leftCol)
-    {
-        var leftBlock = this.FindBlock(row, leftCol);
-        var rightBlock = this.FindBlock(row, leftCol + 1);
-
-        if(leftBlock !== null && rightBlock !== null)
-        {
-            leftBlock.col++;
-            rightBlock.col--;
-
-            var leftX = leftBlock.x;
-            var leftY = leftBlock.y;
-
-            leftBlock.x = rightBlock.x;
-            leftBlock.y = rightBlock.y;
-
-            rightBlock.x = leftX;
-            rightBlock.y = leftY;
-        }
     }
 };
