@@ -1,12 +1,13 @@
 ﻿var materials;
 var puzzle;
 var display;
-var fps = 60;
 var renderStats;
 var updateStats;
 var controller;
 var keyboard;
 var sounds;
+var fps = 60;
+var interval = 1000 / fps;
 
 var BLOCK_COLORS = {
     Green: 1,
@@ -30,48 +31,45 @@ function Setup()
     puzzle = new Puzzle(BLOCK_COLORS, sounds);
     controller = new Controller(puzzle);
     keyboard = new Keyboard(puzzle);
+    keyboard.Run();
     display = new Display(document.getElementById('myCanvas'), materials, BLOCK_COLORS, sounds)
   
-   
-    renderStats = new Stats();
-    //document.body.appendChild(renderStats.domElement);
-
-    updateStats = new Stats();
-    //document.body.appendChild(updateStats.domElement);
+    stats = new Stats();
+    document.body.appendChild(stats.domElement);
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.left = '10px';
+    stats.domElement.style.top = '10px';
 
     Start();
 }
 
 //Game Loop
-this.GameLoop = (function () {
-    var loops = 0, skipTicks = 1000 / fps,
-        maxFrameSkip = 10,
-        nextGameTick = (new Date).getTime();
+function GameLoop() {
+    setTimeout(function () {
 
-    return function () {
-        loops = 0;
+        var a = performance.now();
 
-        while ((new Date).getTime() > nextGameTick) {
-            updateStats.update();
-            GameTick();
-            nextGameTick += skipTicks;
-            loops++;
-        }
-        keyboard.Run();
-        controller.Run();       
-        renderStats.update();
-        Draw();
-    };
-})();
+
+        requestAnimationFrame(GameLoop);
+        controller.Run();
+        GameTick();
+        var b = performance.now();
+        if ((b - a) > 1)
+            console.log((b - a) + ' ms.');
+        Draw()
+        stats.update();
+    }, interval);
+}
+
 
 function Start()
 {
     puzzle.Reset();
-    window.setInterval(this.GameLoop, 0);
+    GameLoop();
 }
 function Draw()
 {
-    display.render(puzzle.blocks, puzzle.selector, puzzle.blockInc);
+    display.render(puzzle.blocks, puzzle.selector, puzzle.blockInc);  
 }
 function GameTick()
 {

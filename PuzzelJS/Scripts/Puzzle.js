@@ -32,7 +32,7 @@
             rightBlock.col--;
             rightBlock.x = 0;
         }
-        
+        this._CheckForSets();
     }
     this.Reset = function () {
         this.blockInc = 0;
@@ -42,6 +42,8 @@
     }
 
     //Private
+
+    //SECTION
     this._MoveBlocksUp = function (blocks)
     {
         this.blockInc++;
@@ -83,15 +85,8 @@
             this.blocks.push(new Block(row, col, randomColor, 0, 0));
         }
     }
-    this._CheckPuzzel = function () {
-        for (var i = 0; i < this.blocks.length; i++) {
-            if(this.blocks[i].row === 11)
-            {
-                this.inPlay = false;
-                break;
-            }   
-        }
-    }
+
+    //SECTION
     this._CreateStartingBlocks = function () {
         for (var i = 0; i < 7; i++) {
             for (var j = 0; j < 6; j++) {
@@ -183,6 +178,8 @@
 
         return true;
     }
+
+    //SECTION
     this._FindBlock = function(row, col) {
         var block = null;
         for (var i = 0; i < this.blocks.length; i++) {
@@ -213,45 +210,139 @@
             return this.BLOCK_COLORS.Yellow;
         }
     }
-    this._CheckForSets = function ()
-    {
-        ////var combos = [];
-        ////var combo = [];
-        ////var totalFound = 0;
 
-        //////Left To Right
-        ////for(var row = 1; i < 12; i++ ){
-        ////    for(var col = 1; j < 7; j++ ){
-        ////       var block = this._FindBlock(row, col);
-                
-        ////        if(block != null)
-        ////        {
-        ////            if (combo.length === 0 ||
-        ////                block.color === combo[0].color){
-        ////                combo.add( block )
-        ////            }
-                      
-        ////            else{
-        ////                if (combo.length >= 3)
-        ////                    combos.add(combo);
-        ////                combo = []
-        ////            }
-                       
 
-                    
-
-        ////        }
-
-        ////    }
-      //  }
-           
-
-        //// SETS
-
+    //SECTION
+    this._CheckPuzzel = function () {
+        for (var i = 0; i < this.blocks.length; i++) {
+            if (this.blocks[i].row === 11) {
+                this.inPlay = false;
+                break;
+            }
+        }
     }
-    this._StartRemoveSet = function ()
-    {
+    this._CheckForSets = function () {
+        var sets = [];
+        sets = this._GetSetsCols(sets);
+        sets = this._GetSetsRows(sets);
+        sets = this._CombineSets(sets);
+    }
+    this._GetSetsCols = function (sets) {
+        var set;
+        for (var row = 1; row < 12; row++) {
+            set = [];
 
+            for (var col = 1; col < 7; col++) {
+                var block = this._FindBlock(row, col);
+
+                if (block != null) {
+                    if (set.length === 0 ||
+                        block.color === set[0].color) {
+                        set.push(block)
+                    }
+
+                    else {
+                        if (set.length >= 3) {
+                            sets.push(set);
+                        }
+                        set = []
+                        set.push(block)
+                    }
+                }
+                else {
+                    if (set.length >= 3) {
+                        sets.push(set);
+                    }
+                    set = []
+                }
+            }
+            if (set.length >= 3) {
+                sets.push(set);
+            }
+        }
+        return sets;
+    }
+    this._GetSetsRows = function (sets) {
+        var set;
+        for (var col = 1; col < 7; col++) {
+            set = [];
+            for (var row = 1; row < 12; row++) {
+                var block = this._FindBlock(row, col);
+
+                if (block != null) {
+                    if (set.length === 0 ||
+                        block.color === set[0].color) {
+                        set.push(block)
+                    }
+
+                    else {
+                        if (set.length >= 3) {
+                            sets.push(set);
+                        }
+                        set = [];
+                        set.push(block)
+                    }
+                }
+                else {
+                    if (set.length >= 3) {
+                        sets.push(set);
+                    }
+                    set = [];
+                }
+            }
+            if (set.length >= 3) {
+                sets.push(set);
+            }
+        }
+        return sets;
+    }
+    this._CombineSets = function (sets)   {
+        var combinedSets = [];
+
+        for(var i = 0; i < sets.length; i++)  {
+            if(combinedSets == []) {
+                combinedSets.push(set[i]);
+            }
+            else {
+                var setFound = false;
+                for(var j = 0; j < combinedSets.length; j++) {
+                    if (this._CompareSet(combinedSets[j], sets[i])) {
+                        setFound = true;
+                        break;
+                    }
+                }
+                if (setFound) {
+                    this._CombineSet(combinedSets[j], sets[i]);
+                }
+            }
+
+        }
+
+        return combinedSets;
+    }
+    this._CompareSet = function (setA, setB) {
+        for (var i = 0; i < setA[i].length; i++) {
+            for (var j = 0; j < setB.length; j++) {
+                if (setA[i].row == setB[i].row &&
+                    setA[i].col == setB[i].col) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    } 
+    this._CombineSet = function (setA, setB) {
+
+        var newSet = setA;
+        for (var i = 0; i < setA[i].length; i++) {
+            for (var j = 0; j < setB[j].length; j++) {
+                if (!(setA[i].row == setB[i].row &&
+                    setA[i].col == setB[i].col)) {
+                    newSet.push(setB[i]);
+                }
+            }
+        }
+        return newSet;
     }
 
 
