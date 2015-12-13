@@ -26,11 +26,11 @@ function FinshLoad() {
 }
 function Setup()
 {
-    audio = new Audio();
-    puzzle = new Puzzle(BLOCK_COLORS);
+    audio = new Audioz();
+    puzzle = new Puzzle(BLOCK_COLORS, audio);
     controller = new Controller(puzzle);
     keyboard = new Keyboard(puzzle);
-    display = new Display(document.getElementById('myCanvas'), materials, BLOCK_COLORS)
+    display = new Display(document.getElementById('myCanvas'), materials, BLOCK_COLORS, audio)
   
    
     renderStats = new Stats();

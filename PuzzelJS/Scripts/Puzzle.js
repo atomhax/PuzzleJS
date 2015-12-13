@@ -1,11 +1,11 @@
-﻿function Puzzle( BLOCK_COLORS ) {
+﻿function Puzzle(BLOCK_COLORS, audio) {
    
     //Constants
     this.BLOCK_ROW_CHANGE = 50;
     this.BLOCK_COLORS = BLOCK_COLORS;
 
     //Selector
-    this.selector = new Selector( 2, 3, this );
+    this.selector = new Selector(2, 3, this, audio);
     this.blockInc = 0;
     this.blocks = [];
     this.inPlay = true;
@@ -215,35 +215,35 @@
     }
     this._CheckForSets = function ()
     {
-        //var combos = [];
-        //var combo = [];
-        //var totalFound = 0;
+        ////var combos = [];
+        ////var combo = [];
+        ////var totalFound = 0;
 
-        ////Left To Right
-        //for(var row = 1; i < 12; i++ ){
-        //    for(var col = 1; j < 7; j++ ){
-        //       var block = this._FindBlock(row, col);
+        //////Left To Right
+        ////for(var row = 1; i < 12; i++ ){
+        ////    for(var col = 1; j < 7; j++ ){
+        ////       var block = this._FindBlock(row, col);
                 
-        //        if(block != null)
-        //        {
-        //            if (combo.length === 0 ||
-        //                block.color === combo[0].color){
-        //                combo.add( block )
-        //            }
+        ////        if(block != null)
+        ////        {
+        ////            if (combo.length === 0 ||
+        ////                block.color === combo[0].color){
+        ////                combo.add( block )
+        ////            }
                       
-        //            else{
-        //                if (combo.length >= 3)
-        //                    combos.add(combo);
-        //                else
-        //            }
+        ////            else{
+        ////                if (combo.length >= 3)
+        ////                    combos.add(combo);
+        ////                combo = []
+        ////            }
                        
 
                     
 
-        //        }
+        ////        }
 
-        //    }
-        //}
+        ////    }
+      //  }
            
 
         //// SETS
