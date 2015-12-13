@@ -1,4 +1,4 @@
-﻿function KeyBoard( puzzle ) {
+﻿function Keyboard(puzzle) {
 
     //Data
     this.puzzle = puzzle;
@@ -11,49 +11,50 @@
     this.lastDownRight = false;
 
     //Functions
-    this.Run = function () 
-    {
- 
-        //A
-        //if (this.gamePad.buttons[0].pressed === true && this.lastDownA == false)
-        //{
-        //    this.lastDownA = true;
-        //    this.puzzle.selector.Swap();
-        //}
-        //if (this.gamePad.buttons[0].pressed === false) {
-        //    this.lastDownA = false;
-        //}
-    
-            
+    this.Run = function () {
 
-        ////Up
-        //if (this.gamePad.buttons[12].pressed === true && this.lastDownUp == false) {
-        //    this.lastDownUp = true;
-        //    this.puzzle.selector.MoveUp();
-        //}
-        //if (this.gamePad.buttons[12].pressed === false) {
-        //    this.lastDownUp = false;
-        //}
 
-        ////Right
-        //if (this.gamePad.buttons[13].pressed === true)
-        //    this.puzzle.selector.MoveRight();
-      
 
-        ////Left
-        //if (this.gamePad.buttons[14].pressed === true)
-        //    this.puzzle.selector.MoveLeft();
+        window.addEventListener('keydown', function (event) {
+            switch (event.keyCode) {
+                case 37: // Left
+                    this.puzzle.selector.MoveLeft();
+                    break;
 
-        ////Down
-        //if (this.gamePad.buttons[15].pressed === true && this.lastDownDown == false)
-        //{
-        //    this.lastDownDown = true;
-        //    this.puzzle.selector.MoveDown();
-        //}
-          
-        //if (this.gamePad.buttons[15].pressed === false) {
-        //    this.lastDownDown = false;
-        //}
-    };
-  
+                case 38: // Up
+                    this.puzzle.selector.MoveUp();
+                    break;
+
+                case 39: // Right
+                    this.puzzle.selector.MoveRight();
+                    break;
+
+                case 40: // Down
+                    this.puzzle.selector.MoveDown();
+                    break;
+
+                case 65: // a left
+                    this.puzzle.selector.MoveLeft();
+                    break;
+
+                case 87: // w up
+                    this.puzzle.selector.MoveUp();
+                    break;
+
+                case 68: // d right
+                    this.puzzle.selector.MoveRight();
+                    break;
+
+                case 83: // s down
+                    this.puzzle.selector.MoveDown();
+                    break;
+
+                case 32: //Space swap
+                    this.puzzle.selector.Swap();
+                    break;
+
+            }
+        }, false);
+
+    }
 };
