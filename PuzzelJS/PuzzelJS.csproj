@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -167,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Files\50x50\block.png" />
+    <Content Include="Content\Files\Swap.mp3" />
     <Content Include="Content\Files\svg\block.svg" />
     <Content Include="Content\Files\50x50\BlockBlue.png" />
     <Content Include="Content\Files\50x50\BlockGreen.png" />
@@ -179,6 +181,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Audio.js" />
     <Content Include="Scripts\Keyboard.js" />
     <Content Include="Scripts\Selector.js" />
     <Content Include="Scripts\Puzzle.js" />
