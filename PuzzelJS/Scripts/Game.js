@@ -6,6 +6,7 @@ var renderStats;
 var updateStats;
 var controller;
 var keyboard;
+var audio;
 
 var BLOCK_COLORS = {
     Green: 1,
@@ -25,11 +26,12 @@ function FinshLoad() {
 }
 function Setup()
 {
-
+    audio = new Audio();
     puzzle = new Puzzle(BLOCK_COLORS);
     controller = new Controller(puzzle);
     keyboard = new Keyboard(puzzle);
     display = new Display(document.getElementById('myCanvas'), materials, BLOCK_COLORS)
+  
    
     renderStats = new Stats();
     //document.body.appendChild(renderStats.domElement);
