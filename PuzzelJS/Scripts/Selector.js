@@ -1,9 +1,11 @@
-﻿function Selector( row, col, puzzel )
+﻿function Selector( row, col, puzzel, audio )
 {
     //Vars
     this.row = row;
     this.col = col;
     this.puzzel = puzzel;
+    this.audio = audio;
+
 
     //Swap
     this.TICKS_TO_SWAP = 10;
@@ -40,6 +42,7 @@
             this.swapTicks = 0;
             this.left = this.puzzel._FindBlock(this.row, this.col);
             this.right = this.puzzel._FindBlock(this.row, this.col + 1);
+            this.audio.swap.play();
             this.continueSwap();
         } 
     }
