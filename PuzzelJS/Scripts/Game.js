@@ -53,10 +53,11 @@ function GameLoop() {
         requestAnimationFrame(GameLoop);
         controller.Run();
         GameTick();
+       
+        Draw()
         var b = performance.now();
         if ((b - a) > 1)
             console.log((b - a) + ' ms.');
-        Draw()
         stats.update();
     }, interval);
 }
