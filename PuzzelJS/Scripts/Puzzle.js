@@ -14,7 +14,7 @@
     this.Tick = function()
     {
         if (puzzle.inPlay === true){
-            //puzzle._MoveBlocksUp();
+           // puzzle._MoveBlocksUp();
         }
           
 
@@ -93,7 +93,7 @@
         }
     }
     this._CreateStartingBlocks = function () {
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 7; i++) {
             for (var j = 0; j < 6; j++) {
                 var row = i;
                 var col = j + 1;

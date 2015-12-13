@@ -27,8 +27,8 @@
                     break;
 
                 case 38: // Up
-                    if (this.LeftKeyUp) {
-                        this.LeftKeyUp = false;
+                    if (this.UpKeyUp) {
+                        this.UpKeyUp = false;
                         this.puzzle.selector.MoveUp();
                     }
                     break;
@@ -55,8 +55,8 @@
                     break;
 
                 case 87: // w up
-                    if (this.LeftKeyUp) {
-                        this.LeftKeyUp = false;
+                    if (this.UpKeyUp) {
+                        this.UpKeyUp = false;
                         this.puzzle.selector.MoveUp();
                     }
                     break;
