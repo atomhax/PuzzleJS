@@ -213,6 +213,47 @@
             return this.BLOCK_COLORS.Yellow;
         }
     }
+    this._CheckForSets = function ()
+    {
+        //var combos = [];
+        //var combo = [];
+        //var totalFound = 0;
+
+        ////Left To Right
+        //for(var row = 1; i < 12; i++ ){
+        //    for(var col = 1; j < 7; j++ ){
+        //       var block = this._FindBlock(row, col);
+                
+        //        if(block != null)
+        //        {
+        //            if (combo.length === 0 ||
+        //                block.color === combo[0].color){
+        //                combo.add( block )
+        //            }
+                      
+        //            else{
+        //                if (combo.length >= 3)
+        //                    combos.add(combo);
+        //                else
+        //            }
+                       
+
+                    
+
+        //        }
+
+        //    }
+        //}
+           
+
+        //// SETS
+
+    }
+    this._StartRemoveSet = function ()
+    {
+
+    }
+
 
     //Not Started
     this._ClearSet = function () {
