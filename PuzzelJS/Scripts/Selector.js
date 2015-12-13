@@ -30,7 +30,7 @@
         }
     }
     this.MoveRight = function () {
-        if (this.col < 6 && this.puzzel.inPlay === true) {
+        if (this.col < 5 && this.puzzel.inPlay === true) {
             this.col++;
         }
     }

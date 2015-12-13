@@ -28,7 +28,7 @@ function Setup()
 
     puzzle = new Puzzle(BLOCK_COLORS);
     controller = new Controller(puzzle);
-    keyboard = new Controller(puzzle);
+    keyboard = new Keyboard(puzzle);
     display = new Display(document.getElementById('myCanvas'), materials, BLOCK_COLORS)
    
     renderStats = new Stats();
@@ -55,7 +55,7 @@ this.GameLoop = (function () {
             nextGameTick += skipTicks;
             loops++;
         }
-        //keyboard.Run();
+        keyboard.Run();
         controller.Run();       
         renderStats.update();
         Draw();
