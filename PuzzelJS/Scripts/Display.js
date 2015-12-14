@@ -10,6 +10,7 @@
     this._layoutContext = this._canvas.getContext('2d');
     //Functions
     this.render = function (blocks, selector, blockInc, score, level) {
+//blockInc()
         this._clearScreen();
         this._drawBlockArea();
         this._drawScore(score);
@@ -57,7 +58,10 @@
     this._drawBlocks = function (startX, startY, blocks, blockInc) {
         for (var i = 0; i < blocks.length; i++) {
 
-            
+            this.remove = true;
+            this.removeTick = 0;
+            this.startRemoveAtTick = 0;
+            this.fullRemoveAtTick = 0;
             if (blocks[i].row === 0)
             {
                 var yCutOff = 50 - blockInc;

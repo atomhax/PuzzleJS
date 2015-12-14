@@ -15,10 +15,12 @@
     //Public
     this.Tick = function()
     {
-        if (puzzle.inPlay === true){
-            puzzle._MoveBlocksUp();
+        if (this.inPlay === true && this._AnyBlocksBeingRemoved() === false) {
+
+           this._MoveBlocksUp();
+
         }
-          
+        this._IncRemoveSets();
 
         if (this.selector.swapInProcess === true) {
             this.selector.continueSwap();
@@ -51,7 +53,14 @@
     //SECTION
     this._MoveBlocksUp = function (blocks)
     {
-        this.blockInc++;
+
+ 
+        if (this.level === 1)
+            this.blockInc += .5;
+
+        if (this.level === 5)
+            this.blockInc++;
+     
 
         if (this.blockInc == 50) {
          
@@ -184,9 +193,6 @@
         return true;
     }
 
-  
-
-
     //SECTION
     this._CheckPuzzel = function () {
         for (var i = 0; i < this.blocks.length; i++) {
@@ -198,9 +204,10 @@
     }
     this._CheckForSets = function () {
         var sets = [];
-        //sets = this._GetSetsCols(sets);
-        //sets = this._GetSetsRows(sets);
-        //sets = this._CombineSets(sets);
+        sets = this._GetSetsCols(sets);
+        sets = this._GetSetsRows(sets);
+        sets = this._CombineSets(sets);
+        this._RemoveSets(sets);
     }
     this._GetSetsCols = function (sets) {
         var set;
@@ -275,19 +282,20 @@
         var combinedSets = [];
 
         for(var i = 0; i < sets.length; i++)  {
-            if(combinedSets == []) {
-                combinedSets.push(set[i]);
+            if(combinedSets.length === 0) {
+                combinedSets.push(sets[i]);
             }
             else {
                 var setFound = false;
                 for(var j = 0; j < combinedSets.length; j++) {
                     if (this._CompareSet(combinedSets[j], sets[i])) {
                         setFound = true;
+                        combinedSets[j] = this._CombineSet(combinedSets[j], sets[i]);
                         break;
                     }
                 }
-                if (setFound) {
-                    this._CombineSet(combinedSets[j], sets[i]);
+                if (!setFound) {
+                    combinedSets.push(sets[i]);
                 }
             }
 
@@ -296,31 +304,65 @@
         return combinedSets;
     }
     this._CompareSet = function (setA, setB) {
-        for (var i = 0; i < setA[i].length; i++) {
+        for (var i = 0; i < setA.length; i++) {
             for (var j = 0; j < setB.length; j++) {
-                if (setA[i].row == setB[i].row &&
-                    setA[i].col == setB[i].col) {
+                if (setA[i].row == setB[j].row &&
+                    setA[i].col == setB[j].col) {
                     return true;
                 }
             }
         }
         return false;
-    } 
+    }
     this._CombineSet = function (setA, setB) {
-
-        var newSet = setA;
-        for (var i = 0; i < setA[i].length; i++) {
-            for (var j = 0; j < setB[j].length; j++) {
-                if (!(setA[i].row == setB[i].row &&
-                    setA[i].col == setB[i].col)) {
-                    newSet.push(setB[i]);
+        for (var i = 0; i < setA.length; i++) {
+            for (var j = 0; j < setB.length; j++) {
+                if (setA[i].row == setB[j].row &&
+                    setA[i].col == setB[j].col) {
+                    return true;
                 }
             }
         }
-        return newSet;
+        return false;
     }
 
+    this._RemoveSets = function (sets) {
+        for (var i = 0; i < sets.length; i++) {
+            for (var j = 0; j < sets[i].length; j++) {
+                sets[i][j].remove = true;
+                sets[i][j].removeTick = 0;
+                sets[i][j].startRemoveAtTick = 60 + j * 6;
+                sets[i][j].removeAtTick = 60 + (j + 1) * 6;
+            }
+        }
+    }
+    this._IncRemoveSets = function (sets) {
+        var removeSet = [];
+        for (var i = 0; i < this.blocks.length; i++) {
+            if (this.blocks[i].remove === true) {
+                this.blocks[i].removeTick++;
+                if (this.blocks[i].removeTick == this.blocks[i].removeAtTick) {
+                    removeSet.push(this.blocks[i]);
+                }
+            }
+        }
 
+        //RemoveBlocks
+        this._RemoveSet(removeSet);
+    }
+    this._AnyBlocksBeingRemoved = function (sets) {
+        for (var i = 0; i < this.blocks.length; i++) {
+            if (this.blocks[i].remove === true) {
+                return true;
+            }
+        }
+        return false;
+    }
+    this._RemoveSet = function (set) {
+        for (var i = 0; i < set.length; i++) {
+            this.blocks.splice(this.blocks.indexOf(set[i]), 1);
+        }
+    }
     //Support
     this._FindBlock = function (row, col) {
         var block = null;

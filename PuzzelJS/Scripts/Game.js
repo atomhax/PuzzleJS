@@ -35,7 +35,7 @@ function Setup()
     keyboard = new Keyboard(puzzle);
     keyboard.Run();
     display = new Display(document.getElementById('myCanvas'), materials, BLOCK_COLORS)
- //   SetupStats();
+    SetupStats();
 
     Start();
 }
@@ -55,7 +55,7 @@ function GameLoop() {
         GameTick();
         Draw();
     
-        //stats.update();
+        stats.update();
     }, interval);
 }
 function Start()

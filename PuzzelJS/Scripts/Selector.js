@@ -38,12 +38,23 @@
     }
     this.StartSwap = function () {
         if (!this.swapInProcess) {
-            this.swapInProcess = true;
-            this.swapTicks = 0;
-            this.left = this.puzzel._FindBlock(this.row, this.col);
-            this.right = this.puzzel._FindBlock(this.row, this.col + 1);
-            Sounds("swap");
-            this.continueSwap();
+            var left = this.puzzel._FindBlock(this.row, this.col);
+            var right = this.puzzel._FindBlock(this.row, this.col + 1);
+
+            if (
+                (left === null || (left != null && left.remove !== true)) &&
+                (right === null || (right != null && right.remove !== true))
+                )
+            {
+                this.left = left;
+                this.right = right;
+                this.swapInProcess = true;
+                this.swapTicks = 0;
+                this.left = this.puzzel._FindBlock(this.row, this.col);
+                this.right = this.puzzel._FindBlock(this.row, this.col + 1);
+                Sounds("swap");
+                this.continueSwap();
+            }
         } 
     }
     this.continueSwap = function ()
