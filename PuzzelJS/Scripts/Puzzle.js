@@ -315,15 +315,25 @@
         return false;
     }
     this._CombineSet = function (setA, setB) {
+        var foundMatch = false;
+        var newSet = [];
+        for (var j = 0; j < setB.length; j++) {
+            newSet.push(setB[j]);
+        }
         for (var i = 0; i < setA.length; i++) {
+            var foundMatch = false;
             for (var j = 0; j < setB.length; j++) {
-                if (setA[i].row == setB[j].row &&
-                    setA[i].col == setB[j].col) {
-                    return true;
+                if ((setA[i].row == setB[j].row &&
+                    setA[i].col == setB[j].col)) {
+                    foundMatch = true;
+                    break;
                 }
             }
+            if (foundMatch === false) {
+                newSet.push(setA[i]);
+            }
         }
-        return false;
+        return newSet;
     }
 
     this._RemoveSets = function (sets) {
@@ -331,8 +341,8 @@
             for (var j = 0; j < sets[i].length; j++) {
                 sets[i][j].remove = true;
                 sets[i][j].removeTick = 0;
-                sets[i][j].startRemoveAtTick = 60 + j * 6;
-                sets[i][j].removeAtTick = 60 + (j + 1) * 6;
+                sets[i][j].startRemoveAtTick = 60 + j * 12;
+                sets[i][j].removeAtTick = 60 + (j + 1) * 60;
             }
         }
     }
