@@ -10,6 +10,10 @@
     this.startRemoveAtTick = 0;
     this.fullRemoveAtTick = 0;
 
+    this.gravityInEffect = false;
+    this.gravityTick = 0;
+    this.gravityEndRow = 0;
+
     //Unquie Offset
     this.x = x;
     this.y = y;

@@ -15,12 +15,21 @@
     //Public
     this.Tick = function()
     {
-        if (this.inPlay === true && this._AnyBlocksBeingRemoved() === false) {
+        var blocksBeingRemoved = this._AnyBlocksBeingRemoved();
+        var blocksInGravity = this._AnyBlocksIn_Gravity();
 
+        if (this.inPlay === true && blocksBeingRemoved === false && blocksInGravity === false) {
            this._MoveBlocksUp();
-
         }
-        this._IncRemoveSets();
+
+        if (blocksInGravity === true) {
+            this._ContinueGravity();
+        }
+
+        if (blocksBeingRemoved === true) {
+            this._IncRemoveSets();
+        }
+
 
         if (this.selector.swapInProcess === true) {
             this.selector.continueSwap();
@@ -37,6 +46,7 @@
             rightBlock.x = 0;
         }
         this._CheckForSets();
+        this._Gravity();
     }
     this.Reset = function () {
       
@@ -193,7 +203,7 @@
         return true;
     }
 
-    //SECTION
+    //SECTION       
     this._CheckPuzzel = function () {
         for (var i = 0; i < this.blocks.length; i++) {
             if (this.blocks[i].row === 11) {
@@ -207,6 +217,8 @@
         sets = this._GetSetsCols(sets);
         sets = this._GetSetsRows(sets);
         sets = this._CombineSets(sets);
+
+
         this._RemoveSets(sets);
     }
     this._GetSetsCols = function (sets) {
@@ -215,7 +227,7 @@
             set = [];
 
             for (var col = 1; col < 7; col++) {
-                var block = this._FindBlock(row, col);
+                var block = this._FindBlockNotInRemove(row, col);
 
                 if (block != null) {
                     if (set.length === 0 ||
@@ -249,7 +261,7 @@
         for (var col = 1; col < 7; col++) {
             set = [];
             for (var row = 1; row < 12; row++) {
-                var block = this._FindBlock(row, col);
+                var block = this._FindBlockNotInRemove(row, col);
 
                 if (block != null) {
                     if (set.length === 0 ||
@@ -346,7 +358,7 @@
             }
         }
     }
-    this._IncRemoveSets = function (sets) {
+    this._IncRemoveSets = function () {
         var removeSet = [];
         for (var i = 0; i < this.blocks.length; i++) {
             if (this.blocks[i].remove === true) {
@@ -359,6 +371,10 @@
 
         //RemoveBlocks
         this._RemoveSet(removeSet);
+        if (removeSet.length > 0){
+            this._Gravity();
+        }
+       
     }
     this._AnyBlocksBeingRemoved = function (sets) {
         for (var i = 0; i < this.blocks.length; i++) {
@@ -373,11 +389,22 @@
             this.blocks.splice(this.blocks.indexOf(set[i]), 1);
         }
     }
+
     //Support
     this._FindBlock = function (row, col) {
         var block = null;
         for (var i = 0; i < this.blocks.length; i++) {
             if (this.blocks[i].row === row && this.blocks[i].col === col) {
+                block = this.blocks[i];
+                break;
+            }
+        }
+        return block;
+    }
+    this._FindBlockNotInRemove = function (row, col) {
+        var block = null;
+        for (var i = 0; i < this.blocks.length; i++) {
+            if (this.blocks[i].row === row && this.blocks[i].col === col && this.blocks[i].remove === false) {
                 block = this.blocks[i];
                 break;
             }
@@ -406,10 +433,57 @@
     }
 
     //Not Started
-    this._ClearSet = function () {
-
-    }
     this._Gravity = function () {
-
+        for (var row = 2; row < 11; row++) {
+            for (var col = 1; col < 7; col++) {
+                var block = this._FindBlockNotInRemove(row, col);
+                if (block != null) {
+                    this._GravityBlock(block);
+                }
+            }
+        }
     }
+    this._GravityBlock = function (block) {
+        var newRow = null;
+        for (var row = block.row - 1; row > 1; row--)
+        {
+            var compareBlock = this._FindBlock(row, block.col);
+            if (compareBlock === null || compareBlock.gravityInEffect === true) {
+                newRow = row;
+            }  
+        }
+
+        if(newRow !== null)
+        {
+            block.gravityInEffect = true;
+            block.gravityTick = 0;
+            block.gravityEndRow = newRow;
+        }
+    }
+
+    this._ContinueGravity = function () {
+        for (var i = 0; i < this.blocks.length; i++) {
+            if (this.blocks[i].gravityInEffect === true) {
+                this.blocks[i].gravityTick++;
+
+                if(this.blocks[i].gravityTick === 10)
+                {
+                    this.blocks[i].gravityTick = 0;
+                    this.blocks[i].gravityInEffect = false;
+                    this.blocks[i].row = this.blocks[i].gravityEndRow;
+                    this.blocks[i].gravityEndRow = null;
+                }
+            }
+        }
+    }
+    this._AnyBlocksIn_Gravity = function (sets) {
+        for (var i = 0; i < this.blocks.length; i++) {
+            if (this.blocks[i].gravityInEffect === true) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 };
