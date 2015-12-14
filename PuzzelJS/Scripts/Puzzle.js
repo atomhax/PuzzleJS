@@ -341,8 +341,8 @@
             for (var j = 0; j < sets[i].length; j++) {
                 sets[i][j].remove = true;
                 sets[i][j].removeTick = 0;
-                sets[i][j].startRemoveAtTick = 60 + j * 12;
-                sets[i][j].removeAtTick = 60 + (j + 1) * 60;
+                sets[i][j].startRemoveAtTick = 60 + j * 6;
+                sets[i][j].removeAtTick = 60 + (j + 1) * 6;
             }
         }
     }
