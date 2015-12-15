@@ -9,6 +9,8 @@
 
 
     //Selector
+    this.blocksInGravity = false;
+    this.comboCount = 0;
     this.selector = new Selector(2, 3, this, audio);
     this.blockInc = 0;
     this.blocks = [];
@@ -26,6 +28,21 @@
 
         var blocksBeingRemoved = this._AnyBlocksBeingRemoved();
         var blocksInGravity = this._AnyBlocksIn_Gravity();
+
+        if (blocksInGravity === false && this.blocksInGravity === true)
+        {
+            //Check For Sets
+            if (this._CheckForSets().length > 0) {
+                this.comboCount++;
+            }
+            //Check Gravity
+            this._Gravity();
+            blocksInGravity = this._AnyBlocksIn_Gravity();
+
+            if (blocksInGravity === false) {
+                this.blocksInGravity == false;
+            }
+        }
 
         if (this.inPlay === true && blocksBeingRemoved === false && blocksInGravity === false) {
             this._MoveBlocksUp();
@@ -67,6 +84,7 @@
 
     this.Reset = function () {
       
+        this.comboCount = 0;
         this.blockInc = 0;
         this.ticksperSet = 0;
         this.totalTicks = 0;
@@ -275,6 +293,8 @@
 
 
         this._RemoveSets(sets);
+
+        return sets;
     }
     this._GetSetsCols = function (sets) {
         var set;
@@ -519,7 +539,7 @@
         var newRow = null;
         for (var row = block.row - 1; row > 0; row--)
         {
-            if (!this._GravityBlocksReservedSpot(row, block.row, block.col)) {
+            if (!this._GravityBlocksReservedSpotCheckRowOnly(row, block.row, block.col)) {
                 newRow = row;
             }  
         }
@@ -532,7 +552,7 @@
         }
     }
 
-    this._GravityBlocksReservedSpot = function (searchRow, blockRow, blockCol) {
+    this._GravityBlocksReservedSpotCheckRowOnly = function (searchRow, blockRow, blockCol) {
         for (var row = blockRow; row > 0; row--) {
             var block = this._FindBlock(row, blockCol);
             if (block != null &&
@@ -545,7 +565,40 @@
                 {
                     return true;
                 }
+        }
+
+        if (this.selector.swapInProcess === true) {
+            if (
+                (this.selector.left === null || (
+                    this.selector.left.col === blockCol &&
+                    this.selector.left.row === searchRow &&
+                    (this.selector.left.row + 1) === searchRow))
+                &&
+               (this.selector.right === null || (
+                this.selector.right.col === blockCol &&
+                this.selector.right.row === searchRow &&
+                (this.selector.right.row - 1) === searchRow))
+                )
+            {
+                return true;
             }
+
+        }
+
+        return false;
+    }
+
+    this._GravityBlocksReservedSpot = function (blockRow, blockCol) {
+        for (var i = 0; i < this.blocks.length; i++)
+        {
+            var block = this.blocks[i];
+            if (block != null &&
+                (block.gravityInEffect === true &&
+                 block.col === blockCol &&
+                 block.gravityEndRow === blockRow)) {
+                return true;
+            }
+        }
         return false;
     }
 

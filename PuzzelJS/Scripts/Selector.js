@@ -36,16 +36,18 @@
             this.col++;
         }
     }
+    //&& !this.puzzel._AnyBlocksIn_Gravity()
     this.StartSwap = function () {
-        if (!this.swapInProcess) {
+        if (!this.swapInProcess ) {
             var left = this.puzzel._FindBlock(this.row, this.col);
             var right = this.puzzel._FindBlock(this.row, this.col + 1);
 
             if (
-                (left === null || (left != null && left.remove !== true && left.gravityInEffect !== true)) &&
-                (right === null || (right != null && right.remove !== true && right.gravityInEffect !== true))
+                (left === null || (left != null && left.remove !== true && left.gravityInEffect !== true && !this.puzzel._GravityBlocksReservedSpot(left.row, left.col + 1))) &&
+                (right === null || (right != null && right.remove !== true && right.gravityInEffect !== true &&  !this.puzzel._GravityBlocksReservedSpot(right.row, right.col - 1)))
                 )
             {
+              
                 this.left = left;
                 this.right = right;
                 this.swapInProcess = true;
