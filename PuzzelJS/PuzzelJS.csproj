@@ -169,6 +169,7 @@
   <ItemGroup>
     <Content Include="Content\Files\160.png" />
     <Content Include="Content\Files\180.png" />
+    <Content Include="Content\Files\Music.mp3" />
     <Content Include="Content\Files\layout.png" />
     <Content Include="Content\Files\50x50\block.png" />
     <Content Include="Content\Files\Swap.mp3" />
@@ -220,6 +221,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+    <Content Include="Content\Files\clear.ogg" />
+    <Content Include="Content\Files\drop.ogg" />
     <None Include="Project_Readme.html" />
     <None Include="Properties\PublishProfiles\DickinsonBros.pubxml" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />

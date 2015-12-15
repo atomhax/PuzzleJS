@@ -1,10 +1,9 @@
-﻿function Selector( row, col, puzzel, sounds )
+﻿function Selector( row, col, puzzel )
 {
     //Vars
     this.row = row;
     this.col = col;
     this.puzzel = puzzel;
-    this.sounds = sounds;
 
 
     //Swap

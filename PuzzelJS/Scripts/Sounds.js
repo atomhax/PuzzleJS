@@ -4,10 +4,21 @@ function Sounds(option) {
 
     
   
-    this.swap = new Audio("/Content/Files/Swap.mp3");
- 
+    if (option == "music") {
+        var music = new Audio("/Content/Files/Music.mp3");
+        music.play();
+    }
     if (option == "swap") {
-        this.swap = this.swap.play();
+        var swap = new Audio("/Content/Files/Swap.mp3");
+        swap.play();
+    }
+    if (option == "clear") {
+        var clear = new Audio("/Content/Files/clear.ogg");
+        clear.play();
+    }
+    if (option == "drop") {
+        var drop = new Audio("/Content/Files/drop.ogg");
+        drop.play();
     }
 
 

@@ -462,7 +462,8 @@
     }
     this._RemoveSet = function (set) {
         for (var i = 0; i < set.length; i++) {
-           var block = this.blocks.splice(this.blocks.indexOf(set[i]), 1);
+            var block = this.blocks.splice(this.blocks.indexOf(set[i]), 1);
+            Sounds("clear");
            delete block;
            this.score += 10;
         }
@@ -614,6 +615,7 @@
                     this.blocks[i].gravityInEffect = false;
                     this.blocks[i].row = this.blocks[i].gravityEndRow;
                     this.blocks[i].gravityEndRow = null;
+                    Sounds("drop");
                     blockLaneded = true;
                 }
             }

@@ -23,6 +23,7 @@ function Load()
 {
     materials = new Materials();
     materials.Load(this.FinshLoad);
+    Sounds("music");
 } 
 function FinshLoad() {
     Setup();
