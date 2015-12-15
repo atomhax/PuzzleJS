@@ -31,16 +31,13 @@
 
         if (blocksInGravity === false && this.blocksInGravity === true)
         {
-            //Check For Sets
-            if (this._CheckForSets().length > 0) {
-                this.comboCount++;
-            }
             //Check Gravity
             this._Gravity();
             blocksInGravity = this._AnyBlocksIn_Gravity();
 
             if (blocksInGravity === false) {
-                this.blocksInGravity == false;
+                this.comboCount = 0;
+                this.blocksInGravity = false;
             }
         }
 
@@ -546,6 +543,7 @@
 
         if(newRow !== null)
         {
+            this.blocksInGravity = true;
             block.gravityInEffect = true;
             block.gravityTick = 0;
             block.gravityEndRow = newRow;
@@ -619,8 +617,8 @@
             }
         }
 
-        if(blockLaneded === true){
-            this._CheckForSets();
+        if (blockLaneded === true) {
+            this.comboCount++;
         }
     }
     this._AnyBlocksIn_Gravity = function (sets) {
