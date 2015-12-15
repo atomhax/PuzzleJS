@@ -18,10 +18,16 @@
 
         window.addEventListener('keydown', function (event) {
             switch (event.keyCode) {
+                case 70: // F
+                  
+                        this.puzzle.ForceBlocksUp();
+                
+                    break;
+
                 case 82: // R
                     if (this.RKeyUp) {
                         this.RKeyUp = false;
-                        this.puzzle.Reset();
+                          this.puzzle.Reset();
                     }
 
                     break;
@@ -97,6 +103,12 @@
 
         window.addEventListener('keyup', function (event) {
             switch (event.keyCode) {
+                case 70: // F
+
+                    this.puzzle.ForceBlocksUpStop();
+
+                    break;
+
                 case 82: // R
                     this.RKeyUp = true;
                     break;

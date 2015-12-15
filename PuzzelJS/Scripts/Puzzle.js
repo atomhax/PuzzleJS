@@ -4,6 +4,10 @@
     this.BLOCK_ROW_CHANGE = 50;
     this.BLOCK_COLORS = BLOCK_COLORS;
 
+    //only add 5 per row
+    //use gravity before user sees
+
+
     //Selector
     this.selector = new Selector(2, 3, this, audio);
     this.blockInc = 0;
@@ -11,10 +15,15 @@
     this.score = 0;
     this.level = 1;
     this.inPlay = true;
-
+    this.totalTicks = 0;
+    this.ticksperSet = 0;
+    this.MoveToNextBlockRowBool = false;
+    this.MoveToNextBlockRowBoolStop = false;
     //Public
     this.Tick = function()
     {
+        this.totalTicks++;
+
         var blocksBeingRemoved = this._AnyBlocksBeingRemoved();
         var blocksInGravity = this._AnyBlocksIn_Gravity();
 
@@ -36,7 +45,8 @@
         }
     }
     this.SelectorSwap = function (leftBlock, rightBlock) {
-      
+      //16
+      //6 Per sec
         if (leftBlock !== null) {
             leftBlock.col++;
             leftBlock.x = 0;
@@ -48,35 +58,80 @@
         this._CheckForSets();
         this._Gravity();
     }
+    this.ForceBlocksUp = function () {
+        this.MoveToNextBlockRowBool = true;
+    }
+    this.ForceBlocksUpStop = function () {
+        this.MoveToNextBlockRowBoolStop = true;
+    }
+
     this.Reset = function () {
       
         this.blockInc = 0;
+        this.ticksperSet = 0;
+        this.totalTicks = 0;
         this.blocks = [];
         this.inPlay = true;
+        this.level = 5;
+        this.score = 0;
         this._CreateStartingBlocks(6);
         this.selector.row = 2;
         this.selector.col = 3;
+        this.MoveToNextBlockRowBool = false;
+        this.MoveToNextBlockRowBoolStop = false;
     }
 
     //Private
 
     //SECTION
-    this._MoveBlocksUp = function (blocks)
+    this._MoveBlocksUp = function ()
     {
 
- 
-        if (this.level === 1)
-            this.blockInc += .5;
+        if (this.MoveToNextBlockRowBool === false) {
+            this.ticksperSet++;
+            //10 standard
+            if (this.level <= 10 && this.ticksperSet % (96 - Math.round(7.3 * (this.level - 1))) === 0) {
+                this.blockInc += 5;
+            }
 
-        if (this.level === 5)
-            this.blockInc++;
-     
+            //Hard
+            if (this.level > 10 && this.level < 15 && this.ticksperSet % (30 - Math.round(3 * (this.level - 10))) === 0) {
+                this.blockInc += 5;
+            }
+
+            //Hard(Over time)
+            if (this.level >= 15 && this.ticksperSet % (30 - Math.round(2 * (this.level - 15))) === 0) {
+                this.blockInc += 5;
+            }
+
+            if (this.totalTicks % (60 * 20) === 0) {
+                this.level += 1;
+            }
+        } else {
+            this._MoveToNextBlockRow();
+
+        }
+       
 
         if (this.blockInc == 50) {
-         
+            this.ticksperSet = 0;
             this._RowChange();
+            this._CheckForSets();
         }
      
+    };
+    this._MoveToNextBlockRow = function () {
+        this.ticksperSet++;
+        if (this.ticksperSet % 1 === 0 && this.blockInc != 50) {
+            this.blockInc += 2.5;
+        }
+
+
+        if (this.blockInc === 50 && this.MoveToNextBlockRowBoolStop === true) {
+            this.MoveToNextBlockRowBoolStop = false;
+            this.MoveToNextBlockRowBool = false;
+            this.ticksperSet = 0;
+        }
     };
     this._RowChange = function ()
     {
@@ -389,6 +444,7 @@
         for (var i = 0; i < set.length; i++) {
            var block = this.blocks.splice(this.blocks.indexOf(set[i]), 1);
            delete block;
+           this.score += 10;
         }
     }
 

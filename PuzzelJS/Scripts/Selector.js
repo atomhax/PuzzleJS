@@ -42,8 +42,8 @@
             var right = this.puzzel._FindBlock(this.row, this.col + 1);
 
             if (
-                (left === null || (left != null && left.remove !== true)) &&
-                (right === null || (right != null && right.remove !== true))
+                (left === null || (left != null && left.remove !== true && left.gravityInEffect !== true)) &&
+                (right === null || (right != null && right.remove !== true && right.gravityInEffect !== true))
                 )
             {
                 this.left = left;
