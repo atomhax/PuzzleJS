@@ -66,7 +66,7 @@
             {
                 var yCutOff = 50 - blockInc;
                 this._context.drawImage(
-                    this._GetBlockSrc(blocks[i].color),
+                    this._GetBlockSrc(blocks[i].color, blocks[i].remove),
                     0,
                     0,
                     50,
@@ -80,7 +80,7 @@
             else
             {
                 this._context.drawImage(
-                              this._GetBlockSrc(blocks[i].color),
+                              this._GetBlockSrc(blocks[i].color, blocks[i].remove),
                               startX + (blocks[i].col - 1) * 50 + blocks[i].x,
                               startY - (blocks[i].row - 1) * 50 + blocks[i].y - blockInc,
                               50,
@@ -91,7 +91,12 @@
         }
         
     }
-    this._GetBlockSrc = function (color) {
+    this._GetBlockSrc = function (color, remove) {
+
+        if (remove === true) {
+            return this._materials.block;
+        }
+
         if (BLOCK_COLORS.Green == color) {
             return this._materials.blockGreen;
         }

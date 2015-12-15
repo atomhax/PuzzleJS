@@ -19,7 +19,7 @@
         var blocksInGravity = this._AnyBlocksIn_Gravity();
 
         if (this.inPlay === true && blocksBeingRemoved === false && blocksInGravity === false) {
-           this._MoveBlocksUp();
+            this._MoveBlocksUp();
         }
 
         if (blocksInGravity === true) {
@@ -53,7 +53,7 @@
         this.blockInc = 0;
         this.blocks = [];
         this.inPlay = true;
-        this._CreateStartingBlocks(3);
+        this._CreateStartingBlocks(6);
         this.selector.row = 2;
         this.selector.col = 3;
     }
@@ -354,7 +354,7 @@
                 sets[i][j].remove = true;
                 sets[i][j].removeTick = 0;
                 sets[i][j].startRemoveAtTick = 60 + j * 6;
-                sets[i][j].removeAtTick = 60 + (j + 1) * 6;
+                sets[i][j].removeAtTick = 60 + (sets[i].length) * 6;
             }
         }
     }
@@ -365,6 +365,7 @@
                 this.blocks[i].removeTick++;
                 if (this.blocks[i].removeTick == this.blocks[i].removeAtTick) {
                     removeSet.push(this.blocks[i]);
+                  
                 }
             }
         }
@@ -386,7 +387,8 @@
     }
     this._RemoveSet = function (set) {
         for (var i = 0; i < set.length; i++) {
-            this.blocks.splice(this.blocks.indexOf(set[i]), 1);
+           var block = this.blocks.splice(this.blocks.indexOf(set[i]), 1);
+           delete block;
         }
     }
 
@@ -405,6 +407,16 @@
         var block = null;
         for (var i = 0; i < this.blocks.length; i++) {
             if (this.blocks[i].row === row && this.blocks[i].col === col && this.blocks[i].remove === false) {
+                block = this.blocks[i];
+                break;
+            }
+        }
+        return block;
+    }
+    this._FindBlockNotInRemoveOrGravity = function (row, col) {
+        var block = null;
+        for (var i = 0; i < this.blocks.length; i++) {
+            if (this.blocks[i].row === row && this.blocks[i].col === col && this.blocks[i].remove === false && this.blocks[i].gravityInEffect === false) {
                 block = this.blocks[i];
                 break;
             }
@@ -432,11 +444,11 @@
         }
     }
 
-    //Not Started
+    //Gravity
     this._Gravity = function () {
         for (var row = 2; row < 11; row++) {
             for (var col = 1; col < 7; col++) {
-                var block = this._FindBlockNotInRemove(row, col);
+                var block = this._FindBlock(row, col);
                 if (block != null) {
                     this._GravityBlock(block);
                 }
@@ -444,11 +456,14 @@
         }
     }
     this._GravityBlock = function (block) {
+        if (block.gravityInEffect === true || block.remove === true) {
+            return;
+        }
+
         var newRow = null;
-        for (var row = block.row - 1; row > 1; row--)
+        for (var row = block.row - 1; row > 0; row--)
         {
-            var compareBlock = this._FindBlock(row, block.col);
-            if (compareBlock === null || compareBlock.gravityInEffect === true) {
+            if (!this._GravityBlocksReservedSpot(row, block.row, block.col)) {
                 newRow = row;
             }  
         }
@@ -461,9 +476,27 @@
         }
     }
 
+    this._GravityBlocksReservedSpot = function (searchRow, blockRow, blockCol) {
+        for (var row = blockRow; row > 0; row--) {
+            var block = this._FindBlock(row, blockCol);
+            if (block != null &&
+                ((block.gravityInEffect === true &&
+                 block.col === blockCol &&
+                 block.gravityEndRow === searchRow) ||
+                (block.gravityInEffect === false &&
+                 block.col === blockCol &&
+                 block.row === searchRow)))
+                {
+                    return true;
+                }
+            }
+        return false;
+    }
+
     this._ContinueGravity = function () {
+        var blockLaneded = false;
         for (var i = 0; i < this.blocks.length; i++) {
-            if (this.blocks[i].gravityInEffect === true) {
+            if (this.blocks[i] != null && this.blocks[i].gravityInEffect === true) {
                 this.blocks[i].gravityTick++;
 
                 if(this.blocks[i].gravityTick === 10)
@@ -472,8 +505,13 @@
                     this.blocks[i].gravityInEffect = false;
                     this.blocks[i].row = this.blocks[i].gravityEndRow;
                     this.blocks[i].gravityEndRow = null;
+                    blockLaneded = true;
                 }
             }
+        }
+
+        if(blockLaneded === true){
+            this._CheckForSets();
         }
     }
     this._AnyBlocksIn_Gravity = function (sets) {
