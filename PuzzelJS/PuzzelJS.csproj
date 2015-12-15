@@ -186,20 +186,25 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\BlockQue.js" />
-    <Content Include="Scripts\Effect.js" />
-    <Content Include="Scripts\Keyboard.js" />
-    <Content Include="Scripts\Selector.js" />
-    <Content Include="Scripts\Puzzle.js" />
-    <Content Include="Scripts\Controller.js" />
-    <Content Include="Scripts\Materials.js" />
-    <Content Include="Scripts\Display.js" />
-    <Content Include="Scripts\Block.js" />
-    <Content Include="Scripts\Other\Experiment\GameLoop.js" />
-    <Content Include="Scripts\Other\Working Samples\Hello World.js" />
-    <Content Include="Scripts\Game.js" />
-    <Content Include="Scripts\Sounds.js" />
-    <Content Include="Scripts\Stats.js" />
+    <Content Include="Scripts\Puzzle\Data\GravityInstance.js" />
+    <Content Include="Scripts\Puzzle\Stateless\Setup.js" />
+    <Content Include="Scripts\Puzzle\Stateless\Support.js" />
+    <Content Include="Scripts\Puzzle\Stateless\RemoveSet.js" />
+    <Content Include="Scripts\Puzzle\Stateless\CheckSet.js" />
+    <Content Include="Scripts\Puzzle\Stateful\MoveBlocksUp.js" />
+    <Content Include="Scripts\Puzzle\Stateful\Gravity.js" />
+    <Content Include="Scripts\Puzzle\Data\BlockQue.js" />
+    <Content Include="Scripts\Puzzle\Data\Effect.js" />
+    <Content Include="Scripts\Game\Keyboard.js" />
+    <Content Include="Scripts\Puzzle\Stateful\Selector.js" />
+    <Content Include="Scripts\Puzzle\Puzzle.js" />
+    <Content Include="Scripts\Game\Controller.js" />
+    <Content Include="Scripts\Game\Materials.js" />
+    <Content Include="Scripts\Game\Display.js" />
+    <Content Include="Scripts\Puzzle\Data\Block.js" />
+    <Content Include="Scripts\Game\Game.js" />
+    <Content Include="Scripts\Game\Sounds.js" />
+    <Content Include="Scripts\Game\Stats.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -218,6 +223,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\CSS\" />
     <Folder Include="Models\" />
+    <Folder Include="Scripts\Other\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
