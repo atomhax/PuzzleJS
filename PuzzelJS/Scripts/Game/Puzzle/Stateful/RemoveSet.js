@@ -1,7 +1,7 @@
-﻿function RemoveSet(blocks)
+﻿function RemoveSet(puzzle)
 {
-    this.blocks = blocks;
-    //public
+    this.puzzle = puzzle;
+    //publichttp://localhost:7669/Scripts/Game
     this.RemoveSets = function (sets,combo) {
         for (var i = 0; i < sets.length; i++) {
             for (var j = 0; j < sets[i].length; j++) {
@@ -16,11 +16,11 @@
     //private
     this.IncRemoveSets = function () {
         var removeSet = [];
-        for (var i = 0; i < this.blocks.length; i++) {
-            if (this.blocks[i].remove === true) {
-                this.blocks[i].removeTick++;
-                if (this.blocks[i].removeTick == this.blocks[i].removeAtTick) {
-                    removeSet.push(this.blocks[i]);
+        for (var i = 0; i < this.puzzle.blocks.length; i++) {
+            if (this.puzzle.blocks[i].remove === true) {
+                this.puzzle.blocks[i].removeTick++;
+                if (this.puzzle.blocks[i].removeTick == this.puzzle.blocks[i].removeAtTick) {
+                    removeSet.push(this.puzzle.blocks[i]);
 
                 }
             }
@@ -29,13 +29,13 @@
         //RemoveBlocks
         this._RemoveSet(removeSet);
         if (removeSet.length > 0) {
-            this._Gravity();
+            this.puzzle._gravity.Apply();
         }
 
     }
     this._RemoveSet = function (set) {
         for (var i = 0; i < set.length; i++) {
-            var block = this.blocks.splice(this.blocks.indexOf(set[i]), 1);
+            var block = this.puzzle.blocks.splice(this.puzzle.blocks.indexOf(set[i]), 1);
             delete block;
             this.score += 10;
         }

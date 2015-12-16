@@ -47,12 +47,12 @@
     //&& !this.puzzel._AnyBlocksIn_Gravity()
     this.StartSwap = function () {
         
-        var left = this.puzzel._FindBlock(this.row, this.col);
-        var right = this.puzzel._FindBlock(this.row, this.col + 1);
+        var left = this.puzzel._support.FindBlock(this.row, this.col);
+        var right = this.puzzel._support.FindBlock(this.row, this.col + 1);
 
         if (
-            (left === null || (left != null && left.remove !== true && left.gravityInEffect !== true && !this.puzzel._GravityBlocksReservedSpot(left.row, left.col + 1))) &&
-            (right === null || (right != null && right.remove !== true && right.gravityInEffect !== true &&  !this.puzzel._GravityBlocksReservedSpot(right.row, right.col - 1)))
+            (left === null || (left != null && left.remove !== true && left.gravityInEffect !== true && !this.puzzel._gravity.BlockReserved(left.row, left.col + 1))) &&
+            (right === null || (right != null && right.remove !== true && right.gravityInEffect !== true && !this.puzzel._gravity.BlockReserved(right.row, right.col - 1)))
             )
         {
               
@@ -60,8 +60,8 @@
             this.right = right;
             this.swapInProcess = true;
             this.swapTicks = 0;
-            this.left = this.puzzel._FindBlock(this.row, this.col);
-            this.right = this.puzzel._FindBlock(this.row, this.col + 1);
+            this.left = this.puzzel._support.FindBlock(this.row, this.col);
+            this.right = this.puzzel._support.FindBlock(this.row, this.col + 1);
             Sounds("swap");
             this.ContinueSwap();
         }
@@ -82,15 +82,15 @@
             this.swapTicks++;
             if (this.swapTicks == 10) {
                 this.swapTicks = 0;
-                if (this.leftBlock !== null) {
-                    this.leftBlock.col++;
-                    this.leftBlock.x = 0;
+                if (this.left !== null) {
+                    this.left.col++;
+                    this.left.x = 0;
                 }
-                if (this.rightBlock !== null) {
-                    this.rightBlock.col--;
-                    this.rightBlock.x = 0;
+                if (this.right !== null) {
+                    this.right.col--;
+                    this.right.x = 0;
                 }
-                this.Swap();
+                this.Swapped();
             }
         }
     }
@@ -98,5 +98,7 @@
     {
         this.puzzel.SelectorSwapped();
         this.swapInProcess = false;
+        this.swapTicks = 0;
+
     }
 };

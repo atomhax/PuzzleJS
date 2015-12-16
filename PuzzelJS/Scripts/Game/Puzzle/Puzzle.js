@@ -12,7 +12,7 @@
     this.inPlay = true;
 
     //Logic
-    this.moveBlocksUp = new MoveBlocksUp();
+    this.moveBlocksUp = new MoveBlocksUp(this);
     this._removeSet = new RemoveSet(this);
     this._checkSet = new CheckSet(this);
     this._gravity = new Gravity(this);
@@ -43,7 +43,7 @@
         //If a new set is found, start the removeal of that set.
         var sets = this._checkSet.CheckForNewSets();
         if(sets.length > 0){
-            this._removeSets(sets);
+            this._removeSet.RemoveSets(sets);
         }
 
         //Increment all sets that are in removal
@@ -53,11 +53,11 @@
     //Public User Faceing
     this.SelectorSwapped = function ()
     {
-        var sets = this._Sets.CheckForNewSets();
+        var sets = this._checkSet.CheckForNewSets();
         if (sets.length > 0) {
-            this._RemoveSets(sets);
+            this._removeSet.RemoveSets(sets);
         }
-        this._Gravity();
+        this._gravity.Apply();
     }
     this.ForceBlocksUp = function () {
         this.moveBlocksUp.PushBlocks = true;
@@ -67,11 +67,11 @@
     }
     this.Reset = function () {
         this.totalTicks = 0;
-        this.blocks = [];
+        this.blocks = new Array();
         this.score = 0;
         this.level = 1;
         this.inPlay = true;
-        this.selector.Reset();
+        this.selector.Reset(2, 3);
         this._setupBlocks.CreateStartingBlocks(4);
         this._gravity.Reset();
         this.moveBlocksUp.Reset();   

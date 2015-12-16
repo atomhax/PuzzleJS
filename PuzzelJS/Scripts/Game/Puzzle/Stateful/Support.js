@@ -4,7 +4,7 @@
     this.CheckPuzzel = function () {
         for (var i = 0; i < this.puzzle.blocks.length; i++) {
             if (this.puzzle.blocks[i].row === 11) {
-                this.inPlay = false;
+                this.puzzle.inPlay = false;
                 break;
             }
         }

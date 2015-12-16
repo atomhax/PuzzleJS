@@ -232,6 +232,8 @@
     <None Include="Project_Readme.html" />
     <None Include="Properties\PublishProfiles\DickinsonBros.pubxml" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <None Include="Properties\PublishProfiles\PuzzelJS - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\PuzzelJS - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
