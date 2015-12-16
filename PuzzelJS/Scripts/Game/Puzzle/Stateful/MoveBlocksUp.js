@@ -1,4 +1,4 @@
-﻿function Move() {
+﻿function MoveBlocksUp() {
 
     //Vars
     //Public
@@ -47,7 +47,11 @@
         }
 
     };
-
+    this.Reset = function () {
+        this.PushBlocksStop = false;
+        this._ticksperSet = 0;
+        this._blockInc = 0;
+    }
     //Private
     this._MoveToNextBlockRow = function () {
         this.ticksperSet++;

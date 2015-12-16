@@ -1,5 +1,6 @@
-﻿function RemoveSet()
+﻿function RemoveSet(blocks)
 {
+    this.blocks = blocks;
     //public
     this.RemoveSets = function (sets,combo) {
         for (var i = 0; i < sets.length; i++) {

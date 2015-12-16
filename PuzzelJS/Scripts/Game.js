@@ -65,9 +65,9 @@ function Start()
 }
 function Draw()
 {
-    display.render(puzzle.blocks, puzzle.selector, puzzle.blockInc, puzzle.score, puzzle.level);  
+    display.render(puzzle.blocks, puzzle.selector, puzzle.moveBlocksUp.blockInc, puzzle.score, puzzle.level);
 }
 function GameTick()
 {
-    puzzle.Tick();
+   puzzle.Tick();
 }

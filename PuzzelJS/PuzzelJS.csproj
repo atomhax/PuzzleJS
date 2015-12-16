@@ -187,10 +187,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Game\Puzzle\Data\GravityInstance.js" />
-    <Content Include="Scripts\Game\Puzzle\Stateless\Setup.js" />
-    <Content Include="Scripts\Game\Puzzle\Stateless\Support.js" />
-    <Content Include="Scripts\Game\Puzzle\Stateless\RemoveSet.js" />
-    <Content Include="Scripts\Game\Puzzle\Stateless\CheckSet.js" />
+    <Content Include="Scripts\Game\Puzzle\Stateful\SetupBlocks.js" />
+    <Content Include="Scripts\Game\Puzzle\Stateful\Support.js" />
+    <Content Include="Scripts\Game\Puzzle\Stateful\RemoveSet.js" />
+    <Content Include="Scripts\Game\Puzzle\Stateful\CheckSet.js" />
     <Content Include="Scripts\Game\Puzzle\Stateful\MoveBlocksUp.js" />
     <Content Include="Scripts\Game\Puzzle\Stateful\Gravity.js" />
     <Content Include="Scripts\Game\Puzzle\Data\BlockQue.js" />

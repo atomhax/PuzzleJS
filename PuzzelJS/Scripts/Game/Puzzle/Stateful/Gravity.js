@@ -1,12 +1,12 @@
-﻿function Gravity( checkSet, removeSet )
+﻿function Gravity( puzzle, removeSet )
 {
     var _gravityInstances = [];
-    var _checkSet = checkSet;
-    var _removeSet = removeSet;
+    this.puzzle = puzzle;
+   
 
     //Public
     this.Tick = function () {
-        if (_gravityInstances.length >= 0) {
+        if (_gravityInstances.length > 0) {
             this._InstanceTick(_gravityInstances[0]);
         }
     }
@@ -36,9 +36,11 @@
       
     }   
     this.InAction = function () {
-        return (_gravityInstances.length >= 0);
+        return (_gravityInstances.length > 0);
     }
-
+    this.Reset = function () {
+        this._gravityInstances = null;
+    }
     //Private
     this._ApplyBlock = function ( block ) {
         if (block.gravityInEffect === true || block.remove === true) {
@@ -62,7 +64,7 @@
         return false;
     }
     this._InstanceTick = function ( gravityInstance ) {
-        _gravityInstances.tick.gravityTick++;
+        _gravityInstances.tick++;
         if (_gravityInstances.tick === 10) {
             for (var i = 0; i < this.blocks.length; i++)
             {
@@ -72,7 +74,7 @@
                     this.blocks[i].gravityEndRow = null;
                 }
             }
-            _gravityInstances.tick.gravityTick = 0;
+            _gravityInstances.tick = 0;
         }
 
        
@@ -88,7 +90,7 @@
     }
     this._BlockReservedCheckRowOnly = function (searchRow, blockRow, blockCol) {
         for (var row = blockRow; row > 0; row--) {
-            var block = this._FindBlock(row, blockCol);
+            var block = puzzle.support.FindBlock(row, blockCol);
             if (block != null &&
                 ((block.gravityInEffect === true &&
                  block.col === blockCol &&
@@ -120,8 +122,8 @@
         return false;
     }
     this._BlockReserved = function (blockRow, blockCol) {
-        for (var i = 0; i < this.blocks.length; i++) {
-            var block = this.blocks[i];
+        for (var i = 0; i < this.puzzle.blocks.length; i++) {
+            var block = this.puzzle.blocks[i];
             if (block != null &&
                 (block.gravityInEffect === true &&
                  block.col === blockCol &&

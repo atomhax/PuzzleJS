@@ -1,5 +1,6 @@
-﻿function CheckSets(row, col, color, x, y)
+﻿function CheckSet( puzzle )
 {
+    this.puzzle = puzzle;
     //public
     this.CheckForNewSets = function () {
         var sets = [];
@@ -139,9 +140,9 @@
     }
     this._FindBlockNotInRemove = function (row, col) {
         var block = null;
-        for (var i = 0; i < this.blocks.length; i++) {
-            if (this.blocks[i].row === row && this.blocks[i].col === col && this.blocks[i].remove === false) {
-                block = this.blocks[i];
+        for (var i = 0; i < this.puzzle.blocks.length; i++) {
+            if (this.puzzle.blocks[i].row === row && this.puzzle.blocks[i].col === col && this.puzzle.blocks[i].remove === false) {
+                block = this.puzzle.blocks[i];
                 break;
             }
         }

@@ -12,15 +12,13 @@
     this.inPlay = true;
 
     //Logic
-   
-    this._moveBlocksUp = new MoveBlocksUp();
-    this._reset = new Reset();
-    this._RemoveSet = new RemoveSet();
-    this._CheckSet = new CheckSet();
-    this._gravity = new Gravity(this._CheckSet, this._RemoveSet);
-    this._setup = new Setup();
-    this._support = new Support();
-
+    this.moveBlocksUp = new MoveBlocksUp();
+    this._removeSet = new RemoveSet(this);
+    this._checkSet = new CheckSet(this);
+    this._gravity = new Gravity(this);
+ 
+    this._support = new Support(this);
+    this._setupBlocks = new SetupBlocks(this);
     //Public
     this.Tick = function()
     {
@@ -29,10 +27,10 @@
 
         //If Gravity Is on, then Tick Gravity
         //other wise Tick MoveBlocksUp
-        if (this._Gravity.InAction()) {
-            this._Gravity.Tick();
+        if (this._gravity.InAction()) {
+            this._gravity.Tick();
         } else {
-            this._MoveBlocksUp.Tick();
+            this.moveBlocksUp.Tick();
            
         }
 
@@ -43,13 +41,13 @@
         }
 
         //If a new set is found, start the removeal of that set.
-        var sets = this._Sets.CheckForNewSets();
+        var sets = this._checkSet.CheckForNewSets();
         if(sets.length > 0){
-            this._RemoveSets(sets);
+            this._removeSets(sets);
         }
 
         //Increment all sets that are in removal
-        this._RemoveSet.IncRemoveSets();
+        this._removeSet.IncRemoveSets();
     }
 
     //Public User Faceing
@@ -62,10 +60,10 @@
         this._Gravity();
     }
     this.ForceBlocksUp = function () {
-        this._moveBlocksUp.PushBlocks = true;
+        this.moveBlocksUp.PushBlocks = true;
     }
     this.ForceBlocksUpStop = function () {
-        this._moveBlocksUp.PushBlocksStop = true;
+        this.moveBlocksUp.PushBlocksStop = true;
     }
     this.Reset = function () {
         this.totalTicks = 0;
@@ -73,10 +71,10 @@
         this.score = 0;
         this.level = 1;
         this.inPlay = true;
-
         this.selector.Reset();
+        this._setupBlocks.CreateStartingBlocks(4);
         this._gravity.Reset();
-        this._moveBlocksUp.Reset();   
+        this.moveBlocksUp.Reset();   
     }
 
 };
