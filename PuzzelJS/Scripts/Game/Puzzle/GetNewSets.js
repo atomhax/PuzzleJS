@@ -1,8 +1,10 @@
-﻿function CheckSet( puzzle )
+﻿function GetNewSets( puzzle )
 {
-    this.puzzle = puzzle;
-    //public
-    this.CheckForNewSets = function () {
+    //Data
+    this._puzzle = puzzle;
+
+    //Functions
+    this.Run = function () {
         var sets = [];
         sets = this._GetSetsCols(sets);
         sets = this._GetSetsRows(sets);
@@ -10,8 +12,6 @@
 
         return sets;
     }
-
-    //Check
     this._GetSetsCols = function (sets) {
         var set;
         for (var row = 1; row < 12; row++) {
@@ -106,17 +106,6 @@
 
         return combinedSets;
     }
-    this._CompareSet = function (setA, setB) {
-        for (var i = 0; i < setA.length; i++) {
-            for (var j = 0; j < setB.length; j++) {
-                if (setA[i].row == setB[j].row &&
-                    setA[i].col == setB[j].col) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
     this._CombineSet = function (setA, setB) {
         var foundMatch = false;
         var newSet = [];
@@ -138,15 +127,15 @@
         }
         return newSet;
     }
-    this._GetAvailableBlocks = function (row, col) {
-        var block = null;
-        for (var i = 0; i < this.puzzle.blocks.length; i++) {
-            if (this.puzzle.blocks[i].row === row && this.puzzle.blocks[i].col === col && this.puzzle.blocks[i].remove === false && this.puzzle.blocks[i].gravityInEffect === false) {
-                block = this.puzzle.blocks[i];
-                break;
+    this._CompareSet = function (setA, setB) {
+        for (var i = 0; i < setA.length; i++) {
+            for (var j = 0; j < setB.length; j++) {
+                if (setA[i].row == setB[j].row &&
+                    setA[i].col == setB[j].col) {
+                    return true;
+                }
             }
         }
-        return block;
+        return false;
     }
-
 }; 

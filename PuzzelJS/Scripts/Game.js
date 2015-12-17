@@ -1,73 +1,52 @@
-﻿var materials;
-var puzzle;
-var display;
-var renderStats;
-var updateStats;
-var controller;
-var keyboard;
-var sounds;
-var fps = 60;
-var interval = 1000 / fps;
+﻿function Game(canvas) {
+    //Data
+    var _canvas;
+    var _stats;
+    var _fps = 60;
+    var _interval = 1000 / fps;
+    var _images;
+    var _puzzle;
+    var _display;
+    var _controller;
+    var _keyboard;
+    var _sounds;
 
-var BLOCK_COLORS = {
-    Green: 1,
-    Blue: 2,
-    Red: 3,
-    Purple: 4,
-    Yellow: 5
-};
+    //Functions
+    this.run = function () {
+        this._load();
+    }
+    this._load = function () {
+        _images = new Images();
+        _images.Load(this._setup);
+    }
+    this._setup = function () {
+        _sounds = new Sounds();
+        _puzzle = new Puzzle(BLOCK_COLORS, sounds);
+        _puzzle.Reset();
+        _controller = new Controller(puzzle);
+        _keyboard = new Keyboard(puzzle);
+        _keyboard.Run();
+        _display = new Display(_canvas, _images)
+        _stats = new Stats();
+        document.body.appendChild(_stats.domElement);
+        _stats.domElement.style.position = 'absolute';
+        _stats.domElement.style.left = '10px';
+        _stats.domElement.style.top = '10px';
+
+        //Start
+        this._gameLoop();
+    }
 
 
-//Setup
-function Load()
-{
-    materials = new Materials();
-    materials.Load(this.FinshLoad);
-} 
-function FinshLoad() {
-    Setup();
-}
-function Setup()
-{
-    sounds = new Sounds();
-    puzzle = new Puzzle(BLOCK_COLORS, sounds);
-    controller = new Controller(puzzle);
-    keyboard = new Keyboard(puzzle);
-    keyboard.Run();
-    display = new Display(document.getElementById('myCanvas'), materials, BLOCK_COLORS)
-    SetupStats();
+    //Game Loop
+    this._gameLoop = function() {
+        setTimeout(function () {
+            requestAnimationFrame(this.gameLoop);
+            _controller.Run();
+            _puzzle.Tick();
+            _display.render(_puzzle.getBlocks(), _puzzle.getSelector(), _puzzle.getBlockInc(), _puzzle.getScore(), _puzzle.getLevel());
 
-    Start();
-}
-function SetupStats() {
-    stats = new Stats();
-    document.body.appendChild(stats.domElement);
-    stats.domElement.style.position = 'absolute';
-    stats.domElement.style.left = '10px';
-    stats.domElement.style.top = '10px';
-}
-
-//Game Loop
-function GameLoop() {
-    setTimeout(function () {
-        requestAnimationFrame(GameLoop);
-        controller.Run();
-        GameTick();
-        Draw();
-    
-        stats.update();
-    }, interval);
-}
-function Start()
-{
-    puzzle.Reset();
-    GameLoop();
-}
-function Draw()
-{
-    display.render(puzzle.blocks, puzzle.selector, puzzle.moveBlocksUp.blockInc, puzzle.score, puzzle.level);
-}
-function GameTick()
-{
-   puzzle.Tick();
+            _stats.update();
+        }, interval);
+    }
 }

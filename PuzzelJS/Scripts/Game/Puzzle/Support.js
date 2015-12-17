@@ -1,33 +1,10 @@
 ﻿function Support(puzzle)
 {
+    //Data
     this.puzzle = puzzle;
-    this.CheckPuzzel = function () {
-        for (var i = 0; i < this.puzzle.blocks.length; i++) {
-            if (this.puzzle.blocks[i].row === 11) {
-                this.puzzle.inPlay = false;
-                break;
-            }
-        }
-    }
-    this.FindBlock = function (row, col) {
-        var block = null;
-        for (var i = 0; i < this.puzzle.blocks.length; i++) {
-            if (this.puzzle.blocks[i].row === row && this.puzzle.blocks[i].col === col) {
-                block = this.puzzle.blocks[i];
-                break;
-            }
-        }
-        return block;
-    }
-    this.BlocksBeingRemoved = function () {
-        for (var i = 0; i < this.puzzle.blocks.length; i++) {
-            if (this.puzzle.blocks[i].remove === true) {
-                return true;
-            }
-        }
-        return false;
-    }
-    this.RandomColor = function () {
+
+    //Functions
+    this.randomColor = function () {
         var min = 1;
         var max = 5;
         var random = Math.floor(Math.random() * (max - min)) + min;
@@ -47,7 +24,34 @@
             return this.puzzle.BLOCK_COLORS.Yellow;
         }
     }
-    this.VaildRandomColor = function (row, col, randomColor) {
+    this.isPlayeralive = function () {
+        for (var i = 0; i < this.puzzle.blocks.length; i++) {
+            if (this.puzzle.blocks[i].row === 11) {
+                return false;
+                break;
+            }
+        }
+        return true;
+    }
+    this.getBlock = function (row, col) {
+        var block = null;
+        for (var i = 0; i < this.puzzle.blocks.length; i++) {
+            if (this.puzzle.blocks[i].row === row && this.puzzle.blocks[i].col === col) {
+                block = this.puzzle.blocks[i];
+                break;
+            }
+        }
+        return block;
+    }
+    this.BlocksBeingRemoved = function () {
+        for (var i = 0; i < this.puzzle.blocks.length; i++) {
+            if (this.puzzle.blocks[i].remove === true) {
+                return true;
+            }
+        }
+        return false;
+    }
+    this.newBlockVaild = function ( block ) {
 
         var foundValue = false;
         var i;

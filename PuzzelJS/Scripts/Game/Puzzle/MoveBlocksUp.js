@@ -1,18 +1,20 @@
 ﻿function MoveBlocksUp( puzzle ) {
-    this.puzzle = puzzle;
-    //Vars
-    //Public
-    this.PushBlocks = false;
-    this.PushBlocksStop = false;
 
-    this.BLOCK_ROW_CHANGE = 50;
+    //Data
+    this._TICKS_FOR_BLOCK_ROW_CHANGE = 50;
+    this._puzzle = puzzle;
+    this._tick = 0;
+    this._blockInc;
+    this._pushBlocksOn = false;
+    this._pushBlocksEnd = false;
 
-    //Private
-    this._ticksperSet = 0;
-    this.blockInc = 0;
-
-    //Public
-    this.Tick = function ()
+    //Functions
+    this.reset = function () {
+        this.PushBlocksStop = false;
+        this._ticksperSet = 0;
+        this.blockInc = 0;
+    }
+    this.tick = function ()
     {
         if (this.PushBlocks === false) {
             this._ticksperSet++;
@@ -35,8 +37,17 @@
                 this.puzzle.level += 1;
             }
         } else {
-            this._MoveToNextBlockRow();
+            this._ticksperSet++;
+            if (this._ticksperSet % 1 === 0 && this.blockInc != 50) {
+                this.blockInc += 2.5;
+            }
 
+
+            if (this.blockInc === 50 && this.PushBlocksStop === true) {
+                this.PushBlocksStop = false;
+                this.PushBlocks = false;
+                this._ticksperSet = 0;
+            }
         }
 
 
@@ -50,27 +61,9 @@
         }
 
     };
-    this.Reset = function () {
-        this.PushBlocksStop = false;
-        this._ticksperSet = 0;
-        this.blockInc = 0;
-    }
-    //Private
-    this._MoveToNextBlockRow = function () {
-        this._ticksperSet++;
-        if (this._ticksperSet % 1 === 0 && this.blockInc != 50) {
-            this.blockInc += 2.5;
-        }
 
-
-        if (this.blockInc === 50 && this.PushBlocksStop === true) {
-            this.PushBlocksStop = false;
-            this.PushBlocks = false;
-            this._ticksperSet = 0;
-        }
-    };
-  
-    this._RowChange = function () {
+    //Private  
+    this._rowChange = function () {
         this.puzzle._support.CheckPuzzel();
         if (this.puzzle.inPlay) {
             this.blockInc = 0;
@@ -78,15 +71,13 @@
             this.puzzle.selector.MoveUp();
             this._AddBlockRow();
         }
-
-
     }
-    this._MoveBlocksUpOneRow = function () {
+    this._moveBlocksUpOneRow = function () {
         for (var i = 0; i < this.puzzle.blocks.length; i++) {
             this.puzzle.blocks[i].row++;
         }
     }
-    this._AddBlockRow = function () {
+    this._addBlockRow = function () {
         for (var i = 0; i < 6; i++) {
             var row = 0;
             var col = i + 1;

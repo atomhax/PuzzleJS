@@ -1,10 +1,8 @@
-﻿function Materials() {
-
+﻿function Images(callBackFunction)
+{
     //Blocks
     this.layout = new Image();
     this.layout.Loaded = false;
-
-  
 
     this.block = new Image();
     this.block.Loaded = false;
@@ -27,10 +25,11 @@
     this.selecter = new Image();
     this.selecter.Loaded = false;
     
+    this.callBackFunction = callBackFunction;
 
     //Load
-    this._onLoad = function (callBackFunction, material) {
-        material.Loaded = true;
+    this._onLoad = function (image) {
+        image.Loaded = true;
 
         if (this.layout.Loaded === true &&
             this.block.Loaded === true &&
@@ -46,56 +45,48 @@
             
 
     }
-    this.Load = function (callBackFunction) {
-        this.callBackFunction = callBackFunction;
-        var Materials = this;
+    this.Load = function () {
+
+        var images = this;
 
         this.layout.src = "/Content/Files/layout.png";
         this.layout.onload = function (e) {
-            var callBackFunction = callBackFunction;
-            Materials._onLoad(Materials.callBackFunction, Materials.layout);
+            this._onLoad(this.callBackFunction, this.layout);
         }
 
         this.block.src = "/Content/Files/50x50/block.png";
         this.block.onload = function (e) {
-            var callBackFunction = callBackFunction;
-            Materials._onLoad(Materials.callBackFunction, Materials.block);
+            this._onLoad(this.callBackFunction, this.block);
         }
 
         this.blockBlue.src = "/Content/Files/50x50/BlockBlue.png";
         this.blockBlue.onload = function (e) {
-            var callBackFunction = callBackFunction;
-            Materials._onLoad(Materials.callBackFunction, Materials.blockBlue);
+            this._onLoad(this.callBackFunction, this.blockBlue);
         }
 
         this.blockGreen.src = "/Content/Files/50x50/BlockGreen.png";
         this.blockGreen.onload = function (e) {
-            var callBackFunction = callBackFunction;
-            Materials._onLoad(Materials.callBackFunction, Materials.blockGreen);
+            this._onLoad(this.callBackFunction, this.blockGreen);
         }
 
         this.blockPurple.src = "/Content/Files/50x50/BlockPurple.png";
         this.blockPurple.onload = function (e) {
-            var callBackFunction = callBackFunction;
-            Materials._onLoad(Materials.callBackFunction, Materials.blockPurple);
+            this._onLoad(this.callBackFunction, this.blockPurple);
         }
 
         this.blockYellow.src = "/Content/Files/50x50/BlockRed.png";
         this.blockYellow.onload = function (e) {
-            var callBackFunction = callBackFunction;
-            Materials._onLoad(Materials.callBackFunction, Materials.blockYellow);
+            this._onLoad(this.callBackFunction, this.blockYellow);
         }
 
         this.blockRed.src = "/Content/Files/50x50/BlockYellow.png";
         this.blockRed.onload = function (e) {
-            var callBackFunction = callBackFunction;
-            Materials._onLoad(Materials.callBackFunction, Materials.blockRed);
+            this._onLoad(this.callBackFunction, this.blockRed);
         }
 
         this.selecter.src = "/Content/Files/Selecter.png";
         this.selecter.onload = function (e) {
-            var callBackFunction = callBackFunction;
-            Materials._onLoad(Materials.callBackFunction, Materials.selecter);
+            this._onLoad(this.callBackFunction, this.selecter);
         }
       
     }

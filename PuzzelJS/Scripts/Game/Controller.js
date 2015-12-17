@@ -2,26 +2,9 @@
 
     //Data
     this.puzzle = puzzle;
+    this.connected = false;
     this.gamePad = navigator.getGamepads()[0];
-    this.lastDownR = false;
-    this.lastDownA = false;
-    this.lastDownUp = false;
-    this.lastDownDown = false;
-    this.lastDownLeft = false;
-    this.lastDownRight = false;
-    this.buttons = {
-        a: 0,
-        b: 1,
-        x: 2,
-        y: 3,
-        lefttrigger: 4,
-        dpadUp: 12,
-        dpadLeft: 14,
-        dpadDown: 13,
-        dpadRight: 15
-    };
-    this.inProcess = false;
-  
+    this.lastControllerState = new ControllerState();
 
     //Functions
     this.Run = function () 
@@ -86,18 +69,5 @@
         this.lastDownR = this.gamePad.buttons[this.buttons.lefttrigger].pressed;
         this.inProcess = false;
           
-    };
-   
-    this.GetGamePad = function ()
-    {
-        //Get Current Game Pad
-        this.gamePad = navigator.getGamepads()[0];
-      
-        if (this.gamePad !== undefined) {
-            return true;
-        }
-        else
-            return false;
-    };
-
+    }; 
 };

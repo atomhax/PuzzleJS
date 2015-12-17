@@ -4,10 +4,13 @@
 
 var Stats = function () {
 
+
+
 	var now = ( self.performance && self.performance.now ) ? self.performance.now.bind( performance ) : Date.now;
 
 	var startTime = now(), prevTime = startTime;
 	var frames = 0, mode = 0;
+
 
 	function createElement( tag, id, css ) {
 

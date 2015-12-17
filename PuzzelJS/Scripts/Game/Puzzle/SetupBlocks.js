@@ -1,6 +1,6 @@
 ﻿function SetupBlocks( puzzle ) {
     this.puzzle = puzzle;
-    this.CreateStartingBlocks = function (startingRows) {
+    this.run = function (startingRows) {
         for (var i = 0; i < startingRows; i++) {
             for (var j = 0; j < 6; j++) {
                 var row = i;

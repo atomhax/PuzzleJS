@@ -1,10 +1,27 @@
 ﻿function RemoveSet(puzzle)
 {
-    this.running = false;
+    //Data
+    this.active = false;
+    this._puzzle = puzzle;
+    this._removeSets = [];
 
-    this.puzzle = puzzle;
-    //publichttp://localhost:7669/Scripts/Game
-    this.RemoveSets = function (sets, combo) {
+    //Functions
+    this.reset = function () {
+
+    }
+    this.tick = function () {
+        var removeSet = [];
+
+        for (var i = 0; i < this.puzzle.blocks.length; i++) {
+            if (this.puzzle.blocks[i].remove === true) {
+                this.puzzle.blocks[i].removeTick++;
+                if (this.puzzle.blocks[i].removeTick == this.puzzle.blocks[i].removeAtTick) {
+                    removeSet.push(this.puzzle.blocks[i]);
+
+                }
+            }
+        }
+    this.removeSets = function (sets, combo) {
         this.running = true;
         this.puzzle.ClearMoveBlocksUpArow();
         this._ChainScore(combo);
@@ -19,18 +36,7 @@
     }
 
     //private
-    this.IncRemoveSets = function () {
-        var removeSet = [];
 
-        for (var i = 0; i < this.puzzle.blocks.length; i++) {
-            if (this.puzzle.blocks[i].remove === true) {
-                this.puzzle.blocks[i].removeTick++;
-                if (this.puzzle.blocks[i].removeTick == this.puzzle.blocks[i].removeAtTick) {
-                    removeSet.push(this.puzzle.blocks[i]);
-
-                }
-            }
-        }
 
         //RemoveBlocks
         this._RemoveSet(removeSet);
@@ -48,15 +54,17 @@
         this.running = atLeastOne;
        
     }
-    this._RemoveSet = function (set) {
+    this.removeSet = function (set) {
         this._BlockScore(set.length);
         for (var i = 0; i < set.length; i++) {
             var block = this.puzzle.blocks.splice(this.puzzle.blocks.indexOf(set[i]), 1);
             delete block;
         }
     }
+    this._removeSet = function (set) {
 
-    this._ChainScore = function (combo) {
+    }
+    this._ChainScore = function (chain) {
         var addtionalScore = 0;
       
         if(combo == 2) {
@@ -99,7 +107,7 @@
         this.puzzle.score += addtionalScore;
 
     }
-    this._BlockScore = function (blocks) {
+    this._BlockScore = function (combo) {
         var addtionalScore = 0;
 
         if(blocks == 3) {

@@ -1,9 +1,8 @@
-﻿function Effect(tick, tickEnd, row, col, type, set, combo) {
+﻿function Effect(tick, tickEnd, row, col, chain, set) {
     this.tick = tick;
     this.tickEnd = tickEnd;
     this.row = row;
     this.col = col;
-    this.type = type;
-    this.combo = combo;
+    this.chain = chain;
     this.set = set;
 };

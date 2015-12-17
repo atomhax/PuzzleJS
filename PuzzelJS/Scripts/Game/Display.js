@@ -1,16 +1,11 @@
-﻿function Display(canvas, materials, BLOCK_COLORS) {
-
-    //Constants
-    this.BLOCK_COLORS = BLOCK_COLORS;
-
+﻿function Display(canvas, images) {
     //Data
-    this._materials = materials;
+    this.images = images;
     this._canvas = canvas;
     this._context = this._canvas.getContext('2d');
 
     //Functions
     this.render = function (blocks, selector, blockInc, score, level) {
-//blockInc()
         this._clearScreen();
         this._drawBlockArea();
         this._drawScore(score);
@@ -21,15 +16,11 @@
     this._clearScreen = function () {
         this._context.clearRect(0, 0, this._canvas.width, this._canvas.height);
     };
-
-
-  
     this._drawLevel = function (level) {
         this._context.font = '30px Arial';
         this._context.fillStyle = 'white';
         this._context.fillText(level, 279, 83);
     }
-
     this._drawScore = function (score) {
         this._context.font = '30px Arial';
         this._context.fillStyle = 'white';
@@ -54,7 +45,6 @@
               50
           );
     }
- 
     this._drawBlocks = function (startX, startY, blocks, blockInc) {
         for (var i = 0; i < blocks.length; i++) {
 
@@ -91,7 +81,7 @@
         }
         
     }
-    this._GetBlockSrc = function (color, remove) {
+    this._GetBlockImage = function (block) {
 
         if (remove === true) {
             return this._materials.block;
@@ -113,6 +103,4 @@
             return this._materials.blockYellow;
         }
     }
-
-  
 };

@@ -1,16 +1,19 @@
-﻿function Gravity( puzzle, removeSet )
+﻿function Gravity( puzzle )
 {
-    this._gravityInstances = new Array();
+    this.active = false;
     this.puzzle = puzzle;
-   
+    this._gravityInstances = new Array();
 
     //Public
-    this.Tick = function () {
+    this.reset = function () {
+        this._gravityInstances = new Array();
+    }
+    this.tick = function (gravityInstance) {
         if (this._gravityInstances.length > 0) {
             this._InstanceTick(this._gravityInstances[0]);
         }
     }
-    this.Apply = function (gravityInstance) {
+    this.apply = function (gravityInstance) {
         var AtLeastOneBlockEffected = false;
         for (var row = 2; row < 11; row++) {
             for (var col = 1; col < 7; col++) {
@@ -35,14 +38,9 @@
         } 
       
     }   
-    this.InAction = function () {
-        return (this._gravityInstances.length > 0);
-    }
-    this.Reset = function () {
-        this._gravityInstances = new Array();
-    }
+
     //Private
-    this._ApplyBlock = function ( block ) {
+    this._applyBlock = function ( block ) {
         if (block.gravityInEffect === true || block.remove === true) {
             return;
         }
@@ -63,41 +61,19 @@
         }
         return false;
     }
-    this._InstanceTick = function (gravityInstance) {
-        var blockUpdated = false;
-        gravityInstance.tick++;
-        if (gravityInstance.tick === 10) {
-            for (var i = 0; i < this.puzzle.blocks.length; i++)
-            {
-                if (this.puzzle.blocks[i] != null && this.puzzle.blocks[i].gravityInEffect === true) {
-                    blockUpdated = true;
-                    this.puzzle.blocks[i].gravityInEffect = false;
-                    this.puzzle.blocks[i].row = this.puzzle.blocks[i].gravityEndRow;
-                    this.puzzle.blocks[i].gravityEndRow = null;
-                }
-            }
-          
-        }
-
-        if (gravityInstance.tick === 10)
-        {
-            gravityInstance.tick = 0;
-
-            var sets = this.puzzle._checkSet.CheckForNewSets();//Check for sets
-
-
-            if (sets.length > 0) {
-                gravityInstance.combos++;
-                this.puzzle._removeSet.RemoveSets(sets, gravityInstance.combo);
-            }
-            else {
-                this._RemoveGravityInstance(gravityInstance);
+    this._blockReserved = function (blockRow, blockCol) {
+        for (var i = 0; i < this.puzzle.blocks.length; i++) {
+            var block = this.puzzle.blocks[i];
+            if (block != null &&
+                (block.gravityInEffect === true &&
+                 block.col === blockCol &&
+                 block.gravityEndRow === blockRow)) {
+                return true;
             }
         }
-      
-
+        return false;
     }
-    this.BlockReservedCheckRowOnly = function (searchRow, blockRow, blockCol) {
+    this._blockReservedInRow = function (searchRow, blockRow, blockCol) {
         for (var row = blockRow; row > 0; row--) {
             var block = this.puzzle._support.FindBlock(row, blockCol);
             if (block != null &&
@@ -128,18 +104,6 @@
 
         }
 
-        return false;
-    }
-    this.BlockReserved = function (blockRow, blockCol) {
-        for (var i = 0; i < this.puzzle.blocks.length; i++) {
-            var block = this.puzzle.blocks[i];
-            if (block != null &&
-                (block.gravityInEffect === true &&
-                 block.col === blockCol &&
-                 block.gravityEndRow === blockRow)) {
-                return true;
-            }
-        }
         return false;
     }
     this._RemoveGravityInstance = function (gravityInstance) {
