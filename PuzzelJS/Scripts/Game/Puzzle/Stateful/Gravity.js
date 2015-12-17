@@ -31,7 +31,7 @@
         else if (gravityInstance != null)
         {
             this._RemoveGravityInstance(gravityInstance);
-        }
+        } 
       
     }   
     this.InAction = function () {
