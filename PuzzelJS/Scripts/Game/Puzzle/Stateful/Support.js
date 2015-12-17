@@ -19,7 +19,7 @@
         }
         return block;
     }
-    this.BlocksBeingRemoved = function (sets) {
+    this.BlocksBeingRemoved = function () {
         for (var i = 0; i < this.puzzle.blocks.length; i++) {
             if (this.puzzle.blocks[i].remove === true) {
                 return true;

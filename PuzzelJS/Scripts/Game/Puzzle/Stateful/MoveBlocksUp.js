@@ -64,14 +64,12 @@
 
 
         if (this.blockInc === 50 && this.PushBlocksStop === true) {
-            this.ClearMoveBlocksUp();
+            this.PushBlocksStop = false;
+            this.PushBlocks = false;
+            this._ticksperSet = 0;
         }
     };
-    this.ClearMoveBlocksUp = function () {
-        this.PushBlocksStop = false;
-        this.PushBlocks = false;
-        this._ticksperSet = 0;
-    }
+  
     this._RowChange = function () {
         this.puzzle._support.CheckPuzzel();
         if (this.puzzle.inPlay) {

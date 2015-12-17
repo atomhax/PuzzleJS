@@ -7,7 +7,7 @@
     this._materials = materials;
     this._canvas = canvas;
     this._context = this._canvas.getContext('2d');
-    this._layoutContext = this._canvas.getContext('2d');
+
     //Functions
     this.render = function (blocks, selector, blockInc, score, level) {
 //blockInc()

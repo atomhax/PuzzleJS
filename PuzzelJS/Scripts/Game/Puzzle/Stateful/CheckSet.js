@@ -138,17 +138,7 @@
         }
         return newSet;
     }
-    this._FindBlockNotInRemove = function (row, col) {
-        var block = null;
-        for (var i = 0; i < this.puzzle.blocks.length; i++) {
-            if (this.puzzle.blocks[i].row === row && this.puzzle.blocks[i].col === col && this.puzzle.blocks[i].remove === false) {
-                block = this.puzzle.blocks[i];
-                break;
-            }
-        }
-        return block;
-    }
-    this._FindBlockNotInRemoveOrGravity = function (row, col) {
+    this._GetAvailableBlocks = function (row, col) {
         var block = null;
         for (var i = 0; i < this.puzzle.blocks.length; i++) {
             if (this.puzzle.blocks[i].row === row && this.puzzle.blocks[i].col === col && this.puzzle.blocks[i].remove === false && this.puzzle.blocks[i].gravityInEffect === false) {
