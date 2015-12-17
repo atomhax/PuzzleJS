@@ -31,7 +31,7 @@
                 this.blockInc += 5;
             }
 
-            if (this.totalTicks % (60 * 20) === 0) {
+            if (this.puzzle.level < 20 && this.puzzle.totalTicks % (60 * 20) === 0) {
                 this.puzzle.level += 1;
             }
         } else {
@@ -64,11 +64,14 @@
 
 
         if (this.blockInc === 50 && this.PushBlocksStop === true) {
-            this.PushBlocksStop = false;
-            this.PushBlocks = false;
-            this._ticksperSet = 0;
+            this.ClearMoveBlocksUp();
         }
     };
+    this.ClearMoveBlocksUp = function () {
+        this.PushBlocksStop = false;
+        this.PushBlocks = false;
+        this._ticksperSet = 0;
+    }
     this._RowChange = function () {
         this.puzzle._support.CheckPuzzel();
         if (this.puzzle.inPlay) {

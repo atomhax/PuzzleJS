@@ -18,7 +18,7 @@
             set = [];
 
             for (var col = 1; col < 7; col++) {
-                var block = this._FindBlockNotInRemove(row, col);
+                var block = this._FindBlockNotInRemoveOrGravity(row, col);
 
                 if (block != null) {
                     if (set.length === 0 ||
@@ -52,7 +52,7 @@
         for (var col = 1; col < 7; col++) {
             set = [];
             for (var row = 1; row < 12; row++) {
-                var block = this._FindBlockNotInRemove(row, col);
+                var block = this._FindBlockNotInRemoveOrGravity(row, col);
 
                 if (block != null) {
                     if (set.length === 0 ||
@@ -142,6 +142,16 @@
         var block = null;
         for (var i = 0; i < this.puzzle.blocks.length; i++) {
             if (this.puzzle.blocks[i].row === row && this.puzzle.blocks[i].col === col && this.puzzle.blocks[i].remove === false) {
+                block = this.puzzle.blocks[i];
+                break;
+            }
+        }
+        return block;
+    }
+    this._FindBlockNotInRemoveOrGravity = function (row, col) {
+        var block = null;
+        for (var i = 0; i < this.puzzle.blocks.length; i++) {
+            if (this.puzzle.blocks[i].row === row && this.puzzle.blocks[i].col === col && this.puzzle.blocks[i].remove === false && this.puzzle.blocks[i].gravityInEffect === false) {
                 block = this.puzzle.blocks[i];
                 break;
             }

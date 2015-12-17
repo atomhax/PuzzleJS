@@ -24,6 +24,7 @@
         }
 
         if (AtLeastOneBlockEffected === true && gravityInstance == null) {
+            this.puzzle.ClearMoveBlocksUpArow();
             var gravityInstance = new GravityInstance();
             this._gravityInstances.push(gravityInstance);
 
@@ -64,30 +65,30 @@
     }
     this._InstanceTick = function (gravityInstance) {
         var blockUpdated = false;
-        this._gravityInstances.tick++;
-        if (this._gravityInstances.tick === 10) {
-            for (var i = 0; i < this.blocks.length; i++)
+        gravityInstance.tick++;
+        if (gravityInstance.tick === 10) {
+            for (var i = 0; i < this.puzzle.blocks.length; i++)
             {
-                if (this.blocks[i] != null && this.blocks[i].gravityInEffect === true) {
+                if (this.puzzle.blocks[i] != null && this.puzzle.blocks[i].gravityInEffect === true) {
                     blockUpdated = true;
-                    this.blocks[i].gravityInEffect = false;
-                    this.blocks[i].row = this.blocks[i].gravityEndRow;
-                    this.blocks[i].gravityEndRow = null;
+                    this.puzzle.blocks[i].gravityInEffect = false;
+                    this.puzzle.blocks[i].row = this.puzzle.blocks[i].gravityEndRow;
+                    this.puzzle.blocks[i].gravityEndRow = null;
                 }
             }
           
         }
 
-        if (this._gravityInstances.tick === 10)
+        if (gravityInstance.tick === 10)
         {
-            this._gravityInstances.tick = 0;
+            gravityInstance.tick = 0;
 
             var sets = this.puzzle._checkSet.CheckForNewSets();//Check for sets
 
 
             if (sets.length > 0) {
                 gravityInstance.combos++;
-                this.puzzle._removeSet.RemoveSets(sets, combo);
+                this.puzzle._removeSet.RemoveSets(sets, gravityInstance.combo);
             }
             else {
                 this._RemoveGravityInstance(gravityInstance);

@@ -22,48 +22,61 @@
     //Public
     this.Tick = function()
     {
-        //Add To Total Ticks
-        this.totalTicks++;
+        if (this.inPlay)
+        {
+            //Add To Total Ticks
+            this.totalTicks++;
 
-        //If Gravity Is on, then Tick Gravity
-        //other wise Tick MoveBlocksUp
-        if (this._gravity.InAction()) {
-            this._gravity.Tick();
-        } else {
-            this.moveBlocksUp.Tick();
-           
+            //If Gravity Is on, then Tick Gravity
+            //other wise Tick MoveBlocksUp
+            if (this._gravity.InAction()) {
+                this._gravity.Tick();
+            } else {
+                this.moveBlocksUp.Tick();
+
+            }
+
+            //If selector has a swap in Process
+            //then continue the swap
+            if (this.selector.swapInProcess) {
+                this.selector.ContinueSwap()
+            }
+
+            //If a new set is found, start the removeal of that set.
+            var sets = this._checkSet.CheckForNewSets();
+            if (sets.length > 0) {
+                this._removeSet.RemoveSets(sets);
+            }
+
+            //Increment all sets that are in removal
+            this._removeSet.IncRemoveSets();
         }
-
-        //If selector has a swap in Process
-        //then continue the swap
-        if (this.selector.swapInProcess) {
-            this.selector.ContinueSwap()
-        }
-
-        //If a new set is found, start the removeal of that set.
-        var sets = this._checkSet.CheckForNewSets();
-        if(sets.length > 0){
-            this._removeSet.RemoveSets(sets);
-        }
-
-        //Increment all sets that are in removal
-        this._removeSet.IncRemoveSets();
+       
     }
 
     //Public User Faceing
     this.SelectorSwapped = function ()
     {
+        this._gravity.Apply();
         var sets = this._checkSet.CheckForNewSets();
         if (sets.length > 0) {
             this._removeSet.RemoveSets(sets);
         }
-        this._gravity.Apply();
+       
     }
     this.ForceBlocksUp = function () {
-        this.moveBlocksUp.PushBlocks = true;
+        if (this.inPlay === true && this._gravity.InAction() === false && this.selector.swapInProcess === false && this._removeSet.running === false) {
+            this.moveBlocksUp.PushBlocks = true;
+        }
     }
     this.ForceBlocksUpStop = function () {
-        this.moveBlocksUp.PushBlocksStop = true;
+        if (this.inPlay === true && this._gravity.InAction() === false && this.selector.swapInProcess === false && this._removeSet.running === false) {
+            this.moveBlocksUp.PushBlocksStop = true;
+        }
+    }
+
+    this.ClearMoveBlocksUpArow = function(){
+        this.moveBlocksUp.ClearMoveBlocksUp();
     }
     this.Reset = function () {
         this.totalTicks = 0;

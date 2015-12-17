@@ -46,7 +46,9 @@
     }
     //&& !this.puzzel._AnyBlocksIn_Gravity()
     this.StartSwap = function () {
-        
+        if (this.puzzel.inPlay === false) {
+            return;
+        }
         var left = this.puzzel._support.FindBlock(this.row, this.col);
         var right = this.puzzel._support.FindBlock(this.row, this.col + 1);
 
@@ -63,6 +65,7 @@
             this.left = this.puzzel._support.FindBlock(this.row, this.col);
             this.right = this.puzzel._support.FindBlock(this.row, this.col + 1);
             Sounds("swap");
+            this.puzzel.ClearMoveBlocksUpArow();
             this.ContinueSwap();
         }
       

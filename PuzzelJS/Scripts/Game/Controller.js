@@ -3,7 +3,7 @@
     //Data
     this.puzzle = puzzle;
     this.gamePad = navigator.getGamepads()[0];
-
+    this.lastDownR = false;
     this.lastDownA = false;
     this.lastDownUp = false;
     this.lastDownDown = false;
@@ -14,6 +14,7 @@
         b: 1,
         x: 2,
         y: 3,
+        lefttrigger: 4,
         dpadUp: 12,
         dpadLeft: 14,
         dpadDown: 13,
@@ -44,7 +45,17 @@
         if (this.gamePad.buttons[this.buttons.a].pressed === true && this.lastDownA == false)
         {
             this.puzzle.selector.StartSwap();
-        }      
+        }
+
+        //Left Trigger Down
+        if (this.gamePad.buttons[this.buttons.lefttrigger].pressed === true && this.lastDownA == false) {
+            this.puzzle.ForceBlocksUp();
+        }
+
+        //Left Trigger Up
+        if (this.gamePad.buttons[this.buttons.lefttrigger].pressed === false && this.lastDownR === true && this.lastDownA == false) {
+            this.puzzle.ForceBlocksUpStop();
+        }
 
         //Up
         if (this.gamePad.buttons[this.buttons.dpadUp].pressed === true && this.lastDownUp == false) {
@@ -72,6 +83,7 @@
         this.lastDownDown = this.gamePad.buttons[this.buttons.dpadDown].pressed;
         this.lastDownLeft = this.gamePad.buttons[this.buttons.dpadLeft].pressed;
         this.lastDownRight = this.gamePad.buttons[this.buttons.dpadRight].pressed;
+        this.lastDownR = this.gamePad.buttons[this.buttons.lefttrigger].pressed;
         this.inProcess = false;
           
     };
