@@ -7,7 +7,7 @@
     W:87,
     Space: 32,
     Left: 37,
-    Up: 38,
     Right: 39,
+    Up: 38,
     Down: 40
 }

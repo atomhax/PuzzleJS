@@ -1,11 +1,12 @@
 ﻿Button = {
-    a: 0,
-    b: 1,
-    x: 2,
-    y: 3,
-    lefttrigger: 4,
-    dpadUp: 12,
-    dpadLeft: 14,
-    dpadDown: 13,
-    dpadRight: 15
+    A: 0,
+    B: 1,
+    X: 2,
+    Y: 3,
+    LeftTrigger: 4,
+    DpadLeft: 14,
+    DpadRight: 15,
+    DpadUp: 12,
+    DpadDown: 13,
+
 };

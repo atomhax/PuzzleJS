@@ -1,8 +1,8 @@
 ﻿function ControllerState(){
-    this.R = BlockState.None;
-    this.A = BlockState.None;
-    this.Up = BlockState.None;
-    this.Down = BlockState.None;
-    this.Left = BlockState.None;
-    this.Right = BlockState.None;
+    this.R = ButtonState.None;
+    this.A = ButtonState.None;
+    this.Up = ButtonState.None;
+    this.Down = ButtonState.None;
+    this.Left = ButtonState.None;
+    this.Right = ButtonState.None;
 }; 
