@@ -40,53 +40,53 @@
             this.blockRed.Loaded === true &&
             this.selecter.Loaded == true)
         {
-            callBackFunction();
+            this.callBackFunction();
         }
             
 
     }
-    this.Load = function () {
+    this.load = function () {
 
         var images = this;
 
         this.layout.src = "/Content/Files/layout.png";
         this.layout.onload = function (e) {
-            this._onLoad(this.callBackFunction, this.layout);
+            images._onLoad(this);
         }
 
         this.block.src = "/Content/Files/50x50/block.png";
         this.block.onload = function (e) {
-            this._onLoad(this.callBackFunction, this.block);
+            images._onLoad(this);
         }
 
         this.blockBlue.src = "/Content/Files/50x50/BlockBlue.png";
         this.blockBlue.onload = function (e) {
-            this._onLoad(this.callBackFunction, this.blockBlue);
+            images._onLoad(this);
         }
 
         this.blockGreen.src = "/Content/Files/50x50/BlockGreen.png";
         this.blockGreen.onload = function (e) {
-            this._onLoad(this.callBackFunction, this.blockGreen);
+            images._onLoad(this);
         }
 
         this.blockPurple.src = "/Content/Files/50x50/BlockPurple.png";
         this.blockPurple.onload = function (e) {
-            this._onLoad(this.callBackFunction, this.blockPurple);
+            images._onLoad(this);
         }
 
         this.blockYellow.src = "/Content/Files/50x50/BlockRed.png";
         this.blockYellow.onload = function (e) {
-            this._onLoad(this.callBackFunction, this.blockYellow);
+            images._onLoad(this);
         }
 
         this.blockRed.src = "/Content/Files/50x50/BlockYellow.png";
         this.blockRed.onload = function (e) {
-            this._onLoad(this.callBackFunction, this.blockRed);
+            images._onLoad(this);
         }
 
         this.selecter.src = "/Content/Files/Selecter.png";
         this.selecter.onload = function (e) {
-            this._onLoad(this.callBackFunction, this.selecter);
+            images._onLoad(this);
         }
       
     }

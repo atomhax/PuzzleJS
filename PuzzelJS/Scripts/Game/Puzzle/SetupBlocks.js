@@ -7,12 +7,12 @@
                 var col = j + 1;
 
                 //Get Vaild random Color
-                var randomColor;
+                var block;
                 do {
-                    randomColor = this.puzzle._support.RandomColor();
-                } while (!this.puzzle._support.VaildRandomColor(row, col, randomColor))
+                    block = new Block(row, col, this.puzzle._support._randomColor(), 0, 0)
+                } while (!this.puzzle._support._isNewBlockVaild(block))
 
-                this.puzzle.blocks.push(new Block(row, col, randomColor, 0, 0));
+                this.puzzle.blocks.push(block);
             }
         }
     }

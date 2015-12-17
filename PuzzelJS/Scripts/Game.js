@@ -1,45 +1,19 @@
 ﻿function Game(canvas) {
     //Data
-    var _canvas;
-    var _stats;
-    var _fps = 60;
-    var _interval = 1000 / fps;
-    var _images;
-    var _puzzle;
-    var _display;
-    var _controller;
-    var _keyboard;
-    var _sounds;
-
+    this._canvas = canvas;
+    this._stats;
+    this._fps = 60;
+    this._interval = 1000 / _fps;
+    this._images;
+    this._puzzle;
+    this._display;
+    this._controller;
+    this._keyboard;
+    this._sounds;
+    
     //Functions
-    this.run = function () {
-        this._load();
-    }
-    this._load = function () {
-        _images = new Images();
-        _images.Load(this._setup);
-    }
-    this._setup = function () {
-        _sounds = new Sounds();
-        _puzzle = new Puzzle(BLOCK_COLORS, sounds);
-        _puzzle.Reset();
-        _controller = new Controller(puzzle);
-        _keyboard = new Keyboard(puzzle);
-        _keyboard.Run();
-        _display = new Display(_canvas, _images)
-        _stats = new Stats();
-        document.body.appendChild(_stats.domElement);
-        _stats.domElement.style.position = 'absolute';
-        _stats.domElement.style.left = '10px';
-        _stats.domElement.style.top = '10px';
-
-        //Start
-        this._gameLoop();
-    }
-
-
     //Game Loop
-    this._gameLoop = function() {
+    this._gameLoop = function () {
         setTimeout(function () {
             requestAnimationFrame(this.gameLoop);
             _controller.Run();
@@ -49,4 +23,32 @@
             _stats.update();
         }, interval);
     }
+
+    this.run = function () {
+        this._load();
+    }
+    this._load = function () {
+        _images = new Images(this._setup);
+        _images.load();
+    }
+    this._setup = function () {
+        this._sounds = new Sounds();
+        this._puzzle = new Puzzle();
+        this._puzzle.Reset();
+        this._controller = new Controller(this._puzzle);
+        this._keyboard = new Keyboard(this._puzzle);
+        this._keyboard.Run();
+        this._display = new Display(_canvas, this._images)
+        this._stats = new Stats();
+        document.body.appendChild(this._stats.domElement);
+        this._stats.domElement.style.position = 'absolute';
+        this._stats.domElement.style.left = '10px';
+        this._stats.domElement.style.top = '10px';
+
+        //Start
+        this._gameLoop();
+    }
+
+
+  
 }

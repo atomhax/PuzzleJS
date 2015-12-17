@@ -1,31 +1,35 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <title></title>
+    <script src="~/Scripts/Enumeration/ButtonState.js"></script>
+    <script src="~/Scripts/Enumeration/BlockState.js"></script>
+    <script src="~/Scripts/Enumeration/SoundRequest.js"></script>
+    <script src="~/Scripts/Enumeration/Button.js"></script>
+    <script src="~/Scripts/Enumeration/Color.js"></script>
+    <script src="~/Scripts/Enumeration/Keys.js"></script>
+    <script src="~/Scripts/Enumeration/KeyState.js"></script>
+    <script src="~/Scripts/DataTypes/Block.js"></script>
+    <script src="~/Scripts/DataTypes/BlockAttacks.js"></script>
+    <script src="~/Scripts/DataTypes/ControllerState.js"></script>
+    <script src="~/Scripts/DataTypes/Effect.js"></script>
+    <script src="~/Scripts/DataTypes/GravityInstance.js"></script>
+    <script src="~/Scripts/DataTypes/KeyboardState.js"></script>
+    <script src="~/Scripts/DataTypes/RemoveSet.js"></script>
+    <script src="~/Scripts/Game/Puzzle/GetNewSets.js"></script>
+    <script src="~/Scripts/Game/Puzzle/Gravity.js"></script>
+    <script src="~/Scripts/Game/Puzzle/MoveBlocksUp.js"></script>
+    <script src="~/Scripts/Game/Puzzle/RemoveSet.js"></script>
+    <script src="~/Scripts/Game/Puzzle/Selector.js"></script>
+    <script src="~/Scripts/Game/Puzzle/SetupBlocks.js"></script>
+    <script src="~/Scripts/Game/Puzzle/Support.js"></script>
+    <script src="~/Scripts/Game/Puzzle.js"></script>
+    <script src="~/Scripts/Game/Controller.js"></script>
+    <script src="~/Scripts/Game/Display.js"></script>
+    <script src="~/Scripts/Game/Images.js"></script>
+    <script src="~/Scripts/Game/Keyboard.js"></script>
     <script src="~/Scripts/Game/Sounds.js"></script>
     <script src="~/Scripts/Game/Stats.js"></script>
-    <script src="~/Scripts/Game/Materials.js"></script>
-    <script src="~/Scripts/Game/Puzzle/Data/Block.js"></script>
-
-    <script src="~/Scripts/Game/Puzzle/Data/BlockQue.js"></script>
-    <script src="~/Scripts/Game/Puzzle/Data/Effect.js"></script>
-    <script src="~/Scripts/Game/Puzzle/Data/GravityInstance.js"></script>
-    <script src="~/Scripts/Game/Puzzle/Stateful/Gravity.js"></script>
-    <script src="~/Scripts/Game/Puzzle/Stateful/MoveBlocksUp.js"></script>
-    <script src="~/Scripts/Game/Puzzle/Stateful/Selector.js"></script>
-    <script src="~/Scripts/Game/Puzzle/Stateful/CheckSet.js"></script>
-    <script src="~/Scripts/Game/Puzzle/Stateful/RemoveSet.js"></script>
-    <script src="~/Scripts/Game/Puzzle/Stateful/SetupBlocks.js"></script>
-    <script src="~/Scripts/Game/Puzzle/Stateful/Support.js"></script>
-    <script src="~/Scripts/Game/Puzzle/Puzzle.js"></script>
-
-
-
-    <script src="~/Scripts/Game/Controller.js"></script>
-
-    <script src="~/Scripts/Game/Keyboard.js"></script>
-
-    <script src="~/Scripts/Game/Display.js"></script>
-
     <script src="~/Scripts/Game.js"></script>
 
 </head>
@@ -39,5 +43,7 @@
 
 </html>
 <script>
-    Load();
+    var canvas = document.getElementById('myCanvas');
+    var game = new Game(canvas);
+    game.run();
 </script>

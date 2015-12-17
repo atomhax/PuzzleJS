@@ -9,12 +9,11 @@
     this._soundRequests = [];
     this._setupBlocks = new SetupBlocks(this);
     this._moveBlocksUp = new MoveBlocksUp(this);
-    this._checkSet = new CheckSet(this);
     this._gravity = new Gravity(this);
     this._selector = new Selector(this, 2, 3);
     this._getNewSets = new GetNewSets(this);
     this._removeSet = new RemoveSet(this);
-
+    this._support = new Support(this);
     //Public
     this.Reset = function () {
         this.totalTicks = 0;
@@ -22,10 +21,10 @@
         this.score = 0;
         this.level = 1;
         this.inPlay = true;
-        this.selector.Reset(2, 3);
-        this._setupBlocks.CreateStartingBlocks(4);
-        this._gravity.Reset();
-        this.moveBlocksUp.Reset();
+        this._selector.reset(2, 3);
+        this._gravity.reset();
+        this._moveBlocksUp.reset();
+        this._setupBlocks.run(4);
     }
     this.Tick = function()
     {

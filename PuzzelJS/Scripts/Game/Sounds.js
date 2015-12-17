@@ -2,8 +2,7 @@
 function Sounds() {
     //Data
     this._soundEffects = [];
-    this._music = new Audio('/Content/Files/Music.mp3');
-    this._music.addEventListener('ended', _musicEnded());
+    this._music = new Audio('/Content/Files/Swap.mp3');
 
     //Functions
     this.run = new function(soundRequests){
@@ -63,5 +62,8 @@ function Sounds() {
         //this._sounds.splice(this._sounds.indexOf(this), 1);
         //delete this;
     }
+
+    //Events
+    this._music.addEventListener('ended', this._musicEnded);
 
 };

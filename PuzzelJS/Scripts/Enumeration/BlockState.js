@@ -1,5 +1,6 @@
 ﻿BlockState = {
     None: 0,
-    Down: 1,
-    Up: 2
+    Swap: 1,
+    Gravity: 2,
+    Remove: 3
 }

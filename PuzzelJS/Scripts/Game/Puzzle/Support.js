@@ -4,27 +4,27 @@
     this.puzzle = puzzle;
 
     //Functions
-    this.randomColor = function () {
+    this._randomColor = function () {
         var min = 1;
         var max = 5;
         var random = Math.floor(Math.random() * (max - min)) + min;
         if (random == 1) {
-            return this.puzzle.BLOCK_COLORS.Green;
+            return Color.Green;
         }
         if (random == 2) {
-            return this.puzzle.BLOCK_COLORS.Blue;
+            return Color.Blue;
         }
         if (random == 3) {
-            return this.puzzle.BLOCK_COLORS.Red;
+            return Color.Red;
         }
         if (random == 4) {
-            return this.puzzle.BLOCK_COLORS.Purple;
+            return Color.Purple;
         }
         if (random == 5) {
-            return this.puzzle.BLOCK_COLORS.Yellow;
+            return Color.Yellow;
         }
     }
-    this.isPlayeralive = function () {
+    this._isPlayeralive = function () {
         for (var i = 0; i < this.puzzle.blocks.length; i++) {
             if (this.puzzle.blocks[i].row === 11) {
                 return false;
@@ -33,7 +33,7 @@
         }
         return true;
     }
-    this.getBlock = function (row, col) {
+    this._getBlock = function (row, col) {
         var block = null;
         for (var i = 0; i < this.puzzle.blocks.length; i++) {
             if (this.puzzle.blocks[i].row === row && this.puzzle.blocks[i].col === col) {
@@ -43,7 +43,7 @@
         }
         return block;
     }
-    this.BlocksBeingRemoved = function () {
+    this._BlocksBeingRemoved = function () {
         for (var i = 0; i < this.puzzle.blocks.length; i++) {
             if (this.puzzle.blocks[i].remove === true) {
                 return true;
@@ -51,7 +51,7 @@
         }
         return false;
     }
-    this.newBlockVaild = function ( block ) {
+    this._isNewBlockVaild = function ( newblock ) {
 
         var foundValue = false;
         var i;
@@ -63,8 +63,8 @@
         do {
             foundValue = false;
 
-            var block = this.FindBlock(row - i, col);
-            if (block !== null && block.color == randomColor) {
+            var block = this._getBlock(newblock.row - i, newblock.col);
+            if (block !== null && block.color == newblock.randomColor) {
                 rowSameColor++;
                 foundValue = true;
             }
@@ -76,8 +76,8 @@
         do {
             foundValue = false;
 
-            var block = this.FindBlock(row + i, col);
-            if (block !== null && block.color == randomColor) {
+            var block = this._getBlock(newblock.row + i, newblock.col);
+            if (block !== null && block.color == newblock.randomColor) {
                 rowSameColor++;
                 foundValue = true;
             }
@@ -97,8 +97,8 @@
         do {
             foundValue = false;
 
-            var block = this.FindBlock(row, col - i);
-            if (block !== null && block.color == randomColor) {
+            var block = this._getBlock(newblock.row, newblock.col - i);
+            if (block !== null && block.color == newblock.randomColor) {
                 colSameColor++;
                 foundValue = true;
             }
@@ -110,8 +110,8 @@
         do {
             foundValue = false;
 
-            var block = this.FindBlock(row, col + i);
-            if (block !== null && block.color == randomColor) {
+            var block = this._getBlock(newblock.row, newblock.col + i);
+            if (block !== null && block.color == newblock.randomColor) {
                 colSameColor++;
                 foundValue = true;
             }
