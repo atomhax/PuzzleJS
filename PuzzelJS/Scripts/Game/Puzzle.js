@@ -16,11 +16,12 @@
     this._support = new Support(this);
     //Public
     this.Reset = function () {
-        this.totalTicks = 0;
-        this.blocks = new Array();
-        this.score = 0;
-        this.level = 1;
-        this.inPlay = true;
+        this.active = true;
+        this._ticks = 0;
+        this._blocks = new Array();
+        this._score = 0;
+        this._level = 1;
+      
         this._selector.reset(2, 3);
         this._gravity.reset();
         this._moveBlocksUp.reset();
@@ -31,7 +32,7 @@
         if (this.inPlay)
         {
             //Add To Total Ticks
-            this.totalTicks++;
+            this._ticks++;
 
             //If Gravity Is on, then Tick Gravity
             //other wise Tick MoveBlocksUp

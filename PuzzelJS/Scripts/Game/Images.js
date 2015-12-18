@@ -1,5 +1,7 @@
 ﻿function Images(callBackFunction)
 {
+    this.allFilesLoaded = false;
+
     //Blocks
     this.layout = new Image();
     this.layout.Loaded = false;
@@ -40,7 +42,7 @@
             this.blockRed.Loaded === true &&
             this.selecter.Loaded == true)
         {
-            this.callBackFunction();
+            this.allFilesLoaded = true;
         }
             
 
