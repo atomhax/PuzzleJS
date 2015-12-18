@@ -1,6 +1,6 @@
 ﻿function Display(canvas, images) {
     //Data
-    this.images = images;
+    this._images = images;
     this._canvas = canvas;
     this._context = this._canvas.getContext('2d');
 
@@ -29,7 +29,7 @@
     this._drawBlockArea = function () {
 
         this._context.drawImage(
-            this._materials.layout,
+            this._images.layout,
             247,
             43,
             306,
@@ -38,7 +38,7 @@
     }
     this._drawSelector = function (startX, startY, selector, blockInc) {
         this._context.drawImage(
-              this._materials.selecter,
+              this._images.selecter,
               startX + (selector.col - 1) * 50,
               startY - (selector.row - 1) * 50 - blockInc,
               100,
@@ -56,7 +56,7 @@
             {
                 var yCutOff = 50 - blockInc;
                 this._context.drawImage(
-                    this._GetBlockSrc(blocks[i].color, blocks[i].remove),
+                   this._GetBlockImage(blocks[i]),
                     0,
                     0,
                     50,
@@ -70,7 +70,7 @@
             else
             {
                 this._context.drawImage(
-                              this._GetBlockSrc(blocks[i].color, blocks[i].remove),
+                              this._GetBlockImage(blocks[i]),
                               startX + (blocks[i].col - 1) * 50 + blocks[i].x,
                               startY - (blocks[i].row - 1) * 50 + blocks[i].y - blockInc,
                               50,
@@ -83,24 +83,24 @@
     }
     this._GetBlockImage = function (block) {
 
-        if (remove === true) {
-            return this._materials.block;
+        if (block.state === BlockState.Remove) {
+            return this._images.block;
         }
 
-        if (BLOCK_COLORS.Green == color) {
-            return this._materials.blockGreen;
+        if (Color.Green == block.color) {
+            return this._images.blockGreen;
         }
-        if (BLOCK_COLORS.Blue == color) {
-            return this._materials.blockBlue;
+        if (Color.Blue == block.color) {
+            return this._images.blockBlue;
         }
-        if (BLOCK_COLORS.Red == color) {
-            return this._materials.blockRed;
+        if (Color.Red == block.color) {
+            return this._images.blockRed;
         }
-        if (BLOCK_COLORS.Purple == color) {
-            return this._materials.blockPurple;
+        if (Color.Purple == block.color) {
+            return this._images.blockPurple;
         }
-        if (BLOCK_COLORS.Yellow == color) {
-            return this._materials.blockYellow;
+        if (Color.Yellow == block.color) {
+            return this._images.blockYellow;
         }
     }
 };

@@ -4,21 +4,21 @@
     this._puzzle = puzzle;
 
     //Functions
-    this.Run = function () {
+    this.run = function () {
         var sets = [];
-        sets = this._GetSetsCols(sets);
-        sets = this._GetSetsRows(sets);
-        sets = this._CombineSets(sets);
+        sets = this._getSetsCols(sets);
+        sets = this._getSetsRows(sets);
+        sets = this._combineSets(sets);
 
         return sets;
     }
-    this._GetSetsCols = function (sets) {
+    this._getSetsCols = function (sets) {
         var set;
         for (var row = 1; row < 12; row++) {
             set = [];
 
             for (var col = 1; col < 7; col++) {
-                var block = this._FindBlockNotInRemoveOrGravity(row, col);
+                var block = this._getAvailableBlock(row, col);
 
                 if (block != null) {
                     if (set.length === 0 ||
@@ -47,12 +47,12 @@
         }
         return sets;
     }
-    this._GetSetsRows = function (sets) {
+    this._getSetsRows = function (sets) {
         var set;
         for (var col = 1; col < 7; col++) {
             set = [];
             for (var row = 1; row < 12; row++) {
-                var block = this._FindBlockNotInRemoveOrGravity(row, col);
+                var block = this._getAvailableBlock(row, col);
 
                 if (block != null) {
                     if (set.length === 0 ||
@@ -81,7 +81,7 @@
         }
         return sets;
     }
-    this._CombineSets = function (sets) {
+    this._combineSets = function (sets) {
         var combinedSets = [];
 
         for (var i = 0; i < sets.length; i++) {
@@ -91,9 +91,9 @@
             else {
                 var setFound = false;
                 for (var j = 0; j < combinedSets.length; j++) {
-                    if (this._CompareSet(combinedSets[j], sets[i])) {
+                    if (this._compareSet(combinedSets[j], sets[i])) {
                         setFound = true;
-                        combinedSets[j] = this._CombineSet(combinedSets[j], sets[i]);
+                        combinedSets[j] = this._combineSet(combinedSets[j], sets[i]);
                         break;
                     }
                 }
@@ -106,7 +106,7 @@
 
         return combinedSets;
     }
-    this._CombineSet = function (setA, setB) {
+    this._combineSet = function (setA, setB) {
         var foundMatch = false;
         var newSet = [];
         for (var j = 0; j < setB.length; j++) {
@@ -127,7 +127,7 @@
         }
         return newSet;
     }
-    this._CompareSet = function (setA, setB) {
+    this._compareSet = function (setA, setB) {
         for (var i = 0; i < setA.length; i++) {
             for (var j = 0; j < setB.length; j++) {
                 if (setA[i].row == setB[j].row &&
@@ -137,5 +137,13 @@
             }
         }
         return false;
+    }
+    this._getAvailableBlock = function (row, col) {
+        var block = this._puzzle._support._getBlock(row, col);
+        if (block != null && block.state === BlockState.None) {
+            return block;
+        } else {
+            return null;
+        }
     }
 }; 

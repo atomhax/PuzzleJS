@@ -12,18 +12,18 @@
     this.tick = function () {
         var removeSet = [];
 
-        for (var i = 0; i < this.puzzle.blocks.length; i++) {
-            if (this.puzzle.blocks[i].remove === true) {
-                this.puzzle.blocks[i].removeTick++;
-                if (this.puzzle.blocks[i].removeTick == this.puzzle.blocks[i].removeAtTick) {
-                    removeSet.push(this.puzzle.blocks[i]);
+        for (var i = 0; i < this._puzzle._blocks.length; i++) {
+            if (this._puzzle._blocks[i].remove === true) {
+                this._puzzle._blocks[i].removeTick++;
+                if (this._puzzle._blocks[i].removeTick == this._puzzle._blocks[i].removeAtTick) {
+                    removeSet.push(this._puzzle._blocks[i]);
 
                 }
             }
         }
     this.removeSets = function (sets, combo) {
         this.running = true;
-        this.puzzle.ClearMoveBlocksUpArow();
+        this._puzzle.ClearMoveBlocksUpArow();
         this._ChainScore(combo);
         for (var i = 0; i < sets.length; i++) {
             for (var j = 0; j < sets[i].length; j++) {
@@ -39,14 +39,14 @@
 
 
         //RemoveBlocks
-        this._RemoveSet(removeSet);
-        if (removeSet.length > 0) {
-            this.puzzle._gravity.Apply();
+    this._RemoveSet(set){
+        if (_removeSets.length > 0) {
+            this._puzzle._gravity.Apply();
         }
 
         var atLeastOne = false;
-        for (var i = 0; i < this.puzzle.blocks.length; i++) {
-            if (this.puzzle.blocks[i].remove === true) {
+        for (var i = 0; i < this._puzzle._blocks.length; i++) {
+            if (this._puzzle._blocks[i].remove === true) {
                 atLeastOne = true;
                 break;
             }
@@ -57,7 +57,7 @@
     this.removeSet = function (set) {
         this._BlockScore(set.length);
         for (var i = 0; i < set.length; i++) {
-            var block = this.puzzle.blocks.splice(this.puzzle.blocks.indexOf(set[i]), 1);
+            var block = this._puzzle._blocks.splice(this._puzzle._blocks.indexOf(set[i]), 1);
             delete block;
         }
     }
@@ -104,7 +104,7 @@
             addtionalScore = 6980 + ((combo - 12) * 1800);
         }
 
-        this.puzzle.score += addtionalScore;
+        this._puzzle.score += addtionalScore;
 
     }
     this._BlockScore = function (combo) {
@@ -227,7 +227,7 @@
         if(blocks > 40) {
             addtionalScore = 20400 + ((blocks - 40) * 800) + (blocks * 10);
         }
-        this.puzzle.score += addtionalScore;
+        this._puzzle.score += addtionalScore;
 
     }
 }; 

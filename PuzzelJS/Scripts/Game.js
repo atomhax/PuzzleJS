@@ -16,13 +16,13 @@
     this._gameLoop = function () {
         setTimeout(function () {
             requestAnimationFrame(this._gameLoop);
-            this._controller.Run();
-            this._puzzle.Tick();
+            this._controller.run();
+            this._puzzle.tick();
             this._display.render(this._puzzle.getBlocks(), this._puzzle.getSelector(), this._puzzle.getBlockInc(), this._puzzle.getScore(), this._puzzle.getLevel());
 
             this._stats.update();
         }.bind(this), this._interval);
-    }
+    }.bind(this);
 
     this.run = function () {
         this._load();
@@ -56,7 +56,7 @@
 
         //Start
         this._gameLoop();
-    };
+    }.bind(this);
 
     //Context Issue
     //Rights Issue

@@ -7,7 +7,7 @@
     this.lastControllerState = new ControllerState();
 
     //Functions
-    this.Run = function () 
+    this.run = function () 
     {
         if (this.inProcess)
             return;

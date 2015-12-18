@@ -12,7 +12,7 @@
                     block = new Block(row, col, this.puzzle._support._randomColor(), 0, 0)
                 } while (!this.puzzle._support._isNewBlockVaild(block))
 
-                this.puzzle.blocks.push(block);
+                this.puzzle._blocks.push(block);
             }
         }
     }

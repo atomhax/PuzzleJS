@@ -25,8 +25,8 @@
         }
     }
     this._isPlayeralive = function () {
-        for (var i = 0; i < this.puzzle.blocks.length; i++) {
-            if (this.puzzle.blocks[i].row === 11) {
+        for (var i = 0; i < this.puzzle._blocks.length; i++) {
+            if (this.puzzle._blocks[i].row === 11) {
                 return false;
                 break;
             }
@@ -35,17 +35,17 @@
     }
     this._getBlock = function (row, col) {
         var block = null;
-        for (var i = 0; i < this.puzzle.blocks.length; i++) {
-            if (this.puzzle.blocks[i].row === row && this.puzzle.blocks[i].col === col) {
-                block = this.puzzle.blocks[i];
+        for (var i = 0; i < this.puzzle._blocks.length; i++) {
+            if (this.puzzle._blocks[i].row === row && this.puzzle._blocks[i].col === col) {
+                block = this.puzzle._blocks[i];
                 break;
             }
         }
         return block;
     }
     this._BlocksBeingRemoved = function () {
-        for (var i = 0; i < this.puzzle.blocks.length; i++) {
-            if (this.puzzle.blocks[i].remove === true) {
+        for (var i = 0; i < this.puzzle._blocks.length; i++) {
+            if (this.puzzle._blocks[i].remove === true) {
                 return true;
             }
         }

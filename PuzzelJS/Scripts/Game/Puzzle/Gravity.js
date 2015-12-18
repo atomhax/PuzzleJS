@@ -53,7 +53,7 @@
         }
 
         if (newRow != null) {
-            this.blocksInGravity = true;
+            this._blocksInGravity = true;
             block.gravityInEffect = true;
             block.gravityTick = 0;
             block.gravityEndRow = newRow;
@@ -62,8 +62,8 @@
         return false;
     }
     this._blockReserved = function (blockRow, blockCol) {
-        for (var i = 0; i < this.puzzle.blocks.length; i++) {
-            var block = this.puzzle.blocks[i];
+        for (var i = 0; i < this.puzzle._blocks.length; i++) {
+            var block = this.puzzle._blocks[i];
             if (block != null &&
                 (block.gravityInEffect === true &&
                  block.col === blockCol &&
@@ -106,7 +106,7 @@
 
         return false;
     }
-    this._RemoveGravityInstance = function (gravityInstance) {
+    this._removeGravityInstance = function (gravityInstance) {
         var gravityInstance = this._gravityInstances.splice(this._gravityInstances.indexOf(gravityInstance), 1);
         delete gravityInstance;   
     }

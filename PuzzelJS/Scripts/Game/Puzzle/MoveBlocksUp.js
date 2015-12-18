@@ -73,8 +73,8 @@
         }
     }
     this._moveBlocksUpOneRow = function () {
-        for (var i = 0; i < this.puzzle.blocks.length; i++) {
-            this.puzzle.blocks[i].row++;
+        for (var i = 0; i < this.puzzle._blocks.length; i++) {
+            this.puzzle._blocks[i].row++;
         }
     }
     this._addBlockRow = function () {
@@ -88,7 +88,7 @@
                 randomColor = this.puzzle._support.RandomColor();
             } while (!this.puzzle._support.VaildRandomColor(row, col, randomColor))
 
-            this.puzzle.blocks.push(new Block(row, col, randomColor, 0, 0));
+            this.puzzle._blocks.push(new Block(row, col, randomColor, 0, 0));
         }
     }
 }

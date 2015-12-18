@@ -27,60 +27,60 @@
         this._moveBlocksUp.reset();
         this._setupBlocks.run(4);
     }
-    this.Tick = function()
+    this.tick = function()
     {
-        if (this.inPlay)
+        if (this.active)
         {
             //Add To Total Ticks
             this._ticks++;
 
             //If Gravity Is on, then Tick Gravity
             //other wise Tick MoveBlocksUp
-            if (this._gravity.InAction()) {
-                this._gravity.Tick();
+            if (this._gravity.active) {
+                this._gravity.tick();
             } else {
-                this.moveBlocksUp.Tick();
+                this._moveBlocksUp.tick();
 
             }
 
             //If selector has a swap in Process
             //then continue the swap
-            if (this.selector.swapInProcess) {
-                this.selector.ContinueSwap()
+            if (this._selector.swapInProcess) {
+                this._selector.ContinueSwap()
             }
 
             //If a new set is found, start the removeal of that set.
-            var sets = this._checkSet.CheckForNewSets();
+            var sets = this._getNewSets.run();
             if (sets.length > 0) {
-                this._removeSet.RemoveSets(sets);
+                this._removeSet.removeSets(sets);
             }
 
             //Increment all sets that are in removal
-            this._removeSet.IncRemoveSets();
+            this._removeSet.tick();
         }
        
     }
 
     this.getBlocks = function () {
-        this._blocks;
+        return this._blocks;
     }
     this.getSelector = function () {
-        this._selector;
+        return this._selector;
     }
     this.getBlockInc = function () {
-        this._moveBlocksUp._blockInc;
+        return this._moveBlocksUp._blockInc;
     }
     this.getScore = function () {
-        this._score;
+        return this._score;
     }
     this.getLevel = function () {
-        this._level;
+        return this._level;
     }
     this.getSoundRequests = function () {
-        this._soundRequests;
+        return this._soundRequests;
     }
     this.clearSoundRequests = function () {
-        this._soundRequests = [];
+        return this._soundRequests = [];
     }
 
     //Player Functions
