@@ -188,6 +188,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\Application.js" />
     <Content Include="Scripts\Controller\GameController.js" />
+    <Content Include="Scripts\Controller\GameManager.js" />
     <Content Include="Scripts\DataTypes\JoystickState.js" />
     <Content Include="Scripts\DataTypes\KeyboardState.js" />
     <Content Include="Scripts\DataTypes\Block.js" />
@@ -212,14 +213,13 @@
     <Content Include="Scripts\Model\Puzzle\Gravity.js" />
     <Content Include="Scripts\DataTypes\BlockAttacks.js" />
     <Content Include="Scripts\DataTypes\Effect.js" />
-    <Content Include="Scripts\View\GameManager.js" />
     <Content Include="Scripts\View\InputManager.js" />
-    <Content Include="Scripts\View\InputManager\Keyboard.js" />
     <Content Include="Scripts\Model\Puzzle\Selector.js" />
-    <Content Include="Scripts\View\InputManager\Joystick.js" />
     <Content Include="Scripts\View\ImageManager.js" />
     <Content Include="Scripts\View\Display.js" />
     <Content Include="Scripts\View\AudioManager.js" />
+    <Content Include="Scripts\View\InputManager\Joystick.js" />
+    <Content Include="Scripts\View\InputManager\Keyboard.js" />
     <Content Include="Scripts\View\Stats.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
