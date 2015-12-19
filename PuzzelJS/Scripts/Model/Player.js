@@ -1,8 +1,6 @@
-﻿function Player(puzzle, name) {
+﻿function Player( name ) {
     //Data
-    this._puzzle = puzzle;
-    this._name = name;
+    this.puzzle = new Puzzle();
+    this.name = name;
 
-    //Functions
-   
 };

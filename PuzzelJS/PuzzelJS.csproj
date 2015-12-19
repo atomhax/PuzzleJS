@@ -188,7 +188,8 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\Application.js" />
     <Content Include="Scripts\Controller\GameController.js" />
-    <Content Include="Scripts\Controller\GameManager.js" />
+    <Content Include="Scripts\Model\Game.js" />
+    <Content Include="Scripts\View\GameManager.js" />
     <Content Include="Scripts\DataTypes\JoystickState.js" />
     <Content Include="Scripts\DataTypes\KeyboardState.js" />
     <Content Include="Scripts\DataTypes\Block.js" />

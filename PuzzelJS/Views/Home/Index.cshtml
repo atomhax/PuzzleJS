@@ -26,12 +26,13 @@
     <script src="~/Scripts/Model/Puzzle/Support.js"></script>
     <script src="~/Scripts/Model/Player.js"></script>
     <script src="~/Scripts/Model/Puzzle.js"></script>
+    <script src="~/Scripts/Model/Game.js"></script>
+    <script src="~/Scripts/View/InputManager/Joystick.js"></script>
+    <script src="~/Scripts/View/InputManager/Keyboard.js"></script>
     <script src="~/Scripts/View/AudioManager.js"></script>
     <script src="~/Scripts/View/Display.js"></script>
     <script src="~/Scripts/View/ImageManager.js"></script>
     <script src="~/Scripts/View/InputManager.js"></script>
-    <script src="~/Scripts/View/Joystick.js"></script>
-    <script src="~/Scripts/View/Keyboard.js"></script>
     <script src="~/Scripts/View/Stats.js"></script>
     <script src="~/Scripts/Controller/GameController.js"></script>
     <script src="~/Scripts/Application.js"></script>
@@ -47,6 +48,6 @@
 </html>
 <script>
     var canvas = document.getElementById('myCanvas');
-    var game = new Game(canvas);
-    game.run();
+    var application = new Application(canvas);
+    application.run();
 </script>

@@ -2,7 +2,7 @@
     //Data
     this._model = new Game();
     this._controller = new GameController();
-    this._view = new GameManager();
+    this._view = new GameManager(canvas);
     this._stats = new Stats();
 
     this._waitForLoadInterval;

@@ -1,4 +1,4 @@
-﻿function Game(canvas) {
+﻿function GameController(canvas) {
 
     //Functions
     this.tick = function (game, gameManger) {
