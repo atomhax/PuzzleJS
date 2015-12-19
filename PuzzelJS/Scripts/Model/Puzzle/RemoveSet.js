@@ -13,7 +13,7 @@
         var removeSet = [];
 
         for (var i = 0; i < this._puzzle._blocks.length; i++) {
-            if (this._puzzle._blocks[i].remove === true) {
+            if (this._puzzle._blocks[i].state === BlockState.Remove) {
                 this._puzzle._blocks[i].removeTick++;
                 if (this._puzzle._blocks[i].removeTick == this._puzzle._blocks[i].removeAtTick) {
                     removeSet.push(this._puzzle._blocks[i]);
@@ -24,13 +24,13 @@
     }
     this.removeSets = function (sets, combo) {
         this.running = true;
-        this._puzzle.ClearMoveBlocksUpArow();
-        this._ChainScore(combo);
+        this._puzzle._moveBlocksUp.clearMoveBlocksUp();
+        this._chainScore(combo);
         for (var i = 0; i < sets.length; i++) {
             for (var j = 0; j < sets[i].length; j++) {
-                sets[i][j].remove = true;
+                sets[i][j].state = BlockState.Remove;
                 sets[i][j].removeTick = 0;
-                sets[i][j].startRemoveAtTick = 60 + j * 6;
+               // sets[i][j].startRemoveAtTick = 60 + j * 6;
                 sets[i][j].removeAtTick = 60 + (sets[i].length) * 6;
             }
         }
@@ -55,41 +55,41 @@
     this._chainScore = function (chain) {
         var addtionalScore = 0;
       
-        if(combo == 2) {
+        if(chain == 2) {
             addtionalScore = 50;
         }
-        if(combo == 3) {
+        if(chain == 3) {
             addtionalScore = 130;
         }
-        if(combo == 4) {
+        if(chain == 4) {
             addtionalScore = 280;
         }
-        if(combo == 5) {
+        if(chain == 5) {
             addtionalScore = 580;
         }
-        if(combo == 6) {
+        if(chain == 6) {
             addtionalScore = 980;
         }
-        if(combo == 7) {
+        if(chain == 7) {
             addtionalScore = 1480;
         }
-        if(combo == 8) {
+        if(chain == 8) {
             addtionalScore = 2180;
         }
-        if(combo == 9) {
+        if(chain == 9) {
             addtionalScore = 3080;
         }
-        if(combo === 10) {
+        if(chain === 10) {
             addtionalScore = 4180;
         }
-        if(combo == 11) {
+        if(chain == 11) {
             addtionalScore = 5480;
         }
-        if(combo == 12) {
+        if(chain == 12) {
             addtionalScore = 6980;
         }
-        if(combo > 12) {
-            addtionalScore = 6980 + ((combo - 12) * 1800);
+        if(chain > 12) {
+            addtionalScore = 6980 + ((chain - 12) * 1800);
         }
 
         this._puzzle.score += addtionalScore;
@@ -98,122 +98,122 @@
     this._blockScore = function (combo) {
         var addtionalScore = 0;
 
-        if(blocks == 3) {
+        if(combo == 3) {
             addtionalScore = 30;
         }
-        if(blocks == 4) {
+        if(combo == 4) {
             addtionalScore = 70;
         }
-        if(blocks == 5) {
+        if(combo == 5) {
             addtionalScore = 100;
         }
-        if(blocks == 6) {
+        if(combo == 6) {
             addtionalScore = 210;
         }
-        if(blocks == 7) {
+        if(combo == 7) {
             addtionalScore = 260;
         }
-        if(blocks == 8) {
+        if(combo == 8) {
             addtionalScore = 310;
         }
-        if(blocks == 9) {
+        if(combo == 9) {
             addtionalScore = 360;
         }
-        if(blocks == 10) {
+        if(combo == 10) {
             addtionalScore = 410;
         }
-        if(blocks == 11) {
+        if(combo == 11) {
             addtionalScore = 510;
         }
-        if(blocks == 12) {
+        if(combo == 12) {
             addtionalScore = 570;
         }
-        if(blocks == 13) {
+        if(combo == 13) {
             addtionalScore = 630;
         }
-        if(blocks == 14) {
+        if(combo == 14) {
             addtionalScore = 690;
         }
-        if(blocks == 15) {
+        if(combo == 15) {
             addtionalScore = 850;
         }
-        if(blocks == 16) {
+        if(combo == 16) {
             addtionalScore = 920;
         }
-        if(blocks == 17) {
+        if(combo == 17) {
             addtionalScore = 1020;
         }
-        if(blocks == 18) {
+        if(combo == 18) {
             addtionalScore = 1150;
         }
-        if(blocks == 19) {
+        if(combo == 19) {
             addtionalScore = 1310;
         }
-        if(blocks == 20) {
+        if(combo == 20) {
             addtionalScore = 1500;
         }
-        if(blocks == 21) {
+        if(combo == 21) {
             addtionalScore = 1720;
         }
-        if(blocks == 22) {
+        if(combo == 22) {
             addtionalScore = 1970;
         }
-        if(blocks == 23) {
+        if(combo == 23) {
             addtionalScore = 2250;
         }
-        if(blocks == 24) {
+        if(combo == 24) {
             addtionalScore = 2560;
         }
-        if(blocks == 25) {
+        if(combo == 25) {
             addtionalScore = 2900;
         }
-        if(blocks == 26) {
+        if(combo == 26) {
             addtionalScore = 3270;
         }
-        if(blocks == 27) {
+        if(combo == 27) {
             addtionalScore = 3670;
         }
-        if(blocks == 28) {
+        if(combo == 28) {
             addtionalScore = 4100;
         }
-        if(blocks == 29) {
+        if(combo == 29) {
             addtionalScore = 4560;
         }
-        if(blocks == 30) {
+        if(combo == 30) {
             addtionalScore = 5050;
         }
-        if(blocks == 31) {
+        if(combo == 31) {
             addtionalScore = 5570;
         }
-        if(blocks == 32) {
+        if(combo == 32) {
             addtionalScore = 15320;
         }
-        if(blocks == 33) {
+        if(combo == 33) {
             addtionalScore = 15900;
         }
-        if(blocks == 34) {
+        if(combo == 34) {
             addtionalScore = 16510;
         }
-        if(blocks == 35) {
+        if(combo == 35) {
             addtionalScore = 17150;
         }
-        if(blocks == 36) {
+        if(combo == 36) {
             addtionalScore = 17820;
         }
-        if(blocks == 37) {
+        if(combo == 37) {
             addtionalScore = 18520;
         }
-        if(blocks == 38) {
+        if(combo == 38) {
             addtionalScore = 19250;
         }
-        if(blocks == 39) {
+        if(combo == 39) {
             addtionalScore = 20010;
         }
-        if(blocks == 40) {
+        if(combo == 40) {
             addtionalScore = 20800;
         }
-        if(blocks > 40) {
-            addtionalScore = 20400 + ((blocks - 40) * 800) + (blocks * 10);
+        if(combo > 40) {
+            addtionalScore = 20400 + ((combo - 40) * 800) + (combo * 10);
         }
         this._puzzle.score += addtionalScore;
 

@@ -14,7 +14,7 @@
     this._getNewSets = new GetNewSets(this);
     this._removeSet = new RemoveSet(this);
     this._support = new Support(this);
-    //Public
+    //Public  
     this.Reset = function () {
         this.active = true;
         this._ticks = 0;
@@ -44,7 +44,7 @@
             //If selector has a swap in Process
             //then continue the swap
             if (this._selector.swapInProcess) {
-                this._selector.ContinueSwap()
+                this._selector.tick()
             }
 
             //If a new set is found, start the removeal of that set.
@@ -66,7 +66,7 @@
         return this._selector;
     }
     this.getBlockInc = function () {
-        return this._moveBlocksUp._blockInc;
+        return this._moveBlocksUp.blockInc;
     }
     this.getScore = function () {
         return this._score;
@@ -83,33 +83,28 @@
 
     //Player Functions
     this.selectorLeft = function () {
-
+        this._selector.moveLeft();
     }
     this.selectorRight = function () {
-
+        this._selector.moveRight();
     }
     this.selectorUp = function () {
-
+        this._selector.moveUp();
     }
     this.selectorDown = function () {
-
+        this._selector.moveDown();
     }
     this.selectorSwap = function () {
-
+        this._selector.swap();
     }
     this.fastBlockOn = function () {
-        if (this.inPlay === true && this._gravity.InAction() === false && this.selector.swapInProcess === false && this._removeSet.running === false) {
+        if (this.active === true && this._gravity.InAction() === false && this.selector.swapInProcess === false && this._removeSet.running === false) {
             this.moveBlocksUp.PushBlocks = true;
         }
     }
     this.fastBlockOff = function () {
-        if (this.inPlay === true && this._gravity.InAction() === false && this.selector.swapInProcess === false && this._removeSet.running === false) {
+        if (this.active === true && this._gravity.InAction() === false && this.selector.swapInProcess === false && this._removeSet.running === false) {
             this.moveBlocksUp.PushBlocksStop = true;
         }
-    }
-
-    //Private Functions
-    this.addSoundRequest = function (soundRequest) {
-        _soundRequests.push(soundRequest)
     }
 };

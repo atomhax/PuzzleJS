@@ -96,7 +96,7 @@
                 break;
 
         }
-    }, false);
+    }.bind(this), false);
     window.addEventListener('keyup', function (event) {
         switch (event.keyCode) {
             case 70: // F
@@ -147,5 +147,5 @@
                 break;
 
         }
-    }, false);
+    }.bind(this), false);
 };

@@ -6,17 +6,17 @@
 
     //render
     this.load = function () {
-
+        this._imageManager.load();
     }
     this.loaded = function () {
-        return true;
+        return this._imageManager.loaded();
     }
     this.render = function (blocks, selector, blockInc, score, level) {
         this._clearScreen();
         this._drawBlockArea();
         this._drawScore(score);
         this._drawLevel(level);
-        this._drawBlocks(250, 650, blocks, blockInc);
+        this._drawBlocks(250, 650, blocks, blockInc, selector);
         this._drawSelector(250, 650, selector, blockInc);
     };
     this._clearScreen = function () {
@@ -51,9 +51,17 @@
               50
           );
     }
-    this._drawBlocks = function (startX, startY, blocks, blockInc) {
-        for (var i = 0; i < blocks.length; i++) {
+    this._drawBlocks = function (startX, startY, blocks, blockInc, selector) {
 
+
+        for (var i = 0; i < blocks.length; i++) {
+            var selectorOffsetX = 0;
+            if (selector.leftSelection === blocks[i] && blocks[i].state === BlockState.Swap){
+                selectorOffsetX += selector.OFF_SET_PER_TICK * selector.ticks;
+            }
+            else if (selector.rightSelection === blocks[i] && blocks[i].state === BlockState.Swap) {
+                selectorOffsetX += -selector.OFF_SET_PER_TICK * selector.ticks;
+            }
             this.remove = true;
             this.removeTick = 0;
             this.startRemoveAtTick = 0;
@@ -62,13 +70,13 @@
             {
                 var yCutOff = 50 - blockInc;
                 this._context.drawImage(
-                   this._GetBlockImage(blocks[i]),
+                   this.getBlockImage(blocks[i]),
                     0,
                     0,
                     50,
                     50 - yCutOff,
-                    startX + (blocks[i].col - 1) * 50 + blocks[i].x,
-                    startY - (blocks[i].row - 1) * 50 + blocks[i].y - blockInc,
+                    startX + (blocks[i].col - 1) * 50 + selectorOffsetX,
+                    startY - (blocks[i].row - 1) * 50 - blockInc,
                     50,
                     50 - yCutOff
                 );
@@ -76,9 +84,9 @@
             else
             {
                 this._context.drawImage(
-                              this._GetBlockImage(blocks[i]),
-                              startX + (blocks[i].col - 1) * 50 + blocks[i].x,
-                              startY - (blocks[i].row - 1) * 50 + blocks[i].y - blockInc,
+                              this.getBlockImage(blocks[i]),
+                              startX + (blocks[i].col - 1) * 50 + selectorOffsetX,
+                              startY - (blocks[i].row - 1) * 50 - blockInc,
                               50,
                               50
                           );
@@ -87,7 +95,7 @@
         }
         
     }
-    this._GetBlockImage = function (block) {
+    this.getBlockImage = function (block) {
 
         if (block.state === BlockState.Remove) {
             return this._imageManager.block;

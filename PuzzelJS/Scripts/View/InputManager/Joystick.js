@@ -5,15 +5,11 @@
     this.connected = false;
 
     this._gamePad = navigator.getGamepads()[0];
-    this._lastControllerState = new JoystickState();
+    this._lastJoystickState = new JoystickState();
 
     //Functions
     this.run = function () 
     {
-        if (this.inProcess)
-            return;
-
-        this.inProcess = true;
 
         //Get Current Game Pad (Player 1)
         this.gamePad = navigator.getGamepads()[0];
@@ -26,7 +22,7 @@
 
 
         //A
-        if (this.gamePad.buttons[Button.a].pressed === true && this.lastDownA == false)
+        if (this.gamePad.buttons[Button.A].pressed === true && this._lastJoystickState.A == false)
         {
             this.inputActions.selectorSwap = true;
         }
@@ -34,44 +30,43 @@
    
 
         //Left Trigger Down
-        if (this.gamePad.buttons[Button.lefttrigger].pressed === true && this.lastDownR == false) {
+        if (this.gamePad.buttons[Button.LeftTrigger].pressed === true && this._lastJoystickState.R == false) {
             this.inputActions.blocksFastOn = true;
         }
 
         //Left Trigger Up
-        if (this.gamePad.buttons[Button.lefttrigger].pressed === false && this.lastDownR == false) {
+        if (this.gamePad.buttons[Button.LeftTrigger].pressed === false && this._lastJoystickState.R == false) {
             this.inputActions.blocksFastOff = true;
         }
 
         //Up
-        if (this.gamePad.buttons[Button.dpadUp].pressed === true && this.lastDownUp == false) {
+        if (this.gamePad.buttons[Button.DpadUp].pressed === true && this._lastJoystickState.Up == false) {
             this.inputActions.selectorUp = true;
         }  
 
         //Down
-        if (this.gamePad.buttons[Button.dpadDown].pressed === true && this.lastDownDown == false) {
+        if (this.gamePad.buttons[Button.DpadDown].pressed === true && this._lastJoystickState.Down == false) {
             this.inputActions.selectorDown = true;
         }
 
         //Left
-        if (this.gamePad.buttons[Button.dpadLeft].pressed === true && this.lastDownLeft == false) {
+        if (this.gamePad.buttons[Button.DpadLeft].pressed === true && this._lastJoystickState.Left == false) {
             this.inputActions.selectorLeft = true;
         }
 
         //Right
-        if (this.gamePad.buttons[Button.dpadRight].pressed === true && this.lastDownRight == false) {
+        if (this.gamePad.buttons[Button.DpadRight].pressed === true && this._lastJoystickState.Right == false) {
             this.inputActions.selectorRight = true;
         }
         
         //Last Pressed
-        this.lastDownA = this.gamePad.buttons[Button.a].pressed;
-        this.lastDownUp = this.gamePad.buttons[Button.dpadUp].pressed;
-        this.lastDownDown = this.gamePad.buttons[Button.dpadDown].pressed;
-        this.lastDownLeft = this.gamePad.buttons[Button.dpadLeft].pressed;
-        this.lastDownRight = this.gamePad.buttons[Button.dpadRight].pressed;
-        this.lastDownR = this.gamePad.buttons[Button.lefttrigger].pressed;
-        this.inProcess = false;
-          
+        this._lastJoystickState.A = this.gamePad.buttons[Button.A].pressed;
+        this._lastJoystickState.Up = this.gamePad.buttons[Button.DpadUp].pressed;
+        this._lastJoystickState.Down = this.gamePad.buttons[Button.DpadDown].pressed;
+        this._lastJoystickState.Left = this.gamePad.buttons[Button.DpadLeft].pressed;
+        this._lastJoystickState.Right = this.gamePad.buttons[Button.DpadRight].pressed;
+        this._lastJoystickState.R = this.gamePad.buttons[Button.LeftTrigger].pressed;
+    
     }; 
     this.clear = function(){
         this.inputActions.clear();

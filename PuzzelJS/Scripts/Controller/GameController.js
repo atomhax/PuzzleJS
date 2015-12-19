@@ -7,19 +7,19 @@
         var inputActions = gameManger.inputManager.getInputActions();
 
         //Run Model Functions with Views Input
-        if (inputActions.left === true) {
+        if (inputActions.selectorLeft === true) {
             game.player.puzzle.selectorLeft();
         }
-        else if (inputActions.right === true) {
+        else if (inputActions.selectorRight === true) {
             game.player.puzzle.selectorRight();
         }
-        else if (inputActions.up === true) {
+        else if (inputActions.selectorUp === true) {
             game.player.puzzle.selectorUp();
         }
-        else if (inputActions.down === true) {
+        else if (inputActions.selectorDown === true) {
             game.player.puzzle.selectorDown();
         } 
-        if (inputActions.wwap === true) {
+        if (inputActions.selectorSwap === true) {
             game.player.puzzle.selectorSwap();
         }
         if (inputActions.reset === true) {

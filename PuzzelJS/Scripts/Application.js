@@ -39,7 +39,6 @@
         }.bind(this), this._interval);
     }.bind(this);
     this._setup = function () {
-        this._stats = new Stats();
         document.body.appendChild(this._stats.domElement);
         this._stats.domElement.style.position = 'absolute';
         this._stats.domElement.style.left = '10px';

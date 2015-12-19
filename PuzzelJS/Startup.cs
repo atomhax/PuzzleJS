@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(PuzzelJS.Startup))]
-namespace PuzzelJS
+[assembly: OwinStartupAttribute(typeof(puzzleJS.Startup))]
+namespace puzzleJS
 {
     public partial class Startup
     {

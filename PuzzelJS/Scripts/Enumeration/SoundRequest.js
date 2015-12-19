@@ -1,4 +1,4 @@
-﻿SoundRequset = {
+﻿SoundRequest = {
     MusicOn: 0,
     MusicOff: 1,
     Pause: 2,

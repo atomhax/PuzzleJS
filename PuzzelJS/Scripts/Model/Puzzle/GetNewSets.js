@@ -139,7 +139,7 @@
         return false;
     }
     this._getAvailableBlock = function (row, col) {
-        var block = this._puzzle._support._getBlock(row, col);
+        var block = this._puzzle._support.getBlock(row, col);
         if (block != null && block.state === BlockState.None) {
             return block;
         } else {

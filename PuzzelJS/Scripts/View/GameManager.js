@@ -12,8 +12,8 @@
     }
     this.loaded = function () {
         if( this.displayManager.loaded() === true && 
-            this.displayManager.loaded() === true && 
-            this.displayManager.loaded() === true) {
+            this.inputManager.loaded() === true &&
+            this.audioManager.loaded() === true) {
             return true;
         } else {
             return false;

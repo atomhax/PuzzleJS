@@ -12,8 +12,8 @@
     this.getInputActions = function ()
     {
         var inputActions = new InputActions();
-        var inputActionsKeyboard = this._keyboard.run();
-        var inputActionsJoystick = this._joystick.run();
+        this._keyboard.run();
+        this._joystick.run();
 
         if(this._keyboard.inputActions.selectorLeft === true ||
            this._joystick.inputActions.selectorLeft === true) {

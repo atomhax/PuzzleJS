@@ -1,10 +1,10 @@
 ﻿function Support(puzzle)
 {
     //Data
-    this.puzzle = puzzle;
+    this._puzzle = puzzle;
 
     //Functions
-    this._randomColor = function () {
+    this.randomColor = function () {
         var min = 1;
         var max = 5;
         var random = Math.floor(Math.random() * (max - min)) + min;
@@ -24,26 +24,27 @@
             return Color.Yellow;
         }
     }
-    this._isPlayeralive = function () {
-        for (var i = 0; i < this.puzzle._blocks.length; i++) {
-            if (this.puzzle._blocks[i].row === 11) {
+    this.isPlayeralive = function () {
+        for (var i = 0; i < this._puzzle._blocks.length; i++) {
+            if (this._puzzle._blocks[i].row === 11) {
+                puzzle.active = false;
                 return false;
                 break;
             }
         }
         return true;
     }
-    this._getBlock = function (row, col) {
+    this.getBlock = function (row, col) {
         var block = null;
-        for (var i = 0; i < this.puzzle._blocks.length; i++) {
-            if (this.puzzle._blocks[i].row === row && this.puzzle._blocks[i].col === col) {
-                block = this.puzzle._blocks[i];
+        for (var i = 0; i < this._puzzle._blocks.length; i++) {
+            if (this._puzzle._blocks[i].row === row && this._puzzle._blocks[i].col === col) {
+                block = this._puzzle._blocks[i];
                 break;
             }
         }
         return block;
     }
-    this._isNewBlockVaild = function ( newblock ) {
+    this.isNewBlockVaild = function ( newblock ) {
 
         var foundValue = false;
         var i;
@@ -55,8 +56,8 @@
         do {
             foundValue = false;
 
-            var block = this._getBlock(newblock.row - i, newblock.col);
-            if (block !== null && block.color == newblock.randomColor) {
+            var block = this.getBlock(newblock.row - i, newblock.col);
+            if (block !== null && block.color == newblock.color) {
                 rowSameColor++;
                 foundValue = true;
             }
@@ -68,8 +69,8 @@
         do {
             foundValue = false;
 
-            var block = this._getBlock(newblock.row + i, newblock.col);
-            if (block !== null && block.color == newblock.randomColor) {
+            var block = this.getBlock(newblock.row + i, newblock.col);
+            if (block !== null && block.color == newblock.color) {
                 rowSameColor++;
                 foundValue = true;
             }
@@ -89,8 +90,8 @@
         do {
             foundValue = false;
 
-            var block = this._getBlock(newblock.row, newblock.col - i);
-            if (block !== null && block.color == newblock.randomColor) {
+            var block = this.getBlock(newblock.row, newblock.col - i);
+            if (block !== null && block.color == newblock.color) {
                 colSameColor++;
                 foundValue = true;
             }
@@ -102,8 +103,8 @@
         do {
             foundValue = false;
 
-            var block = this._getBlock(newblock.row, newblock.col + i);
-            if (block !== null && block.color == newblock.randomColor) {
+            var block = this.getBlock(newblock.row, newblock.col + i);
+            if (block !== null && block.color == newblock.color) {
                 colSameColor++;
                 foundValue = true;
             }
@@ -116,5 +117,8 @@
         }
 
         return true;
+    }
+    this.addSoundRequest = function (soundRequest) {
+        this._puzzle._soundRequests.push(soundRequest)
     }
 }; 

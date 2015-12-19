@@ -1,5 +1,5 @@
 ﻿function SetupBlocks( puzzle ) {
-    this.puzzle = puzzle;
+    this._puzzle = puzzle;
     this.run = function (startingRows) {
         for (var i = 0; i < startingRows; i++) {
             for (var j = 0; j < 6; j++) {
@@ -9,10 +9,10 @@
                 //Get Vaild random Color
                 var block;
                 do {
-                    block = new Block(row, col, this.puzzle._support._randomColor(), 0, 0)
-                } while (!this.puzzle._support._isNewBlockVaild(block))
+                    block = new Block(row, col, this._puzzle._support.randomColor(), 0, 0)
+                } while (!this._puzzle._support.isNewBlockVaild(block))
 
-                this.puzzle._blocks.push(block);
+                this._puzzle._blocks.push(block);
             }
         }
     }
