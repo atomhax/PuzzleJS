@@ -1,4 +1,4 @@
-﻿function Images()
+﻿function ImageManager()
 {
 
     //Blocks
@@ -76,7 +76,7 @@
         }
       
     }
-    this.loaded = new function () {
+    this.loaded = function () {
         if (this.layout.Loaded === true &&
             this.block.Loaded === true &&
             this.blockBlue.Loaded === true &&

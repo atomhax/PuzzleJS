@@ -1,16 +1,16 @@
 ﻿function Keyboard() {
 
     //Data
-    this.inputAction = new InputAction();
+    this.inputActions = new InputActions();
     this._lastKeyboardState = new KeyboardState();
     this._currentKeyboardState = new KeyboardState();
 
     //Functions
     this.run = function () {
-        return this.inputAction;
+        return this.inputActions;
     }
     this.clear = function () {
-        this.inputAction.clear();
+        this.inputActions.clear();
     }
 
     //Events

@@ -6,43 +6,41 @@
 
     this.load = function () {
     }
-    this.loaded = new function () {
+    this.loaded = function () {
         return true;
     }
-    this.run() = new function ()
+    this.getInputActions = function ()
     {
         var inputActions = new InputActions();
-
-      
         var inputActionsKeyboard = this._keyboard.run();
         var inputActionsJoystick = this._joystick.run();
 
-        if(inputActionsKeyboard.selectorLeft === true ||
-           inputActionsJoystick.selectorLeft === true){
+        if(this._keyboard.inputActions.selectorLeft === true ||
+           this._joystick.inputActions.selectorLeft === true) {
             inputActions.selectorLeft = true;
         }
-        if(inputActionsKeyboard.selectorRight === true ||
-         inputActionsJoystick.selectorRight === true){
+        if(this._keyboard.inputActions.selectorRight === true ||
+         this._joystick.inputActions.selectorRight === true){
             inputActions.selectorRight = true;
         }
-        if(inputActionsKeyboard.selectorDown === true ||
-         inputActionsJoystick.selectorDown === true){
+        if(this._keyboard.inputActions.selectorDown === true ||
+         this._joystick.inputActions.selectorDown === true){
             inputActions.selectorDown = true;
         }
-        if(inputActionsKeyboard.selectorUp === true ||
-         inputActionsJoystick.selectorUp === true){
+        if(this._keyboard.inputActions.selectorUp === true ||
+         this._joystick.inputActions.selectorUp === true){
             inputActions.selectorUp = true;
         }
-        if(inputActionsKeyboard.selectorSwap === true ||
-         inputActionsJoystick.selectorSwap === true){
+        if(this._keyboard.inputActions.selectorSwap === true ||
+         this._joystick.inputActions.selectorSwap === true){
             inputActions.selectorSwap = true;
         }
-        if(inputActionsKeyboard.reset === true ||
-         inputActionsJoystick.reset === true){
+        if(this._keyboard.inputActions.reset === true ||
+         this._joystick.inputActions.reset === true){
             inputActions.reset = true;
         }
-        if(inputActionsKeyboard.pause === true ||
-         inputActionsJoystick.pause === true){
+        if(this._keyboard.inputActions.pause === true ||
+         this._joystick.inputActions.pause === true){
             inputActions.pause = true;
         }
 

@@ -1,12 +1,15 @@
 ﻿function Game() {
     //Data
-    this._player = new Player();
+    this.player = new Player();
 
     //Functions
-    this.load = new function () {
-
+    this.tick = function () {
+        this.player.puzzle.tick();
     }
-    this.loaded = new function () {
+    this.load = function () {
+        this.player.puzzle.Reset();
+    }
+    this.loaded = function () {
         return true;
     }
 };

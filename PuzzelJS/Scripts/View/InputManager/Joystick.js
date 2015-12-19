@@ -1,11 +1,11 @@
-﻿function Controller(  ) {
+﻿function JoyStick() {
 
     //Data
-    this.inputActions = new InputAction();
+    this.inputActions = new InputActions();
     this.connected = false;
 
     this._gamePad = navigator.getGamepads()[0];
-    this._lastControllerState = new ControllerState();
+    this._lastControllerState = new JoystickState();
 
     //Functions
     this.run = function () 

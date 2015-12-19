@@ -1,8 +1,15 @@
 ﻿function Application(canvas) {
     //Data
-    this._model = new Game();
-    this._controller = new GameController();
-    this._view = new GameManager(canvas);
+    //Model
+    this._game = new Game();
+
+    //Controller
+    this._gameController = new GameController();
+
+    //View
+    this._gameManager = new GameManager(canvas);
+
+    //Stats
     this._stats = new Stats();
 
     this._waitForLoadInterval;
@@ -14,11 +21,11 @@
     }
 
     this._load = function () {
-        this._model.Load();
-        this._view.Load(this._setup);
+        this._game.load();
+        this._gameManager.load(this._setup);
                this._gameLoop();
         this._waitForLoadInterval = setInterval(function () {
-            if (this._view.ImageManger.allFilesLoaded === true) {
+            if (this._gameManager.loaded() === true) {
                 window.clearInterval(this._waitForLoadInterval);
                 this._gameLoop();
             }
@@ -27,7 +34,7 @@
     this._gameLoop = function () {
         setTimeout(function () {
             requestAnimationFrame(this._gameLoop);
-            this._controller.run();
+            this._gameController.tick(this._game, this._gameManager);
             this._stats.update();
         }.bind(this), this._interval);
     }.bind(this);

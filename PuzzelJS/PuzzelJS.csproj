@@ -216,8 +216,8 @@
     <Content Include="Scripts\DataTypes\Effect.js" />
     <Content Include="Scripts\View\InputManager.js" />
     <Content Include="Scripts\Model\Puzzle\Selector.js" />
-    <Content Include="Scripts\View\ImageManager.js" />
-    <Content Include="Scripts\View\Display.js" />
+    <Content Include="Scripts\View\DisplayManager\ImageManager.js" />
+    <Content Include="Scripts\View\DisplayManager.js" />
     <Content Include="Scripts\View\AudioManager.js" />
     <Content Include="Scripts\View\InputManager\Joystick.js" />
     <Content Include="Scripts\View\InputManager\Keyboard.js" />

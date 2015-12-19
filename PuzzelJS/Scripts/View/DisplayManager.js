@@ -1,14 +1,14 @@
-﻿function Display( canvas ) {
+﻿function DisplayManager( canvas ) {
     //Data
     this._imageManager = new ImageManager();
     this._canvas = canvas;
     this._context = this._canvas.getContext('2d');
 
     //render
-    this.load = new function () {
+    this.load = function () {
 
     }
-    this.loaded = new function () {
+    this.loaded = function () {
         return true;
     }
     this.render = function (blocks, selector, blockInc, score, level) {
@@ -35,7 +35,7 @@
     this._drawBlockArea = function () {
 
         this._context.drawImage(
-            this._images.layout,
+            this._imageManager.layout,
             247,
             43,
             306,
@@ -44,7 +44,7 @@
     }
     this._drawSelector = function (startX, startY, selector, blockInc) {
         this._context.drawImage(
-              this._images.selecter,
+              this._imageManager.selecter,
               startX + (selector.col - 1) * 50,
               startY - (selector.row - 1) * 50 - blockInc,
               100,
@@ -90,23 +90,23 @@
     this._GetBlockImage = function (block) {
 
         if (block.state === BlockState.Remove) {
-            return this._images.block;
+            return this._imageManager.block;
         }
 
         if (Color.Green == block.color) {
-            return this._images.blockGreen;
+            return this._imageManager.blockGreen;
         }
         if (Color.Blue == block.color) {
-            return this._images.blockBlue;
+            return this._imageManager.blockBlue;
         }
         if (Color.Red == block.color) {
-            return this._images.blockRed;
+            return this._imageManager.blockRed;
         }
         if (Color.Purple == block.color) {
-            return this._images.blockPurple;
+            return this._imageManager.blockPurple;
         }
         if (Color.Yellow == block.color) {
-            return this._images.blockYellow;
+            return this._imageManager.blockYellow;
         }
     }
 };
