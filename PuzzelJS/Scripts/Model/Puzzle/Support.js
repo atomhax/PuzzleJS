@@ -43,14 +43,6 @@
         }
         return block;
     }
-    this._BlocksBeingRemoved = function () {
-        for (var i = 0; i < this.puzzle._blocks.length; i++) {
-            if (this.puzzle._blocks[i].remove === true) {
-                return true;
-            }
-        }
-        return false;
-    }
     this._isNewBlockVaild = function ( newblock ) {
 
         var foundValue = false;

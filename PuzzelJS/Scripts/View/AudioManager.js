@@ -1,5 +1,5 @@
 // JavaScript source code
-function Sounds() {
+function AudioManager() {
     //Data
     this._soundEffects = [];
     this._music = new Audio('/Content/Files/Swap.mp3');
@@ -7,6 +7,12 @@ function Sounds() {
     //Functions
     this.run = new function(soundRequests){
 
+    }
+    this.load = new function (soundRequests) {
+
+    }
+    this.loaded = new function (soundRequests) {
+        return true;
     }
 
     //General Controls

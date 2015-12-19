@@ -1,6 +1,5 @@
-﻿function Images(callBackFunction)
+﻿function Images()
 {
-    this.allFilesLoaded = false;
 
     //Blocks
     this.layout = new Image();
@@ -26,25 +25,10 @@
 
     this.selecter = new Image();
     this.selecter.Loaded = false;
-    
-    this.callBackFunction = callBackFunction;
-
+  
     //Load
     this._onLoad = function (image) {
         image.Loaded = true;
-
-        if (this.layout.Loaded === true &&
-            this.block.Loaded === true &&
-            this.blockBlue.Loaded === true &&
-            this.blockGreen.Loaded === true &&
-            this.blockPurple.Loaded === true &&
-            this.blockYellow.Loaded === true &&
-            this.blockRed.Loaded === true &&
-            this.selecter.Loaded == true)
-        {
-            this.allFilesLoaded = true;
-        }
-            
 
     }
     this.load = function () {
@@ -91,5 +75,19 @@
             images._onLoad(this);
         }
       
+    }
+    this.loaded = new function () {
+        if (this.layout.Loaded === true &&
+            this.block.Loaded === true &&
+            this.blockBlue.Loaded === true &&
+            this.blockGreen.Loaded === true &&
+            this.blockPurple.Loaded === true &&
+            this.blockYellow.Loaded === true &&
+            this.blockRed.Loaded === true &&
+            this.selecter.Loaded == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 };

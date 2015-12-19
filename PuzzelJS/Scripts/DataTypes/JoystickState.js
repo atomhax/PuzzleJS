@@ -1,4 +1,4 @@
-﻿function ControllerState(){
+﻿function JoystickState(){
     this.R = ButtonState.None;
     this.A = ButtonState.None;
     this.Up = ButtonState.None;

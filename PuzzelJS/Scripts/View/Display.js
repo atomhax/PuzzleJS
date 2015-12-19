@@ -1,10 +1,16 @@
-﻿function Display(canvas, images) {
+﻿function Display( canvas ) {
     //Data
-    this._images = images;
+    this._imageManager = new ImageManager();
     this._canvas = canvas;
     this._context = this._canvas.getContext('2d');
 
-    //Functions
+    //render
+    this.load = new function () {
+
+    }
+    this.loaded = new function () {
+        return true;
+    }
     this.render = function (blocks, selector, blockInc, score, level) {
         this._clearScreen();
         this._drawBlockArea();

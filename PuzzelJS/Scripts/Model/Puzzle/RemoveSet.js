@@ -21,6 +21,7 @@
                 }
             }
         }
+    }
     this.removeSets = function (sets, combo) {
         this.running = true;
         this._puzzle.ClearMoveBlocksUpArow();
@@ -36,10 +37,7 @@
     }
 
     //private
-
-
-        //RemoveBlocks
-    this._RemoveSet(set){
+    this._removeSet = function(set){
         if (_removeSets.length > 0) {
             this._puzzle._gravity.Apply();
         }
@@ -54,17 +52,7 @@
         this.running = atLeastOne;
        
     }
-    this.removeSet = function (set) {
-        this._BlockScore(set.length);
-        for (var i = 0; i < set.length; i++) {
-            var block = this._puzzle._blocks.splice(this._puzzle._blocks.indexOf(set[i]), 1);
-            delete block;
-        }
-    }
-    this._removeSet = function (set) {
-
-    }
-    this._ChainScore = function (chain) {
+    this._chainScore = function (chain) {
         var addtionalScore = 0;
       
         if(combo == 2) {
@@ -107,7 +95,7 @@
         this._puzzle.score += addtionalScore;
 
     }
-    this._BlockScore = function (combo) {
+    this._blockScore = function (combo) {
         var addtionalScore = 0;
 
         if(blocks == 3) {
@@ -230,4 +218,7 @@
         this._puzzle.score += addtionalScore;
 
     }
-}; 
+    this._generateBlockAttacks = function (chain, combo) {
+       
+    }
+};
