@@ -1,4 +1,4 @@
-﻿function GetNewSets( puzzle )
+﻿function FindBlockSets(puzzle)
 {
     //Data
     this._puzzle = puzzle;

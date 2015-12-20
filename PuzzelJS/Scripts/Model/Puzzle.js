@@ -7,12 +7,12 @@
     this._score = 0;
     this._level = 1;
     this._soundRequests = [];
-    this._setupBlocks = new SetupBlocks(this);
+
     this._moveBlocksUp = new MoveBlocksUp(this);
     this._gravity = new Gravity(this);
     this._selector = new Selector(this, 2, 3);
-    this._getNewSets = new GetNewSets(this);
-    this._removeSet = new RemoveSet(this);
+    this._findBlockSets = new FindBlockSets(this);
+    this._removeBlocks = new RemoveBlocks(this);
     this._support = new Support(this);
     //Public  
     this.Reset = function () {
@@ -25,7 +25,7 @@
         this._selector.reset(2, 3);
         this._gravity.reset();
         this._moveBlocksUp.reset();
-        this._setupBlocks.run(4);
+        this._support.createSetupBlocks(4);
     }
     this.tick = function () {
         if (this.active) {
@@ -43,18 +43,18 @@
 
             //If selector has a swap in Process
             //then continue the swap
-            if (this._selector.swapInProcess) {
+            if (this._selector.active) {
                 this._selector.tick()
             }
 
             //If a new set is found, start the removeal of that set.
-            var sets = this._getNewSets.run();
+            var sets = this._findBlockSets.run();
             if (sets.length > 0) {
-                this._removeSet.removeSets(sets);
+                this._removeBlocks.removeSetsOfBlocks(sets);
             }
 
             //Increment all sets that are in removal
-            this._removeSet.tick();
+            this._removeBlocks.tick();
         }
 
     }
@@ -98,13 +98,13 @@
         this._selector.swap();
     }
     this.fastBlockOn = function () {
-        if (this.active === true && this._gravity.InAction() === false && this.selector.swapInProcess === false && this._removeSet.running === false) {
-            this.moveBlocksUp.PushBlocks = true;
+        if (this.active === true && this._gravity.active === false && this._selector.active === false && this._removeBlocks.active === false) {
+            this._moveBlocksUp.pushBlocksOn = true;
         }
     }
     this.fastBlockOff = function () {
-        if (this.active === true && this._gravity.InAction() === false && this.selector.swapInProcess === false && this._removeSet.running === false) {
-            this.moveBlocksUp.PushBlocksStop = true;
+        if (this.active === true && this._gravity.active === false && this._selector.active === false && this._removeBlocks.active === false) {
+            this._moveBlocksUp.pushBlocksEnd = true;
         }
     }
 };

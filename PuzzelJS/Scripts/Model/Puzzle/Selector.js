@@ -15,14 +15,14 @@
     this.reset = function (row, col) {
         this.row = row;
         this.col = col;
-        this.swapInProcess = false;
+        this.active = false;
         this.swapTicks = 0;
         this.leftSelection = null;
         this.rightSelection = null;
     }
     this.tick = function()
     {
-        if (this.swapInProcess) {
+        if (this.active) {
           
             this.ticks++;
             if (this.ticks == this._TICKS_TO_SWAP) {
@@ -44,7 +44,7 @@
         }
     }
     this.swap = function () {
-        if (this._puzzle.active === false) {
+        if (this._puzzle.active === false || this._puzzle._gravity.active === true || this.active === true) {
             return;
         }
         var left = this._puzzle._support.getBlock(this.row, this.col);
@@ -57,12 +57,18 @@
 
             this.leftSelection = left;
             this.rightSelection = right;
-            this.leftSelection.state = BlockState.Swap;
-            this.rightSelection.state = BlockState.Swap;
-            this.swapInProcess = true;
+
+            this.active = true;
             this.swapTicks = 0;
             this.leftSelection = this._puzzle._support.getBlock(this.row, this.col);
             this.rightSelection = this._puzzle._support.getBlock(this.row, this.col + 1);
+            if (this.leftSelection != null) {
+                this.leftSelection.state = BlockState.Swap;
+            }
+            if (this.rightSelection != null) {
+                this.rightSelection.state = BlockState.Swap;
+            }
+           
             this._puzzle._support.addSoundRequest(SoundRequest.Swap);
             this._puzzle._moveBlocksUp.clearMoveBlocksUp();
             //this.ContinueSwap();
@@ -93,12 +99,12 @@
     {
 
 
-        this._puzzle._gravity.apply();
-        var sets = this._puzzle._getNewSets.run();
+        this._puzzle._gravity.apply(0);
+        var sets = this._puzzle._findBlockSets.run();
         if (sets.length > 0) {
-            this._puzzle._removeSet.removeSets(sets);
+            this._puzzle._removeBlocks.removeSetsOfBlocks(sets);
         }
-        this.swapInProcess = false;
+        this.active = false;
         this.swapTicks = 0;
 
 

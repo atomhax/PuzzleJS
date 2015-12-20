@@ -43,7 +43,17 @@
          this._joystick.inputActions.pause === true){
             inputActions.pause = true;
         }
+        if (this._keyboard.inputActions.blocksFastOn === true ||
+            this._joystick.inputActions.blocksFastOn === true) {
+            inputActions.blocksFastOn = true;
+        }
+        if (this._keyboard.inputActions.blocksFastOff === true ||
+         this._joystick.inputActions.blocksFastOff === true) {
+            inputActions.blocksFastOff = true;
+        }
 
+
+     
 
         this._keyboard.clear();
         this._joystick.clear();

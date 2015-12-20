@@ -28,6 +28,13 @@
         if (inputActions.pause === true) {
             game.pause();
         }
+        if (inputActions.blocksFastOn === true) {
+            game.player.puzzle.fastBlockOn();
+        }
+        if (inputActions.blocksFastOff === true) {
+            game.player.puzzle.fastBlockOff();
+        }
+
 
         //Game Tick
         game.tick();

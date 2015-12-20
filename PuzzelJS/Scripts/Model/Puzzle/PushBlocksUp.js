@@ -6,32 +6,32 @@
     this._puzzle = puzzle;
     this._tick = 0;
 
-    this._pushBlocksOn = false;
-    this._pushBlocksEnd = false;
+    this.pushBlocksOn = false;
+    this.pushBlocksEnd = false;
 
     //Functions
     this.reset = function () {
-        this._pushBlocksOn = false;
-        this._pushBlocksEnd = false;
+        this.pushBlocksOn = false;
+        this.pushBlocksEnd = false;
         this._ticksperSet = 0;
         this.blockInc = 0;
     }
     this.tick = function ()
     {
-        if (this._pushBlocksOn === false) {
-            this._ticksperSet++;
+        this._tick++;
+        if (this.pushBlocksOn === false) {
             //10 standard
-            if (this._puzzle._level <= 10 && this._ticksperSet % (96 - Math.round(7.3 * (this._puzzle._level - 1))) === 0) {
+            if (this._puzzle._level <= 10 && this._tick % (96 - Math.round(7.3 * (this._puzzle._level - 1))) === 0) {
                 this.blockInc += 5;
             }
 
             //Hard
-            if (this._puzzle._level > 10 && this._puzzle._level < 15 && this._ticksperSet % (30 - Math.round(3 * (this._puzzle._level - 10))) === 0) {
+            if (this._puzzle._level > 10 && this._puzzle._level < 15 && this._tick % (30 - Math.round(3 * (this._puzzle._level - 10))) === 0) {
                 this.blockInc += 5;
             }
 
             //Hard(Over time)
-            if (this._puzzle._level >= 15 && this._ticksperSet % (30 - Math.round(2 * (this._puzzle._level - 15))) === 0) {
+            if (this._puzzle._level >= 15 && this._tick % (30 - Math.round(2 * (this._puzzle._level - 15))) === 0) {
                 this.blockInc += 5;
             }
 
@@ -39,33 +39,33 @@
                 this._puzzle._level += 1;
             }
         } else {
-            this._ticksperSet++;
-            if (this._ticksperSet % 1 === 0 && this.blockInc != 50) {
+
+            if (this._tick % 1 === 0 && this.blockInc != 50) {
                 this.blockInc += 2.5;
             }
 
 
-            if (this.blockInc === 50 && this._pushBlocksEnd === true) {
-                this._pushBlocksEnd = false;
-                this._pushBlocksOn = false;
-                this._ticksperSet = 0;
+            if (this.blockInc === 50 && this.pushBlocksEnd === true) {
+                this.pushBlocksEnd = false;
+                this.pushBlocksOn = false;
+                this._tick = 0;
             }
         }
 
 
         if (this.blockInc == 50) {
-            this._ticksperSet = 0;
+            this._tick = 0;
             this._rowChange();
-            var sets = this._puzzle._getNewSets.run();
+            var sets = this._puzzle._findBlockSets.run();
             if (sets.length > 0) {
-                this._puzzle._removeSet.removeSets(sets);
+                this._puzzle._removeBlocks.removeSetsOfBlocks(sets);
             }
         }
 
     };
     this.clearMoveBlocksUp = function () {
-        this._pushBlocksOn = false;
-        this._pushBlocksEnd = false;
+        this.pushBlocksOn = false;
+        this.pushBlocksEnd = false;
         this._tick = 0;
     }
     //Private  

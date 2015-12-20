@@ -35,7 +35,7 @@
         }
 
         //Left Trigger Up
-        if (this.gamePad.buttons[Button.LeftTrigger].pressed === false && this._lastJoystickState.R == false) {
+        if (this.gamePad.buttons[Button.LeftTrigger].pressed === false && this._lastJoystickState.R == true) {
             this.inputActions.blocksFastOff = true;
         }
 
