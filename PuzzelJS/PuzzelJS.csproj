@@ -188,22 +188,22 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\Application.js" />
     <Content Include="Scripts\Controller\GameController.js" />
-    <Content Include="Scripts\DataTypes\BlockStateAfterGravity.js" />
+    <Content Include="Scripts\Model\Puzzle\Gravity\BlockStateAfterGravity.js" />
     <Content Include="Scripts\Model\Game.js" />
     <Content Include="Scripts\View\GameManager.js" />
-    <Content Include="Scripts\DataTypes\JoystickState.js" />
-    <Content Include="Scripts\DataTypes\KeyboardState.js" />
-    <Content Include="Scripts\DataTypes\Block.js" />
-    <Content Include="Scripts\DataTypes\RemovalInstance.js" />
-    <Content Include="Scripts\DataTypes\InputActions.js" />
-    <Content Include="Scripts\Enumeration\ImageType.js" />
-    <Content Include="Scripts\Enumeration\KeyState.js" />
-    <Content Include="Scripts\Enumeration\ButtonState.js" />
-    <Content Include="Scripts\Enumeration\Keys.js" />
-    <Content Include="Scripts\Enumeration\Button.js" />
-    <Content Include="Scripts\Enumeration\SoundRequest.js" />
-    <Content Include="Scripts\Enumeration\Color.js" />
-    <Content Include="Scripts\Enumeration\BlockState.js" />
+    <Content Include="Scripts\View\InputManager\Joystick\JoystickState.js" />
+    <Content Include="Scripts\View\InputManager\Keyboard\KeyboardState.js" />
+    <Content Include="Scripts\Model\Puzzle\Block.js" />
+    <Content Include="Scripts\Model\Puzzle\RemoveBlocks\RemovalInstance.js" />
+    <Content Include="Scripts\View\InputActions.js" />
+    <Content Include="Scripts\View\DisplayManager\InputManager\ImageType.js" />
+    <Content Include="Scripts\View\InputManager\Keyboard\KeyState.js" />
+    <Content Include="Scripts\View\InputManager\Joystick\ButtonState.js" />
+    <Content Include="Scripts\View\InputManager\Keyboard\Keys.js" />
+    <Content Include="Scripts\View\InputManager\Joystick\Button.js" />
+    <Content Include="Scripts\Model\Puzzle\SoundRequest.js" />
+    <Content Include="Scripts\Model\Puzzle\Color.js" />
+    <Content Include="Scripts\Model\Puzzle\BlockState.js" />
     <Content Include="Scripts\Model\Puzzle.js" />
     <Content Include="Scripts\Model\Player.js" />
     <Content Include="Scripts\Model\Puzzle\Support.js" />
@@ -211,8 +211,8 @@
     <Content Include="Scripts\Model\Puzzle\FindBlockSets.js" />
     <Content Include="Scripts\Model\Puzzle\PushBlocksUp.js" />
     <Content Include="Scripts\Model\Puzzle\Gravity.js" />
-    <Content Include="Scripts\DataTypes\BlockAttacks.js" />
-    <Content Include="Scripts\DataTypes\Effect.js" />
+    <Content Include="Scripts\Model\Puzzle\BlockAttacks.js" />
+    <Content Include="Scripts\Model\Puzzle\Effect.js" />
     <Content Include="Scripts\View\InputManager.js" />
     <Content Include="Scripts\Model\Puzzle\Selector.js" />
     <Content Include="Scripts\View\DisplayManager\ImageManager.js" />
@@ -220,7 +220,7 @@
     <Content Include="Scripts\View\AudioManager.js" />
     <Content Include="Scripts\View\InputManager\Joystick.js" />
     <Content Include="Scripts\View\InputManager\Keyboard.js" />
-    <Content Include="Scripts\View\Stats.js" />
+    <Content Include="Scripts\Stats.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -238,7 +238,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\CSS\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
