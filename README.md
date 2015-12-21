@@ -1,4 +1,4 @@
-# PuzzelJS
+# PuzzleJS
 
 Fun Puzzle Game, TO THE MAX.
 
