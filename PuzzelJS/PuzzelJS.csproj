@@ -187,7 +187,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Application.js" />
-    <Content Include="Scripts\Controller\GameController.js" />
+    <Content Include="Scripts\Adapter\GameAdapter.js" />
     <Content Include="Scripts\Model\Puzzle\Gravity\BlockStateAfterGravity.js" />
     <Content Include="Scripts\Model\Game.js" />
     <Content Include="Scripts\View\GameManager.js" />
@@ -248,6 +248,7 @@
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Properties\PublishProfiles\PuzzelJS - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\PuzzelJS - Web Deploy.pubxml" />
+    <Content Include="PuzzleJS_MVA_V1.vsdx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

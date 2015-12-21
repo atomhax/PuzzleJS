@@ -1,4 +1,4 @@
-﻿function GameController(canvas) {
+﻿function GameAdapter(canvas) {
 
     //Functions
     this.tick = function (game, gameManger) {
@@ -40,7 +40,7 @@
         game.tick();
 
         //Update View
-        gameManger.audioManager.run(game.player.puzzle.getSoundRequests());
+        gameManger.audioManager.runSoundRequests(game.player.puzzle.getSoundRequests());
         game.player.puzzle.clearSoundRequests();
         gameManger.displayManager.render(game.player.puzzle.getBlocks(),
                                   game.player.puzzle.getSelector(),

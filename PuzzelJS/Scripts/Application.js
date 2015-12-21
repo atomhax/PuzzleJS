@@ -4,7 +4,7 @@
     this._game = new Game();
 
     //Controller
-    this._gameController = new GameController();
+    this._gameAdapter = new GameAdapter();
 
     //View
     this._gameManager = new GameManager(canvas);
@@ -17,7 +17,7 @@
         this._load();
     }
     this.end = function () {
-        this._controller.end();
+
     }
 
     this._load = function () {
@@ -34,7 +34,7 @@
     this._gameLoop = function () {
         setTimeout(function () {
             requestAnimationFrame(this._gameLoop);
-            this._gameController.tick(this._game, this._gameManager);
+            this._gameAdapter.tick(this._game, this._gameManager);
             this._stats.update();
         }.bind(this), this._interval);
     }.bind(this);

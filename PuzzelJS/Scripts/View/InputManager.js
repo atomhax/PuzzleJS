@@ -5,6 +5,7 @@
     this._joystick = new JoyStick();
 
     this.load = function () {
+        return true;
     }
     this.loaded = function () {
         return true;
@@ -12,43 +13,43 @@
     this.getInputActions = function ()
     {
         var inputActions = new InputActions();
-        this._keyboard.run();
-        this._joystick.run();
+        var keyboardInputActions = this._keyboard.getInputActions();
+        var joystickInputActions = this._joystick.getInputActions();
 
-        if(this._keyboard.inputActions.selectorLeft === true ||
-           this._joystick.inputActions.selectorLeft === true) {
+        if (keyboardInputActions.selectorLeft === true ||
+           joystickInputActions.selectorLeft === true) {
             inputActions.selectorLeft = true;
         }
-        if(this._keyboard.inputActions.selectorRight === true ||
-         this._joystick.inputActions.selectorRight === true){
+        if (keyboardInputActions.selectorRight === true ||
+         joystickInputActions.selectorRight === true) {
             inputActions.selectorRight = true;
         }
-        if(this._keyboard.inputActions.selectorDown === true ||
-         this._joystick.inputActions.selectorDown === true){
+        if (keyboardInputActions.selectorDown === true ||
+         joystickInputActions.selectorDown === true) {
             inputActions.selectorDown = true;
         }
-        if(this._keyboard.inputActions.selectorUp === true ||
-         this._joystick.inputActions.selectorUp === true){
+        if (keyboardInputActions.selectorUp === true ||
+         joystickInputActions.selectorUp === true) {
             inputActions.selectorUp = true;
         }
-        if(this._keyboard.inputActions.selectorSwap === true ||
-         this._joystick.inputActions.selectorSwap === true){
+        if (keyboardInputActions.selectorSwap === true ||
+         joystickInputActions.selectorSwap === true) {
             inputActions.selectorSwap = true;
         }
-        if(this._keyboard.inputActions.reset === true ||
-         this._joystick.inputActions.reset === true){
+        if (keyboardInputActions.reset === true ||
+         joystickInputActions.reset === true) {
             inputActions.reset = true;
         }
-        if(this._keyboard.inputActions.pause === true ||
-         this._joystick.inputActions.pause === true){
+        if (keyboardInputActions.pause === true ||
+         joystickInputActions.pause === true) {
             inputActions.pause = true;
         }
-        if (this._keyboard.inputActions.blocksFastOn === true ||
-            this._joystick.inputActions.blocksFastOn === true) {
+        if (keyboardInputActions.blocksFastOn === true ||
+            joystickInputActions.blocksFastOn === true) {
             inputActions.blocksFastOn = true;
         }
-        if (this._keyboard.inputActions.blocksFastOff === true ||
-         this._joystick.inputActions.blocksFastOff === true) {
+        if (keyboardInputActions.blocksFastOff === true ||
+         joystickInputActions.blocksFastOff === true) {
             inputActions.blocksFastOff = true;
         }
 

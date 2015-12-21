@@ -5,7 +5,7 @@ function AudioManager() {
     this._music = new Audio('/Content/Files/Swap.mp3');
 
     //Functions
-    this.run = function (soundRequests) {
+    this.runSoundRequests = function (soundRequests) {
         for (var i = 0; i < soundRequests.length; i++) {
             if (soundRequests[i] === SoundRequest.Pause) {
                 this._pause();
@@ -51,10 +51,10 @@ function AudioManager() {
             }
         }
     }
-    this.load = function (soundRequests) {
+    this.load = function () {
 
     }
-    this.loaded = function (soundRequests) {
+    this.loaded = function () {
         return true;
     }
     this.reset = function () {

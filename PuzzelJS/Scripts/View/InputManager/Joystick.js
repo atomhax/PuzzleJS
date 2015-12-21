@@ -1,14 +1,14 @@
 ﻿function JoyStick() {
 
     //Data
-    this.inputActions = new InputActions();
+    this._inputActions = new InputActions();
     this.connected = false;
 
     this._gamePad = navigator.getGamepads()[0];
     this._lastJoystickState = new JoystickState();
 
     //Functions
-    this.run = function () 
+    this.getInputActions = function ()
     {
 
         //Get Current Game Pad (Player 1)
@@ -17,46 +17,46 @@
         //If Game Pad Not Found return
         if (this.gamePad === undefined) {
             inProcess = false;
-            return;
+            return this._inputActions;
         }
 
 
         //A
         if (this.gamePad.buttons[Button.A].pressed === true && this._lastJoystickState.A == false)
         {
-            this.inputActions.selectorSwap = true;
+            this._inputActions.selectorSwap = true;
         }
 
    
 
         //Left Trigger Down
         if (this.gamePad.buttons[Button.LeftTrigger].pressed === true && this._lastJoystickState.R == false) {
-            this.inputActions.blocksFastOn = true;
+            this._inputActions.blocksFastOn = true;
         }
 
         //Left Trigger Up
         if (this.gamePad.buttons[Button.LeftTrigger].pressed === false && this._lastJoystickState.R == true) {
-            this.inputActions.blocksFastOff = true;
+            this._inputActions.blocksFastOff = true;
         }
 
         //Up
         if (this.gamePad.buttons[Button.DpadUp].pressed === true && this._lastJoystickState.Up == false) {
-            this.inputActions.selectorUp = true;
+            this._inputActions.selectorUp = true;
         }  
 
         //Down
         if (this.gamePad.buttons[Button.DpadDown].pressed === true && this._lastJoystickState.Down == false) {
-            this.inputActions.selectorDown = true;
+            this._inputActions.selectorDown = true;
         }
 
         //Left
         if (this.gamePad.buttons[Button.DpadLeft].pressed === true && this._lastJoystickState.Left == false) {
-            this.inputActions.selectorLeft = true;
+            this._inputActions.selectorLeft = true;
         }
 
         //Right
         if (this.gamePad.buttons[Button.DpadRight].pressed === true && this._lastJoystickState.Right == false) {
-            this.inputActions.selectorRight = true;
+            this._inputActions.selectorRight = true;
         }
         
         //Last Pressed
@@ -66,9 +66,11 @@
         this._lastJoystickState.Left = this.gamePad.buttons[Button.DpadLeft].pressed;
         this._lastJoystickState.Right = this.gamePad.buttons[Button.DpadRight].pressed;
         this._lastJoystickState.R = this.gamePad.buttons[Button.LeftTrigger].pressed;
+
+        return this._inputActions;
     
     }; 
     this.clear = function(){
-        this.inputActions.clear();
+        this._inputActions.clear();
     }
 };

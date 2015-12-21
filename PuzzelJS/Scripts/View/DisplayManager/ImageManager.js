@@ -23,8 +23,8 @@
     this.blockRed = new Image();
     this.blockRed.Loaded = false;
 
-    this.selecter = new Image();
-    this.selecter.Loaded = false;
+    this.selector = new Image();
+    this.selector.Loaded = false;
   
     //Load
     this._onLoad = function (image) {
@@ -70,8 +70,8 @@
             images._onLoad(this);
         }
 
-        this.selecter.src = "/Content/Files/Selecter.png";
-        this.selecter.onload = function (e) {
+        this.selector.src = "/Content/Files/Selecter.png";
+        this.selector.onload = function (e) {
             images._onLoad(this);
         }
       
@@ -84,7 +84,7 @@
             this.blockPurple.Loaded === true &&
             this.blockYellow.Loaded === true &&
             this.blockRed.Loaded === true &&
-            this.selecter.Loaded == true) {
+            this.selector.Loaded == true) {
             return true;
         } else {
             return false;

@@ -75,6 +75,15 @@
     this.getLevel = function () {
         return this._level;
     }
+    this.getBlockAttacks = function (blockAttacks) {
+        //
+    }
+    this.sendBlockAttacks = function () {
+        //
+    }
+    this.clearSendBlockAttacks = function () {
+        //
+    }
     this.getSoundRequests = function () {
         return this._soundRequests;
         return this._soundRequests = [];

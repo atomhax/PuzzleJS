@@ -44,7 +44,7 @@
     }
     this._drawSelector = function (startX, startY, selector, blockInc) {
         this._context.drawImage(
-              this._imageManager.selecter,
+              this._imageManager.selector,
               startX + (selector.col - 1) * 50,
               startY - (selector.row - 1) * 50 - blockInc,
               100,
