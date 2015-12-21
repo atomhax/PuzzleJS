@@ -55,6 +55,10 @@
 
             //Increment all sets that are in removal
             this._removeBlocks.tick();
+
+            //Level up
+            if (this._ticks % (60 * 20) === 0)
+                this._level++;
         }
 
     }

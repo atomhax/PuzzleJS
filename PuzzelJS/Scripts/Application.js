@@ -11,7 +11,8 @@
 
     //Stats
     this._stats = new Stats();
-
+    this._fps = 60;
+    this._interval = 1000 / this._fps;
     this._waitForLoadInterval;
     this.run = function () {
         this._load();
@@ -27,7 +28,7 @@
         this._waitForLoadInterval = setInterval(function () {
             if (this._gameManager.loaded() === true) {
                 window.clearInterval(this._waitForLoadInterval);
-                this._gameLoop();
+                this._setup();
             }
         }.bind(this), 10);
     }
@@ -36,7 +37,7 @@
             requestAnimationFrame(this._gameLoop);
             this._gameAdapter.tick(this._game, this._gameManager);
             this._stats.update();
-        }.bind(this), this._interval);
+        }.bind(this), 20.6666);
     }.bind(this);
     this._setup = function () {
         document.body.appendChild(this._stats.domElement);
