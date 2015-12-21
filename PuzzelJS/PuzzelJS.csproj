@@ -189,7 +189,8 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\Application.js" />
     <Content Include="Scripts\Adapter\GameAdapter.js" />
-    <Content Include="Scripts\Model\Puzzle\NetworkPlayers.js" />
+    <Content Include="Scripts\Model\Player\PlayerRenderData.js" />
+    <Content Include="Scripts\Model\NetworkPlayer.js" />
     <Content Include="Scripts\Model\Puzzle\Gravity\BlockStateAfterGravity.js" />
     <Content Include="Scripts\Model\Game.js" />
     <Content Include="Scripts\View\GameManager.js" />

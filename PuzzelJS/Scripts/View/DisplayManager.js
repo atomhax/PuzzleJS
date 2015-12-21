@@ -11,57 +11,87 @@
     this.loaded = function () {
         return this._imageManager.loaded();
     }
-    this.render = function (blocks, selector, blockInc, score, level) {
+    this.render = function (playersRenderData) {
         this._clearScreen();
-        this._drawBlockArea();
-        this._drawScore(score);
-        this._drawLevel(level);
-        this._drawBlocks(250, 650, blocks, blockInc, selector);
-        this._drawSelector(250, 650, selector, blockInc);
+        var percent = 0.25;
+        for (var i = 0; i < playersRenderData.length; i++) {
+
+            this.renderPlayer((i % 20) * (320 - 0) * percent, (Math.floor(i / 20) * 680) * percent, percent, playersRenderData[i]);
+        }
+
+       // this.renderPlayer(0, 0, playersRenderData[0]);
     };
+
+    this.renderPlayer = function (xOffset, yOffset, percent, playersRenderData) {
+        this._drawBlockArea(xOffset, yOffset, percent);
+        this._drawScore(xOffset, yOffset, percent, playersRenderData.score);
+        this._drawLevel(xOffset, yOffset, percent, playersRenderData.level);
+        this._drawBlocks(xOffset, yOffset, percent, playersRenderData.blocks, playersRenderData.blockInc, playersRenderData.selector);
+
+
+
+        if(playersRenderData.selector != null) {
+            this._drawSelector(xOffset, yOffset, percent, playersRenderData.selector, playersRenderData.blockInc);
+        }
+    
+    };
+
+
     this._clearScreen = function () {
         this._context.clearRect(0, 0, this._canvas.width, this._canvas.height);
     };
-    this._drawLevel = function (level) {
-        this._context.font = '30px Arial';
+    this._drawLevel = function (xOffset, yOffset, percent, level) {
+        var fontsize = 30 * percent;
+
+        this._context.font = '' + fontsize + 'px Arial';
         this._context.fillStyle = 'white';
-        this._context.fillText(level, 279, 83);
+        this._context.fillText(level, (279) * percent + xOffset, (83) * percent + yOffset);
     }
-    this._drawScore = function (score) {
-        this._context.font = '30px Arial';
+    this._drawScore = function (xOffset, yOffset,percent, score) {
+        var fontsize = 30 * percent;
+
+        this._context.font = ''+ fontsize + 'px Arial';
         this._context.fillStyle = 'white';
-        this._context.fillText(score, 440, 83);
+        this._context.fillText(score, (440) * percent + xOffset, (83) * percent + yOffset);
     }
-    this._drawBlockArea = function () {
+    this._drawBlockArea = function (xOffset, yOffset, percent) {
 
         this._context.drawImage(
             this._imageManager.layout,
-            247,
-            43,
-            306,
-            660
+            xOffset + (247) * percent,
+            yOffset + (43) * percent,
+            (306) * percent,
+            (660) * percent
         );
     }
-    this._drawSelector = function (startX, startY, selector, blockInc) {
+    this._drawSelector = function (xOffset, yOffset, percent, selector, blockInc) {
+        var startX = 250;
+        var startY = 650;
         this._context.drawImage(
               this._imageManager.selector,
-              startX + (selector.col - 1) * 50,
-              startY - (selector.row - 1) * 50 - blockInc,
-              100,
-              50
+              xOffset + (startX + (selector.col - 1) * 50) * percent,
+              yOffset + (startY - (selector.row - 1) * 50 - blockInc) * percent,
+              (100) * percent,
+              (50) * percent
           );
     }
-    this._drawBlocks = function (startX, startY, blocks, blockInc, selector) {
-
+        this._drawBlocks = function (xOffset, yOffset, percent, blocks, blockInc, selector) {
+        var startX =250;
+        var startY = 650;
 
         for (var i = 0; i < blocks.length; i++) {
             var selectorOffsetX = 0;
-            if (selector.leftSelection === blocks[i] && blocks[i].state === BlockState.Swap){
-                selectorOffsetX += selector.OFF_SET_PER_TICK * selector.ticks;
+            if(selector != null){
+                if (selector.leftSelection === blocks[i] && blocks[i].state === BlockState.Swap){
+                    selectorOffsetX += selector.OFF_SET_PER_TICK * selector.ticks;
+                }
+                else if (selector.rightSelection === blocks[i] && blocks[i].state === BlockState.Swap) {
+                    selectorOffsetX += -selector.OFF_SET_PER_TICK * selector.ticks;
+                }
             }
-            else if (selector.rightSelection === blocks[i] && blocks[i].state === BlockState.Swap) {
-                selectorOffsetX += -selector.OFF_SET_PER_TICK * selector.ticks;
-            }
+            
+
+          
             this.remove = true;
             this.removeTick = 0;
             this.startRemoveAtTick = 0;
@@ -70,25 +100,27 @@
             {
                 var yCutOff = 50 - blockInc;
                 this._context.drawImage(
-                   this.getBlockImage(blocks[i]),
+                    this.getBlockImage(blocks[i]),
                     0,
                     0,
                     50,
-                    50 - yCutOff,
-                    startX + (blocks[i].col - 1) * 50 + selectorOffsetX,
-                    startY - (blocks[i].row - 1) * 50 - blockInc,
-                    50,
-                    50 - yCutOff
-                );
+                    (50 - yCutOff),
+                    xOffset + (startX + (blocks[i].col - 1) * 50 + selectorOffsetX) * percent,
+                    yOffset + (startY - (blocks[i].row - 1) * 50 - blockInc) * percent,
+                    (50) * percent,
+                    (50 - yCutOff) * percent
+                 );
+
+           
             }
             else
             {
                 this._context.drawImage(
                               this.getBlockImage(blocks[i]),
-                              startX + (blocks[i].col - 1) * 50 + selectorOffsetX,
-                              startY - (blocks[i].row - 1) * 50 - blockInc,
-                              50,
-                              50
+                              xOffset + (startX + (blocks[i].col - 1) * 50 + selectorOffsetX) * percent,
+                              yOffset + (startY - (blocks[i].row - 1) * 50 - blockInc) * percent,
+                              (50) * percent,
+                              (50) * percent
                           );
             }
           
