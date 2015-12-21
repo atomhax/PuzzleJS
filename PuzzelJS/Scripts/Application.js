@@ -3,7 +3,7 @@
     //Model
     this._game = new Game();
 
-    //Controller
+    //Adapter
     this._gameAdapter = new GameAdapter();
 
     //View
