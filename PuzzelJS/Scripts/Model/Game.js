@@ -11,7 +11,7 @@
 
 
     this.AddTestPlayers = function(){
-        for (var i = 0; i < 99; i++) {
+        for (var i = 0; i < 0; i++) {
             var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
                 var r = crypto.getRandomValues(new Uint8Array(1))[0] % 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
                 return v.toString(16);
@@ -26,11 +26,11 @@
     this.tick = function () {
         this.player.puzzle.tick();
      
-        for (var i = 0; i < this.testPlayers.length; i++) {
-            this.testPlayers[i].puzzle.tick();
-            };
+        //for (var i = 0; i < this.testPlayers.length; i++) {
+        //    this.testPlayers[i].puzzle.tick();
+        //    };
 
-        this.updateNetworkPlayersRenderData();
+        //this.updateNetworkPlayersRenderData();
     }
 
     this.getPlayerRenderData = function() {
@@ -69,7 +69,7 @@
     
     this.load = function () {
         this.player.puzzle.Reset();
-        this.AddTestPlayers();
+       // this.AddTestPlayers();
 
     }
     this.loaded = function () {

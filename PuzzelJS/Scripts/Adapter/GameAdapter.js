@@ -9,34 +9,23 @@
         //Run Model Functions with Views Input
         if (inputActions.selectorLeft === true) {
             game.player.puzzle.selectorLeft();
-            for (var i = 0; i < 99; i++) {
-                game.testPlayers[i].puzzle.selectorLeft();
-            }
-
+           
         }
         else if (inputActions.selectorRight === true) {
             game.player.puzzle.selectorRight();
-            for (var i = 0; i < 99; i++) {
-                game.testPlayers[i].puzzle.selectorRight();
-            }
+           
         }
         else if (inputActions.selectorUp === true) {
             game.player.puzzle.selectorUp();
-            for (var i = 0; i < 99; i++) {
-                game.testPlayers[i].puzzle.selectorUp();
-            }
+           
         }
         else if (inputActions.selectorDown === true) {
             game.player.puzzle.selectorDown();
-            for (var i = 0; i < 99; i++) {
-                game.testPlayers[i].puzzle.selectorDown();
-            }
+            
         } 
         if (inputActions.selectorSwap === true) {
             game.player.puzzle.selectorSwap();
-            for (var i = 0; i < 99; i++) {
-                game.testPlayers[i].puzzle.selectorSwap();
-            }
+          
         }
         if (inputActions.reset === true) {
             game.reset();
@@ -46,15 +35,11 @@
         }
         if (inputActions.blocksFastOn === true) {
             game.player.puzzle.fastBlockOn();
-            for (var i = 0; i < 99; i++) {
-                game.testPlayers[i].puzzle.fastBlockOn();
-            }
+           
         }
         if (inputActions.blocksFastOff === true) {
             game.player.puzzle.fastBlockOff();
-            for (var i = 0; i < 99; i++) {
-                game.testPlayers[i].puzzle.fastBlockOff();
-            }
+
         }
 
 

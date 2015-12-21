@@ -13,13 +13,15 @@
     }
     this.render = function (playersRenderData) {
         this._clearScreen();
-        var percent = 0.25;
-        for (var i = 0; i < playersRenderData.length; i++) {
 
-            this.renderPlayer((i % 20) * (320 - 0) * percent, (Math.floor(i / 20) * 680) * percent, percent, playersRenderData[i]);
+        var percent = 1;
+
+        for (var i = 0; i < 1; i++) {
+
+            this.renderPlayer((0) * percent, (0) * percent, percent, playersRenderData[i]);
         }
 
-       // this.renderPlayer(0, 0, playersRenderData[0]);
+       
     };
 
     this.renderPlayer = function (xOffset, yOffset, percent, playersRenderData) {
