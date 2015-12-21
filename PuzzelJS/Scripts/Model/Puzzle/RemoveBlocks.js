@@ -39,7 +39,7 @@
 
     }
     this.removeSetsOfBlocks = function (setsOfBlocks, chain) {
-        this.running = true;
+        this.active = true;
         this._puzzle._moveBlocksUp.clearMoveBlocksUp();
         if (chain == null) {
             chain = 1;

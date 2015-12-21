@@ -34,9 +34,9 @@
 
             //If Gravity Is on, then Tick Gravity
             //other wise Tick MoveBlocksUp
-            if (this._gravity.active || this._removeBlocks.active) {
+            if (this._gravity.active) {
                 this._gravity.tick();
-            } else {
+            } else if(!this._removeBlocks.active){
                 this._moveBlocksUp.tick();
 
             }
@@ -148,7 +148,7 @@
     this._isPlayeralive = function () {
         for (var i = 0; i < this._blocks.length; i++) {
             if (this._blocks[i].row === 11) {
-                puzzle.active = false;
+                this.active = false;
                 return false;
                 break;
             }
