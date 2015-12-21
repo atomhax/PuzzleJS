@@ -251,7 +251,7 @@
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Properties\PublishProfiles\PuzzelJS - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\PuzzelJS - Web Deploy.pubxml" />
-    <Content Include="PuzzleJS_MVA_V1.vsdx" />
+    <Content Include="PuzzleJS_MVA.pdf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
