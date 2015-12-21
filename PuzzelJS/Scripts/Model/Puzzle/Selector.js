@@ -2,7 +2,7 @@
 {
     //Data
     this.active = false;
-    this._TICKS_TO_SWAP = 20;
+    this._TICKS_TO_SWAP = 10;
     this.OFF_SET_PER_TICK = 50 / this._TICKS_TO_SWAP ;
     this._puzzle = puzzle;
     this.row = row;
