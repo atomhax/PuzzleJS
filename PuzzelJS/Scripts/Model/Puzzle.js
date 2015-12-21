@@ -34,7 +34,7 @@
 
             //If Gravity Is on, then Tick Gravity
             //other wise Tick MoveBlocksUp
-            if (this._gravity.active) {
+            if (this._gravity.active || this._removeBlocks.active) {
                 this._gravity.tick();
             } else {
                 this._moveBlocksUp.tick();
