@@ -55,7 +55,7 @@
         if (chain == null)  {
             chain = 0;
         }
-        for (var row = 2; row < 11; row++) {
+        for (var row = 2; row < 12; row++) {
             for (var col = 1; col < 7; col++) {
                 var block = this._puzzle._getBlock(row, col);
                 if (block != null) {
