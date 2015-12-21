@@ -20,7 +20,7 @@
         this._ticks = 0;
         this._blocks = new Array();
         this._score = 0;
-        this._level = 1;
+        this._level = 5;
 
         this._selector.reset(2, 3);
         this._gravity.reset();
