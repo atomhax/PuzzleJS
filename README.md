@@ -1,6 +1,7 @@
 # PuzzleJS
 
-Fun Puzzle Game, TO THE MAX.
+A block based puzzle game written in Javascript
+Uses Model View Adapter Design Pattern
 
 http://puzzle-js.com/
 
