@@ -43,6 +43,8 @@
         this._puzzle._moveBlocksUp.clearMoveBlocksUp();
         if (chain == null) {
             chain = 1;
+        } else {
+            chain++;
         }
 
         //Create removeSetsOfBlocks
@@ -55,8 +57,8 @@
         }
 
         //Score
-        this._puzzle._support.chainScore(chain);
-        this._puzzle._support.totalBlockScore(totalBlocks);
+        this._puzzle._chainScore(chain);
+        this._puzzle._totalBlockScore(totalBlocks);
 
         var removeSetsOfBlocks = new RemovalInstance(chain, setsOfBlocks);
         this._removalInstances.push(removeSetsOfBlocks);

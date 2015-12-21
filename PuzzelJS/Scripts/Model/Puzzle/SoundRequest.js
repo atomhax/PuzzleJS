@@ -1,10 +1,16 @@
 ﻿SoundRequest = {
-    MusicOn: 0,
-    MusicOff: 1,
-    Pause: 2,
-    Resume: 3,
-    Swap: 4,
-    EffectFall: 5,
-    EffectGet: 6,
-    GetSetEffect: 7
+    Pause: 0,
+    Resume: 1,
+    MusicStart: 2,
+    MusicMute: 3,
+    MusicUnMute: 4,
+    SoundEffectsMute: 5,
+    SoundEffectsUnMute: 6,
+    Swap: 7,
+    BlocksFall: 8,
+    BlockSet: 9,
+    Combo: 10,
+    LargeCombo: 11,
+    Chain: 12,
+    LargeChain: 13
 }

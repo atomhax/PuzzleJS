@@ -47,8 +47,8 @@
         if (this._puzzle.active === false || this._puzzle._gravity.active === true || this.active === true) {
             return;
         }
-        var left = this._puzzle._support.getBlock(this.row, this.col);
-        var right = this._puzzle._support.getBlock(this.row, this.col + 1);
+        var left = this._puzzle._getBlock(this.row, this.col);
+        var right = this._puzzle._getBlock(this.row, this.col + 1);
 
         if ((left != null || right != null) && (
             (left === null || (left != null && left.state === BlockState.None)) &&
@@ -60,8 +60,8 @@
 
             this.active = true;
             this.swapTicks = 0;
-            this.leftSelection = this._puzzle._support.getBlock(this.row, this.col);
-            this.rightSelection = this._puzzle._support.getBlock(this.row, this.col + 1);
+            this.leftSelection = this._puzzle._getBlock(this.row, this.col);
+            this.rightSelection = this._puzzle._getBlock(this.row, this.col + 1);
             if (this.leftSelection != null) {
                 this.leftSelection.state = BlockState.Swap;
             }
@@ -69,7 +69,7 @@
                 this.rightSelection.state = BlockState.Swap;
             }
            
-            this._puzzle._support.addSoundRequest(SoundRequest.Swap);
+            this._puzzle._addSoundRequest(SoundRequest.Swap);
             this._puzzle._moveBlocksUp.clearMoveBlocksUp();
             //this.ContinueSwap();
         }

@@ -5,8 +5,51 @@ function AudioManager() {
     this._music = new Audio('/Content/Files/Swap.mp3');
 
     //Functions
-    this.run = function(soundRequests){
-
+    this.run = function (soundRequests) {
+        for (var i = 0; i < soundRequests.length; i++) {
+            if (soundRequests[i] === SoundRequest.Pause) {
+                this._pause();
+            }
+            if (soundRequests[i] === SoundRequest.Resume) {
+                this._resume();
+            }
+            if (soundRequests[i] === SoundRequest.MusicStart) {
+                this._musicStart();
+            }
+            if (soundRequests[i] === SoundRequest.MusicMute) {
+                this._musicMute();
+            }
+            if (soundRequests[i] === SoundRequest.MusicUnMute) {
+                this._musicUnMute();
+            }
+            if (soundRequests[i] === SoundRequest.SoundEffectsMute) {
+                this._soundEffectsMute();
+            }
+            if (soundRequests[i] === SoundRequest.SoundEffectsUnMute) {
+                this._soundEffectsUnMute();
+            }
+            if (soundRequests[i] === SoundRequest.Swap) {
+                this._swap();
+            }
+            if (soundRequests[i] === SoundRequest.BlocksFall) {
+                this._blocksFall();
+            }
+            if (soundRequests[i] === SoundRequest.BlockSet) {
+                this._blockSet();
+            }
+            if (soundRequests[i] === SoundRequest.Combo) {
+                this._combo();
+            }
+            if (soundRequests[i] === SoundRequest.LargeCombo) {
+                this._largeCombo();
+            }
+            if (soundRequests[i] === SoundRequest.Chain) {
+                this._chain();
+            }
+            if (soundRequests[i] === SoundRequest.LargeChain) {
+                this._largeChain();
+            }
+        }
     }
     this.load = function (soundRequests) {
 
@@ -14,62 +57,56 @@ function AudioManager() {
     this.loaded = function (soundRequests) {
         return true;
     }
+    this.reset = function () {
+
+    }
 
     //General Controls
-    this._reset = function (reset) {
-
-    }
     this._pause = function () {
 
-        //this._music.pause
-
-        //for (var i = 0; i < this._sounds.length; i++) {
-        //this._sounds[i].pause
-        // }
     }
     this._resume = function () {
-        //this._music.resume
-
-        //for (var i = 0; i < this._sounds.length; i++) {
-        //this._sounds[i].resume
-        //}
+     
     }
 
     //Music
-    this._playMusic = function () {   
-        //music.play();
+    this._musicStart = function () {
+
     }
-    this._muteMusic = function () {
-       // this._music.Mute...
+    this._musicMute = function () {
+     
     }
-    this._unmuteMusic = function () {
-      //  this._music.UnMute..
-    }
-    this._musicEnded = function () {
-        //this._music.currentTime = 0;
-        //this._music.play();
+    this._musicUnMute = function () {
+
     }
 
     //Sound Effects
-    this._swapSoundEffect = function () {
-        //swap = new Audio("/Content/Files/Swap.mp3");
-        //swap.addEventListener("ended", SoundEffectEnded);
-        //swap.play();
-        //this._sounds.push(swap);
+    this._soundEffectsMute = function () {
+
     }
-    this._clearSoundEffect = function () {
+    this._soundEffectsUnMute = function () {
+
+    }
+    this._swap = function () {
+     
+    }
+    this._blocksFall = function () {
       
     }
-    this._dropSoundEffect = function () {
+    this._blockSet = function () {
+     
+    }
+    this._combo = function () {
 
     }
-    this._soundEffectEnded = function () {
-        //this refers to the SoundEffect. It may be differnt code this is just the general Idea
-        //this._sounds.splice(this._sounds.indexOf(this), 1);
-        //delete this;
-    }
+    this._largeCombo = function () {
 
-    //Events
-    this._music.addEventListener('ended', this._musicEnded);
+    }
+    this._chain = function () {
+
+    }
+    this._largeChain = function () {
+
+    }
 
 };

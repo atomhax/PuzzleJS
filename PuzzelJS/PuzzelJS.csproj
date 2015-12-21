@@ -206,7 +206,6 @@
     <Content Include="Scripts\Model\Puzzle\BlockState.js" />
     <Content Include="Scripts\Model\Puzzle.js" />
     <Content Include="Scripts\Model\Player.js" />
-    <Content Include="Scripts\Model\Puzzle\Support.js" />
     <Content Include="Scripts\Model\Puzzle\RemoveBlocks.js" />
     <Content Include="Scripts\Model\Puzzle\FindBlockSets.js" />
     <Content Include="Scripts\Model\Puzzle\PushBlocksUp.js" />

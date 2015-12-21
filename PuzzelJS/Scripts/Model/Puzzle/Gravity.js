@@ -30,7 +30,7 @@
                 }
 
                 //Sound Effect
-                this._puzzle._support.addSoundRequest(SoundRequest.EffectFall);
+                this._puzzle._addSoundRequest(SoundRequest.EffectFall);
 
                 //Look For New Block Sets
                 var newBlockSets = this._puzzle._findBlockSets.run();
@@ -57,7 +57,7 @@
         }
         for (var row = 2; row < 11; row++) {
             for (var col = 1; col < 7; col++) {
-                var block = this._puzzle._support.getBlock(row, col);
+                var block = this._puzzle._getBlock(row, col);
                 if (block != null) {
                     if (this._applyBlock(block)) {
                         this._blocks.push(block);
@@ -69,6 +69,7 @@
         if (this._blocks.length > 0) {
             this._puzzle._moveBlocksUp.clearMoveBlocksUp();
             this.active = true;
+            this._chain = chain;
         }
  
     }
@@ -93,7 +94,7 @@
         return false;
     }
     this._blockReserved = function (row, col) {
-        var block = this._puzzle._support.getBlock(row, col);
+        var block = this._puzzle._getBlock(row, col);
         if (block != null &&
             block.state !== BlockState.Gravity) {
             return true;

@@ -70,12 +70,12 @@
     }
     //Private  
     this._rowChange = function () {
-        this._puzzle._support.isPlayeralive();
+        this._puzzle._isPlayeralive();
         if (this._puzzle.active) {
             this.blockInc = 0;
             this._moveBlocksUpOneRow();
             this._puzzle._selector.moveUp();
-            this._addBlockRow();
+            this._puzzle._addBlockRow(0);
         }
     }
     this._moveBlocksUpOneRow = function () {
@@ -83,18 +83,5 @@
             this._puzzle._blocks[i].row++;
         }
     }
-    this._addBlockRow = function () {
-        for (var i = 0; i < 6; i++) {
-            var row = 0;
-            var col = i + 1;
-
-            //Get Vaild random Color
-            var randomColor;
-            do {
-                randomColor = this._puzzle._support.randomColor();
-            } while (!this._puzzle._support.isNewBlockVaild(row, col, randomColor))
-
-            this._puzzle._blocks.push(new Block(row, col, randomColor, 0, 0));
-        }
-    }
+  
 }

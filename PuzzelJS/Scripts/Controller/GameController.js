@@ -41,6 +41,7 @@
 
         //Update View
         gameManger.audioManager.run(game.player.puzzle.getSoundRequests());
+        game.player.puzzle.clearSoundRequests();
         gameManger.displayManager.render(game.player.puzzle.getBlocks(),
                                   game.player.puzzle.getSelector(),
                                   game.player.puzzle.getBlockInc(),
